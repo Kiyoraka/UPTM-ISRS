@@ -1,0 +1,219 @@
+/* dashboard.css */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    display: grid;
+    grid-template-areas:
+        "nav nav"
+        "sidebar main";
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 60px 1fr;
+    min-height: 100vh;
+}
+
+/* Top Navigation Bar */
+.top-nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a73e8;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 77px;
+    background-color: white;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Right side navigation */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 20px;
+    color: white;
+}
+
+/* User profile section */
+.user-profile {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-icon {
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Notification section */
+.notifications {
+    position: relative;
+    cursor: pointer;
+    color: #666;
+}
+
+.notification-icon {
+    font-size: 1.2rem;
+}
+
+/* hover effect for both icons */
+.user-profile:hover, 
+.notifications:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+    grid-area: sidebar;
+    background-color: #1a73e8;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+    padding: 20px 0;
+}
+
+.nav-menu {
+    list-style: none;
+}
+
+.nav-item:first-child {
+    margin-top: 90px;
+}
+
+.nav-item {
+    margin-bottom: 5px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    gap: 10px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-icon {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Main content area */
+.main-content {
+    grid-area: main;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px);
+    padding: 20px 0 0 0; /* Remove left and right padding */
+    background-color: #f5f7fb;
+}
+
+.content-wrapper {
+    flex: 1;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 0 20px;
+    text-align: center; /* Center all content */
+}
+
+.content-wrapper h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0; /* Optional: adds a subtle line under the title */
+}
+
+/* Footer Styles */
+.dashboard-footer {
+    width: 100%;
+    background-color: #1a73e8;
+    margin-top: 20px;
+    padding: 15px 0; /* Remove left-right padding */
+}
+
+.footer-content {
+    text-align: center;
+    font-weight: bold;
+    padding: 0 20px; /* Add padding to the content if needed */
+}
+
+.footer-text {
+    color: white;
+    font-size: 0.875rem;
+}
+
+/* Utility Classes */
+.text-primary {
+    color: #1a73e8;
+}
+
+.bg-primary {
+    background-color: #1a73e8;
+}
+
+.bg-light {
+    background-color: #f5f7fb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "nav"
+            "main";
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .dashboard-footer {
+        margin-top: auto;
+    }
+
+    .footer-content {
+        text-align: center;
+    }
+}
