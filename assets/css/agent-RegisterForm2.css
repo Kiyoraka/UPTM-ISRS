@@ -1,0 +1,39 @@
+/* agent-RegisterForm2.css */
+/* Contact Details Section Styles */
+
+/* Website and Countries Covered Input Styling */
+#website,
+#countries_covered {
+    width: 100%;
+}
+
+/* Mobile and Email Validation Styles (optional) */
+#contact_mobile:valid,
+#contact_email:valid {
+    border-color: #28a745;
+}
+
+#contact_mobile:invalid,
+#contact_email:invalid {
+    border-color: #dc3545;
+}
+
+/* Fax Input Optional Styling */
+#contact_fax {
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* Additional specific styles for the contact information section */
+#section-b .form-group {
+    margin-bottom: 20px;
+}
+
+#section-b input[type="tel"],
+#section-b input[type="email"],
+#section-b input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #585858;
+    border-radius: 4px;
+}

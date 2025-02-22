@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="button-container">
                     <button type="submit" class="btn login-btn">LOGIN</button>
-                    <a href="../index.html" class="btn back-btn">BACK</a>
+                    <a href="../agent/agent-register.php" class="btn back-btn">REGISTER</a>
                 </div>
             </form>
         </div>
