@@ -66,6 +66,25 @@
                 </div>
 
                 <div class="form-row">
+                    <div class="form-group photo-upload-container">
+                        <label>Passport Size Photo *</label>
+                            <div class="photo-upload-box">
+                                <img id="photo-preview" src="#" alt="Photo preview" style="display: none;">
+                                <div id="upload-placeholder">
+                                    <span>Click to upload photo</span>
+                                    <small>PNG, JPEG (Max 2MB)</small>
+                                </div>
+                                    <input type="file" 
+                                        id="passport_photo" 
+                                        name="passport_photo" 
+                                        accept=".png,.jpg,.jpeg" 
+                                        required
+                                        onchange="previewPhoto(this);">
+                            </div>
+                    </div>
+                </div>                
+
+                <div class="form-row">
                     <div class="form-group">
                         <label for="company_name">Company Name / Individual Name *</label>
                         <input type="text" id="company_name" name="company_name" required>

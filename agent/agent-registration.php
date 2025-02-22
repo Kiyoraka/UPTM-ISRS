@@ -120,6 +120,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
+        // Handle passport photo upload
+        if (isset($_FILES['passport_photo']) && $_FILES['passport_photo']['error'] === UPLOAD_ERR_OK) {
+            $photo = $_FILES['passport_photo'];
+            $photo_info = handleUpload($photo, 'agent_photos');
+    
+            if ($photo_info['success']) {
+                $photo_sql = "UPDATE agent SET photo_path = ? WHERE id = ?";
+                $photo_stmt = mysqli_prepare($conn, $photo_sql);
+                $photo_path = 'uploads/agent_photos/' . $photo_info['filename'];
+        
+                mysqli_stmt_bind_param($photo_stmt, "si", $photo_path, $agent_id);
+                mysqli_stmt_execute($photo_stmt);
+            }
+        }
+
         // Commit transaction
         mysqli_commit($conn);
         
