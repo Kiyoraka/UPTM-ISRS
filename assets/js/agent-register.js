@@ -76,15 +76,17 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.success) {
                 alert(data.message);
-                // Redirect to success page or dashboard
-                window.location.href = 'agent-dashboard.php';
+                // Redirect to success page
+                window.location.href = 'success-page.html';
             } else {
-                alert('Error: ' + data.message);
+                // Redirect to error page
+                window.location.href = 'error-page.html';
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred while submitting the form. Please try again.');
+            // Redirect to error page
+            window.location.href = 'error-page.html';
         });
     });
 

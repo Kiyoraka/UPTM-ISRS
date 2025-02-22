@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Success - UPTM ISRS</title>
+    <link rel="stylesheet" href="../assets/css/thanks-and-error-page.css">
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-box">
+            <a href="../index.html" class="logo-link">
+                <img src="../assets/img/uptm-logo.png" alt="UPTM Logo" class="logo">
+            </a>
+            <div class="success-message">
+                <h1>Thank You for Registering!</h1>
+                <p>Your agent registration has been submitted successfully.</p>
+                <p>We will review your application and contact you soon.</p>
+                <div class="redirect-message">
+                    Redirecting to homepage in <span id="countdown">5</span> seconds...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown and redirect
+        let seconds = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdown = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = '../index.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

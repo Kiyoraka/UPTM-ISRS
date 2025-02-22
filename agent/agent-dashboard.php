@@ -13,7 +13,7 @@ require_once '../includes/functions.php';
 
 // Fetch agent details
 $agent_id = $_SESSION['user_id'];
-$query = "SELECT * FROM agents WHERE id = ?";
+$query = "SELECT * FROM agent WHERE id = ?";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "i", $agent_id);
 mysqli_stmt_execute($stmt);

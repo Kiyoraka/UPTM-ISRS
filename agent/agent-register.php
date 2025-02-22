@@ -461,7 +461,7 @@
 
                 <div class="form-navigation">
                     <button type="button" class="btn back-btn btn-prev">Previous</button>
-                    <button type="submit" class="btn login-btn">Submit Application</button>
+                    <button type="submit" class="btn btn-next">Submit Application</button>
                 </div>
             </div>
         </form>

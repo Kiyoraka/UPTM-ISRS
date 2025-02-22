@@ -1,0 +1,108 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f7fb;
+}
+
+.success-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.success-box {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.logo-link {
+    display: block;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+}
+
+.success-message {
+    color: #333;
+}
+
+.success-message h1 {
+    color: #1a73e8;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.success-message p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 1.1rem;
+}
+
+.redirect-message {
+    margin-top: 2rem;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+#countdown {
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+/* Error specific styles */
+.error-box {
+    border: 1px solid #fee2e2;
+}
+
+.error-message h1 {
+    color: #dc2626;
+}
+
+.error-message #countdown {
+    color: #dc2626;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .success-container {
+        padding: 15px;
+    }
+
+    .success-box {
+        padding: 2rem 1.5rem;
+    }
+
+    .logo {
+        width: 150px;
+    }
+
+    .success-message h1 {
+        font-size: 1.5rem;
+    }
+
+    .success-message p {
+        font-size: 1rem;
+    }
+}
