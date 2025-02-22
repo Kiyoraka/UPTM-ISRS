@@ -1,0 +1,115 @@
+/* Agreement and Declaration Styling */
+.agreement-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.agreement-table,
+.declaration-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.section-header {
+    background-color: #EBF5FB;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border: 1px solid #000;
+}
+
+.agreement-table td,
+.declaration-table td {
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+}
+
+.agreement-table label,
+.declaration-table label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal;
+    color: #666;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.declaration-text {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.signature-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.signature-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.signature-line {
+    flex-grow: 1;
+    border-bottom: 1px solid #000;
+    height: 30px;
+}
+
+.signature-row label {
+    white-space: nowrap;
+}
+
+/* Form Navigation Styles */
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-prev,
+.btn-next {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-prev {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-next {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+    opacity: 0.8;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .agreement-table,
+    .declaration-table {
+        font-size: 0.9em;
+    }
+
+    .signature-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

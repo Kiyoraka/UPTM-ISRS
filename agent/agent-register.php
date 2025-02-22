@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="../assets/css/agent-register.css">
     <link rel="stylesheet" href="../assets/css/agent-ProgressBarForm.css">
     <link rel="stylesheet" href="../assets/css/agent-RegisterForm1.css">
-    <link rel="stylesheet" href="../assets/css/agent-RegisterForm1.css">
+    <link rel="stylesheet" href="../assets/css/agent-RegisterForm2.css">
+    <link rel="stylesheet" href="../assets/css/agent-RegisterForm3.css">
+    <link rel="stylesheet" href="../assets/css/agent-RegisterForm4.css">
+    <link rel="stylesheet" href="../assets/css/agent-RegisterForm5.css">
 </head>
 <body>
     <div class="registration-container">
@@ -242,13 +245,6 @@
     <h2>Section D: Bank Account Details</h2>
     <div class="bank-account-container">
         <table class="bank-account-table">
-            <thead>
-                <tr>
-                    <th colspan="2" class="section-header">
-                        BANK ACCOUNT PARTICULARS (for payment of commission purposes)
-                    </th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
                     <td class="label-cell">
@@ -296,6 +292,90 @@
                     </td>
                     <td class="input-cell">
                         <textarea id="bank_address" name="bank_address" class="form-input" rows="3"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-navigation">
+        <button type="button" class="btn back-btn btn-prev">Previous</button>
+        <button type="button" class="btn login-btn btn-next">Next</button>
+    </div>
+</div>
+
+<!-- Agreement & DeclarationDetails Section -->
+<div class="form-section" id="section-e">
+    <h2>Section E: Agreement & Declaration</h2>
+    <div class="agreement-container">
+        <table class="agreement-table">
+            <thead>
+                <tr>
+                    <th class="section-header">SIGNEE OF AGREEMENT</th>
+                    <th class="section-header">WITNESS OF AGREEMENT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="signee_full_name">Full Name:</label>
+                        <input type="text" id="signee_full_name" name="signee_full_name" class="form-input">
+                    </td>
+                    <td>
+                        <label for="witness_full_name">Full Name:</label>
+                        <input type="text" id="witness_full_name" name="witness_full_name" class="form-input">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="signee_designation">Designation:</label>
+                        <input type="text" id="signee_designation" name="signee_designation" class="form-input">
+                    </td>
+                    <td>
+                        <label for="witness_designation">Designation:</label>
+                        <input type="text" id="witness_designation" name="witness_designation" class="form-input">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="signee_nric">NRIC/Passport:</label>
+                        <input type="text" id="signee_nric" name="signee_nric" class="form-input">
+                    </td>
+                    <td>
+                        <label for="witness_nric">NRIC/Passport:</label>
+                        <input type="text" id="witness_nric" name="witness_nric" class="form-input">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="declaration-table">
+            <thead>
+                <tr>
+                    <th class="section-header">DECLARATION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="declaration-text">
+                        <p>I hereby declare that the information given in this application form is true and complete.</p>
+                        <p>I understand that any false or incomplete information submitted may result my application being rejected.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="signature-section">
+                            <div class="signature-row">
+                                <label for="signature_checkbox">
+                                    <input type="checkbox" id="signature_checkbox" name="signature_confirmation" required>
+                                    I confirm the above declaration is true
+                                </label>
+                            </div>
+                            <div class="signature-row">
+                                <label for="signature_date">Date:</label>
+                                <input type="date" id="signature_date" name="signature_date" class="form-input" required>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>

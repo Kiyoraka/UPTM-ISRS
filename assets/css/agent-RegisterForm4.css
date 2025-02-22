@@ -1,0 +1,96 @@
+/* Bank Account Details Styling */
+.bank-account-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.bank-account-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bank-account-table .section-header {
+    background-color: #ffffff;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border: 1px solid #000;
+}
+
+.bank-account-table .label-cell {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+}
+
+.bank-account-table .input-cell {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.bank-account-table label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal;
+    color: #666;
+}
+
+.bank-account-table .form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.bank-account-table textarea.form-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Form Navigation Styles */
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-prev,
+.btn-next {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-prev {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-next {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+    opacity: 0.8;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .bank-account-table {
+        font-size: 0.9em;
+    }
+
+    .bank-account-table .label-cell,
+    .bank-account-table .input-cell {
+        padding: 5px;
+    }
+}
