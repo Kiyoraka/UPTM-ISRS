@@ -52,7 +52,7 @@
 
         <h1>INTERNATIONAL STUDENT RECRUITMENT AGENT APPLICATION FORM</h1>
         
-        <form id="agentRegistrationForm">
+        <form id="agentRegistrationForm" action="agent-registration.php" method="POST" enctype="multipart/form-data">
             <!-- Personal Details Section -->
             <div class="form-section active" id="section-a">
                 <h2>Section A: Personal Details</h2>
@@ -461,7 +461,7 @@
 
                 <div class="form-navigation">
                     <button type="button" class="btn back-btn btn-prev">Previous</button>
-                    <button type="button" class="btn login-btn btn-next">Submit Application</button>
+                    <button type="submit" class="btn login-btn">Submit Application</button>
                 </div>
             </div>
         </form>
