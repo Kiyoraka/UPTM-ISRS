@@ -1,0 +1,165 @@
+/* agent-RegisterForm3.css */
+.experience-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Countries Covered Styling */
+.countries-covered {
+    margin-bottom: 20px;
+}
+
+.countries-covered label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.countries-covered select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg fill="%23585858" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 10px center;
+    background-color: #fff;
+    padding-right: 30px;
+}
+
+/* Recruitment Experience Styling */
+.recruitment-experience {
+    margin-bottom: 20px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Table Styling */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.experience-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.experience-table th {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #475569;
+}
+
+.experience-table td {
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+}
+
+/* Column Specific Widths */
+.col-no {
+    width: 50px;
+    text-align: center;
+}
+
+.col-institution {
+    width: 25%;
+}
+
+.col-from,
+.col-until {
+    width: 15%;
+}
+
+.col-recruited {
+    width: 15%;
+}
+
+.col-actions {
+    width: 200px;
+    text-align: center;
+}
+
+/* Input Styling */
+.experience-table input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 38px; /* Consistent height for all inputs */
+}
+
+.date-input {
+    text-align: center;
+}
+
+/* Actions Column Styling */
+.actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Remove and Add Row Buttons */
+.btn-remove,
+.add-row-btn {
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-remove {
+    background: none;
+    border: 1px solid #dc2626;
+    color: #dc2626;
+}
+
+.btn-remove:hover {
+    background-color: #fee2e2;
+}
+
+.add-row-btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    margin-left: 10px;
+}
+
+.add-row-btn:hover {
+    background-color: #1557b0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .experience-table {
+        font-size: 0.9em;
+    }
+
+    .actions-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
