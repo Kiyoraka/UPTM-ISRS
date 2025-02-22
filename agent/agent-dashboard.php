@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 // Check if user is logged in and has agent role
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'agent') {
     header('Location: agent-login.php');
@@ -57,15 +56,15 @@ $agent = mysqli_fetch_assoc($result);
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-section="student-list">
-                        <span class="nav-icon">👥</span>
-                        <span class="nav-text">Student List</span>
+                    <a href="#" class="nav-link" data-section="profile">
+                        <span class="nav-icon">📝</span>
+                        <span class="nav-text">Profile</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-section="appeal">
-                        <span class="nav-icon">📝</span>
-                        <span class="nav-text">Appeal</span>
+                    <a href="#" class="nav-link" data-section="student-list">
+                        <span class="nav-icon">👥</span>
+                        <span class="nav-text">Student List</span>
                     </a>
                 </li>
             </ul>
@@ -114,11 +113,11 @@ $agent = mysqli_fetch_assoc($result);
                             <div class="stat-number registered"><?php echo $total_students; ?></div>
                             <div class="stat-label">Total Student Registered</div>
                         </div>
-            
+
                         <!-- Total Students Approved -->
                         <div class="stat-card">
                             <div class="stat-icon approved">
-                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-user-graduate"></i>
                             </div>
                             <div class="stat-number approved"><?php echo $approved_students; ?></div>
                             <div class="stat-label">Total Student Approved</div>
@@ -127,7 +126,7 @@ $agent = mysqli_fetch_assoc($result);
                         <!-- Total Students Rejected -->
                         <div class="stat-card">
                             <div class="stat-icon rejected">
-                                <i class="fas fa-times-circle"></i>
+                                <i class="fas fa-user-graduate"></i>
                             </div>
                             <div class="stat-number rejected"><?php echo $rejected_students; ?></div>
                             <div class="stat-label">Total Student Rejected</div>
@@ -135,10 +134,16 @@ $agent = mysqli_fetch_assoc($result);
                     </div>
                 </div>
 
+                <!-- Profile Content -->
+                <div id="profile-content" style="display: none;">
+                    <h1>Profile</h1>
+                    <!-- Add profile content -->
+                </div>
+
                 <!-- Student List Content -->
                 <div id="student-list-content" style="display: none;">
                     <h1>Student List</h1>
-                    
+
                     <!-- Search and Filter Section -->
                     <div class="search-filter-container">
                         <div class="search-box">
@@ -149,14 +154,14 @@ $agent = mysqli_fetch_assoc($result);
                             <i class="fas fa-filter"></i>
                             <select id="statusFilter">
                                 <option value="">All Status</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Approved">Approved</option>
-                                <option value="Rejected">Rejected</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- Table Section -->
+                    <!-- Table Container -->
                     <div class="table-container">
                         <table class="student-table">
                             <thead>
@@ -170,42 +175,21 @@ $agent = mysqli_fetch_assoc($result);
                                 </tr>
                             </thead>
                             <tbody id="studentTableBody">
-                                <?php
-                                // Fetch students for this agent
-                                $students_query = "SELECT * FROM students WHERE agent_id = ?";
-                                $stmt = mysqli_prepare($conn, $students_query);
-                                mysqli_stmt_bind_param($stmt, "i", $agent_id);
-                                mysqli_stmt_execute($stmt);
-                                $students_result = mysqli_stmt_get_result($stmt);
-                                
-                                $counter = 1;
-                                while ($student = mysqli_fetch_assoc($students_result)) {
-                                    echo "<tr>";
-                                    echo "<td>" . $counter++ . "</td>";
-                                    echo "<td>" . htmlspecialchars($student['name']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($student['email']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($student['country']) . "</td>";
-                                    echo "<td><span class='status-badge status-" . strtolower($student['status']) . "'>" . htmlspecialchars($student['status']) . "</span></td>";
-                                    echo "<td>
-                                        <div class='action-buttons'>
-                                            <button class='btn-action btn-view' onclick='viewStudent(" . $student['id'] . ")'>
-                                                <i class='fas fa-eye'></i>
-                                            </button>
-                                        </div>
-                                    </td>";
-                                    echo "</tr>";
-                                }
-                                ?>
+                                <!-- Table rows will be dynamically populated -->
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-container">
+                        <button id="prevPage" class="pagination-btn">Previous</button>
+                        <div class="page-numbers">
+                            <!-- Page numbers will be dynamically populated -->
+                        </div>
+                        <button id="nextPage" class="pagination-btn">Next</button>
+                    </div>
                 </div>
 
-                <!-- Appeal Content -->
-                <div id="appeal-content" style="display: none;">
-                    <h1>Appeal</h1>
-                    <!-- Add appeal content -->
-                </div>
             </div>
 
             <!-- Footer -->
@@ -217,7 +201,7 @@ $agent = mysqli_fetch_assoc($result);
                 </div>
             </footer>
         </main>
-    </div>
+    
 
     <script src="../assets/js/agent-dashboard.js"></script>
 </body>
