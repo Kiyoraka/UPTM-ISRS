@@ -5,3 +5,5 @@
 *.txt 
 password-hash.php
 password-tex.php
+uploads/
+

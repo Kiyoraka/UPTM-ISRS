@@ -487,6 +487,7 @@
     </div>
 
     <script src="../assets/js/agent-register.js"></script>
+    <script src="../assets/js/agent-registerform1.js"></script>
     <script src="../assets/js/agent-registerform3.js"></script>
     <script src="../assets/js/agent-registerform6.js"></script>
 </body>
