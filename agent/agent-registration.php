@@ -64,6 +64,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         mysqli_stmt_execute($stmt);
         $agent_id = mysqli_insert_id($conn);
 
+        //---------------------DEBUG MODE---------------------
+        // Insert into agent_login table
+        $hashed_password = password_hash($registration_no, PASSWORD_DEFAULT); // Hash the registration number
+        $login_sql = "INSERT INTO agent_login (agent_id, name, email, password) VALUES (?, ?, ?, ?)";
+        $login_stmt = mysqli_prepare($conn, $login_sql);
+        mysqli_stmt_bind_param($login_stmt, "isss",
+            $agent_id,
+            $company_name,
+            $contact_email,
+            $hashed_password
+        );
+        mysqli_stmt_execute($login_stmt);
+        //---------------------DEBUG MODE---------------------
+
         // Insert experience details if any
         if ($recruitment_experience === 'yes' && isset($_POST['institution'])) {
             $institutions = $_POST['institution'];

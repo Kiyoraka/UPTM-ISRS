@@ -161,7 +161,6 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
                             <div class="profile-section active" id="section-personal">
                                 <div class="section-header">
                                     <h2>Personal Details</h2>
-                                    <button type="button" class="edit-button">Edit</button>
                                 </div>
                                 <!-- Photo upload -->
                                 <div class="form-row">
@@ -194,6 +193,7 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
                                 </div>
                                 <div class="form-navigation">
                                     <button type="button" class="btn-prev" style="visibility: hidden;">Previous</button>
+                                    <button type="button" class="btn-edit">Edit</button>
                                     <button type="button" class="btn-next">Next</button>
                                 </div>
                             </div>
@@ -202,7 +202,6 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
                             <div class="profile-section" id="section-contact">
                                 <div class="section-header">
                                     <h2>Contact Information</h2>
-                                    <button type="button" class="edit-button">Edit</button>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
@@ -216,6 +215,7 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
                                 </div>
                                 <div class="form-navigation">
                                     <button type="button" class="btn-prev">Previous</button>
+                                    <button type="button" class="btn-edit">Edit</button>
                                     <button type="button" class="btn-next">Next</button>
                                 </div>
                             </div>
@@ -224,7 +224,6 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
                             <div class="profile-section" id="section-bank">
                                 <div class="section-header">
                                     <h2>Bank Account Details</h2>
-                                    <button type="button" class="edit-button">Edit</button>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
@@ -248,6 +247,7 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
                                 </div>
                                 <div class="form-navigation">
                                     <button type="button" class="btn-prev">Previous</button>
+                                    <button type="button" class="btn-edit">Edit</button>
                                     <button type="button" class="btn-save">Save Changes</button>
                                 </div>
                             </div>

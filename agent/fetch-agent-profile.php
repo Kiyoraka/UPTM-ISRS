@@ -12,12 +12,16 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'agent') {
 }
 
 try {
-    $agent_id = $_SESSION['user_id'];
+    $agent_login_id = $_SESSION['user_id'];
     
-    // Fetch agent details
-    $sql = "SELECT * FROM agent WHERE id = ?";
+    // Fetch agent details with join
+    $sql = "SELECT a.*, al.email as login_email, al.name as login_name 
+            FROM agent a 
+            INNER JOIN agent_login al ON a.id = al.agent_id 
+            WHERE al.id = ?";
+    
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $agent_id);
+    mysqli_stmt_bind_param($stmt, "i", $agent_login_id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     

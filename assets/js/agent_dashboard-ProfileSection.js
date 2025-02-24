@@ -99,24 +99,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Handle edit buttons
-    document.querySelectorAll('.edit-button').forEach(button => {
+    document.querySelectorAll('.btn-edit').forEach(button => {
         button.addEventListener('click', function() {
             const section = this.closest('.profile-section');
             const inputs = section.querySelectorAll('.form-control, input[type="file"]');
             const saveBtn = section.querySelector('.btn-save') || section.querySelector('.btn-next');
-            
+        
             if (this.textContent === 'Edit') {
+                // Store original form field values
+                const originalValues = {};
+                inputs.forEach(input => {
+                    originalValues[input.id] = input.value;
+                });
+                this.dataset.originalValues = JSON.stringify(originalValues);
+
                 inputs.forEach(input => input.disabled = false);
                 this.textContent = 'Cancel';
-                saveBtn.textContent = 'Save Changes';
-                saveBtn.classList.add('btn-save');
+                if (saveBtn) {
+                    saveBtn.textContent = 'Save Changes';
+                    saveBtn.classList.remove('btn-next');
+                    saveBtn.classList.add('btn-save');
+                }
             } else {
                 inputs.forEach(input => input.disabled = true);
                 this.textContent = 'Edit';
-                saveBtn.textContent = (section.querySelector('.btn-next') ? 'Next' : 'Save');
-                saveBtn.classList.remove('btn-save');
-                // Reset changes
-                fetchProfileData();
+                if (saveBtn) {
+                    saveBtn.textContent = 'Save Changes';
+                    saveBtn.classList.remove('btn-save');
+                    saveBtn.classList.add('btn-save');
+                }
+
+                // Restore original form field values
+                const originalValues = JSON.parse(this.dataset.originalValues);
+                inputs.forEach(input => {
+                    input.value = originalValues[input.id];
+                });
             }
         });
     });

@@ -147,6 +147,7 @@
 }
 
 .btn-prev,
+.btn-edit,
 .btn-next,
 .btn-save {
     padding: 0.75rem 1.5rem;
@@ -158,6 +159,12 @@
 
 .btn-prev {
     background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-edit {
+    background-color: #e81a1a;
     color: white;
     border: none;
 }
@@ -175,6 +182,7 @@
 }
 
 .btn-prev:hover,
+.btn-edit:hover,
 .btn-next:hover,
 .btn-save:hover {
     opacity: 0.9;

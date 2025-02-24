@@ -31,15 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Next button click handlers
     document.querySelectorAll('.btn-next').forEach(button => {
         button.addEventListener('click', () => {
-            // If it's the last section, trigger form submission
-            if (currentSection === sections.length - 1) {
-                if (form.checkValidity()) {
-                    form.submit();
-                } else {
-                    // Trigger HTML5 validation
-                    form.reportValidity();
-                }
-            } else if (currentSection < sections.length - 1) {
+            if (currentSection < sections.length - 1) {
                 // Validate current section before moving to next
                 const currentInputs = sections[currentSection].querySelectorAll('input[required], select[required], textarea[required]');
                 let isValid = true;
@@ -63,6 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form submission handler
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Validate the entire form
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
 
         // Create FormData object
         const formData = new FormData(form);
