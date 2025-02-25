@@ -1,0 +1,91 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.registration-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* Logo Styling */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+}
+
+.logo-link {
+    display: block;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    text-align: center;
+    color: #000000;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    text-align: left;
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 5px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #1a73e8;
+}
+
+/* Form Sections */
+.form-section {
+    display: none;
+}
+
+.form-section.active {
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .registration-container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+    
+    h2 {
+        font-size: 16px;
+    }
+}

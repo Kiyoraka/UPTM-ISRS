@@ -1,0 +1,62 @@
+/* Document Upload Section */
+.document-upload-container {
+    margin-bottom: 20px;
+}
+
+.document-upload-container .form-group {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: #f9fafb;
+}
+
+.document-upload-container label {
+    font-weight: 500;
+    color: #475569;
+}
+
+.upload-instructions {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.upload-instructions ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.upload-instructions li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+/* Declaration Section */
+.declaration-text {
+    text-align: justify;
+    line-height: 1.6;
+    background-color: #f8fafc;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.declaration-text p {
+    margin-bottom: 10px;
+}
+
+/* Input file styling */
+input[type="file"] {
+    padding: 8px;
+    border: 1px dashed #d1d5db;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+
+input[type="file"]:hover {
+    background-color: #f9fafb;
+}

@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Student Registration - UPTM ISRS</title>
-    <link rel="stylesheet" href="../assets/css/student-registration.css">
+    <link rel="stylesheet" href="../assets/css/student-register-main.css">
+    <link rel="stylesheet" href="../assets/css/student-register-progress-bar.css">
+    <link rel="stylesheet" href="../assets/css/student-register-form-elements.css">
+    <link rel="stylesheet" href="../assets/css/student-register-personal-details.css">
+    <link rel="stylesheet" href="../assets/css/student-register-qualifications.css">
+    <link rel="stylesheet" href="../assets/css/student-register-documents.css">
 </head>
 <body>
     <div class="registration-container">
