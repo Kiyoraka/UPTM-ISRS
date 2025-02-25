@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Toggle dropdown on user icon click
         userProfile.addEventListener('click', function(event) {
             event.stopPropagation();
+            
+            // Close notification dropdown if open
+            const notificationDropdown = document.querySelector('.notification-dropdown');
+            if (notificationDropdown) {
+                notificationDropdown.style.display = 'none';
+            }
+            
+            // Toggle user dropdown
             const dropdownStyle = window.getComputedStyle(userDropdown);
             if (dropdownStyle.display === 'none') {
                 userDropdown.style.display = 'block';

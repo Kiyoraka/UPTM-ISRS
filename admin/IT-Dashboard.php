@@ -3,7 +3,7 @@ session_start();
 
 // Check if user is logged in and has admin role
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'it') {
-    header('Location: admin-login.php');
+    header('Location: admin-login.php'); 
     exit();
 }
 
@@ -32,6 +32,7 @@ $admin = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="../assets/css/IT_dashboard-UserDropDownMenu.css">
     <link rel="stylesheet" href="../assets/css/IT_dashboard-changepassword.css">
     <link rel="stylesheet" href="../assets/css/IT_dashboard-AgentViewer.css">
+    <link rel="stylesheet" href="../assets/css/IT_dashboard-notification.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -45,7 +46,7 @@ $admin = mysqli_fetch_assoc($result);
             <div class="nav-right">
                 <div class="user-profile">
                     <span class="user-icon">👤</span>
-                    <div class="user-dropdown">
+                    <div class="user-dropdown" style="position: fixed; z-index: 9999; top: 60px; right: 70px;">
                         <div class="user-dropdown-header">
                             <div class="user-name"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
                             <div class="user-role">IT Admin</div>
@@ -195,7 +196,7 @@ $admin = mysqli_fetch_assoc($result);
                     <h1>Agent Management</h1>
                     
                     <!-- Search and Filter Section -->
-                    <div class="search-filter-container">
+                    <div class="search-filter-container" style="position: relative; z-index: 10;">
                         <div class="search-box">
                             <i class="fas fa-search"></i>
                             <input type="text" id="agentSearchInput" placeholder="Search by name, email, or ID...">
@@ -524,5 +525,6 @@ $admin = mysqli_fetch_assoc($result);
     <script src="../assets/js/IT_dashboard-ChangePassword.js"></script>
     <script src="../assets/js/IT_dashboard-AgentManagement.js"></script>
     <script src="../assets/js/IT_dashboard-AgentViewer.js"></script>
+    <script src="../assets/js/IT_dashboard-notification.js"></script>
 </body>
 </html>
