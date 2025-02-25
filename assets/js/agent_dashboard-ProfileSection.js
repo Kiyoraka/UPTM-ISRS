@@ -124,9 +124,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 inputs.forEach(input => input.disabled = true);
                 this.textContent = 'Edit';
                 if (saveBtn) {
-                    saveBtn.textContent = 'Save Changes';
-                    saveBtn.classList.remove('btn-save');
-                    saveBtn.classList.add('btn-save');
+                    if (section.id === 'section-bank') {
+                        saveBtn.textContent = 'Save Changes';
+                        saveBtn.classList.remove('btn-save');
+                        saveBtn.classList.add('btn-save');
+                    } else {
+                        saveBtn.textContent = 'Next';
+                        saveBtn.classList.remove('btn-save');
+                        saveBtn.classList.add('btn-next');
+                    }
+                
                 }
 
                 // Restore original form field values
@@ -156,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Save changes
                 updateSection(currentSectionElement.id);
                 // Reset button and inputs
-                const editButton = currentSectionElement.querySelector('.edit-button');
+                const editButton = currentSectionElement.querySelector('.btn-edit');
                 if (editButton) {
                     editButton.click(); // Reset to view mode
                 }

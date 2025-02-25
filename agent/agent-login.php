@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('Location: agent-dashboard.php');
                 exit();
             } else {
-                $error = "Invalid credentialsddd";
+                $error = "Invalid credentials";
             }
         } else {
-            $error = "Invalid credentialsxxx";
+            $error = "Invalid credentials";
         }
     }
 }
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="button-container">
                     <button type="submit" class="btn login-btn">LOGIN</button>
-                    <a href="../agent/agent-register.php" class="btn back-btn">REGISTER</a>
+                    <a href="../index.html" class="btn back-btn">BACK</a>
                 </div>
             </form>
         </div>

@@ -156,7 +156,7 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
                             </div>
                         </div>
 
-                        <form id="profileForm" method="POST">
+                        <form id="agentProfileForm" method="POST">
                             <!-- Personal Details Section -->
                             <div class="profile-section active" id="section-personal">
                                 <div class="section-header">
