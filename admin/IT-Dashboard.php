@@ -70,7 +70,7 @@ $admin = mysqli_fetch_assoc($result);
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="#" class="nav-link active" data-section="main">
-                        <span class="nav-icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="nav-icon"><i class="fa fa-home"></i></span>
                         <span class="nav-text">Dashboard</span>
                     </a>
                 </li>
@@ -558,5 +558,6 @@ $admin = mysqli_fetch_assoc($result);
     <script src="../assets/js/IT_dashboard-AgentViewer.js"></script>
     <script src="../assets/js/IT_dashboard-notification.js"></script>
     <script src="../assets/js/IT_dashboard-StaffManagement.js"></script>
+    <script src="../assets/js/IT_dashboard-Stats.js"></script>
 </body>
 </html>
