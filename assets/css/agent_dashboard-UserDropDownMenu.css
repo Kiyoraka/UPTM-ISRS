@@ -1,0 +1,95 @@
+/* agent_dashboard-UserDropDownMenu.css */
+.user-profile {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 0 10px;
+    height: 60px;
+    transition: all 0.3s ease;
+}
+
+.user-profile:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-icon {
+    font-size: 1.2rem;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 220px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.user-profile:hover .user-dropdown {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    color: #1a73e8;
+    font-size: 0.9rem;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f7fb;
+    color: #1a73e8;
+}
+
+.dropdown-item.logout {
+    color: #e81a1a;
+}
+
+.dropdown-item.logout i {
+    color: #e81a1a;
+}
+
+.dropdown-item.logout:hover {
+    background-color: #fee2e2;
+}
+
+/* Add a header to the dropdown with user info */
+.user-dropdown-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+}
+
+.user-dropdown-header .user-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.user-dropdown-header .user-role {
+    font-size: 0.8rem;
+    color: #6c757d;
+}

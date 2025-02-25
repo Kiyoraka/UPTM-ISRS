@@ -52,6 +52,8 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
     <link rel="stylesheet" href="../assets/css/agent_dashboard-MainSection.css">
     <link rel="stylesheet" href="../assets/css/agent_dashboard-ProfileSection.css">
     <link rel="stylesheet" href="../assets/css/agent_dashboard-StudentListSection.css">
+    <link rel="stylesheet" href="../assets/css/agent_dashboard-UserDropDownMenu.css">
+    <link rel="stylesheet" href="../assets/css/agent_dashboard-changepassword.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -64,6 +66,14 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
             <div class="nav-right">
                 <div class="user-profile">
                     <span class="user-icon">👤</span>
+                    <div class="user-dropdown">
+                        <a href="change-password.php" class="dropdown-item">
+                            <i class="fas fa-key"></i> Change Password
+                        </a>
+                        <a href="agent-logout.php" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
                 </div>
                 <div class="notifications">
                     <span class="notification-icon">🔔</span>
@@ -307,6 +317,43 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
 
             </div>
 
+            <!-- Change Password Modal -->
+            <div id="passwordModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Change Password</h2>
+                        <span class="close-modal">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div id="password-message"></div>
+            
+                        <form id="changePasswordForm">
+                            <div class="form-group">
+                                <label for="current_password">Current Password</label>
+                                <input type="password" id="current_password" name="current_password" class="form-control" required>
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="new_password">New Password</label>
+                                <input type="password" id="new_password" name="new_password" class="form-control" required minlength="8" oninput="checkPasswordStrength()">
+                                <div id="password-strength" class="password-strength"></div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="confirm_password">Confirm New Password</label>
+                                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required minlength="8" oninput="checkPasswordMatch()">
+                                <div id="password-match" class="password-strength"></div>
+                            </div>
+                
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary" id="cancelPasswordChange">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Change Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <!-- Footer -->
             <footer class="dashboard-footer">
                 <div class="footer-content">
@@ -320,5 +367,7 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'];
 
     <script src="../assets/js/agent-dashboard.js"></script>
     <script src="../assets/js/agent_dashboard-ProfileSection.js"></script>
+    <script src="../assets/js/agent_dashboard-UserDropDownMenu.js"></script>
+    <script src="../assets/js/agent_dashboard-ChangePassword.js"></script>
 </body>
 </html>
