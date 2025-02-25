@@ -2,6 +2,11 @@
 require_once '../config/db.php';
 require_once '../includes/functions.php';
 
+// Start session if not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -12,7 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($email) || empty($password)) {
         $error = "All fields are required";
     } else {
-        $sql = "SELECT * FROM agent_login WHERE email = ?";
+        // Join agent_login with agent table to get status information
+        $sql = "SELECT al.*, a.status, a.status_reason 
+                FROM agent_login al 
+                JOIN agent a ON al.agent_id = a.id 
+                WHERE al.email = ?";
+        
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
@@ -21,13 +31,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($row = mysqli_fetch_assoc($result)) {
             // Verify password
             if (password_verify($password, $row['password'])) {
+                // Store basic login information
                 $_SESSION['user_id'] = $row['id'];
+                $_SESSION['agent_id'] = $row['agent_id'];
                 $_SESSION['role'] = 'agent';
                 $_SESSION['username'] = $row['name'];
                 
-                // Redirect to dashboard
-                header('Location: agent-dashboard.php');
-                exit();
+                // Check agent status and redirect accordingly
+                if ($row['status'] === 'approved') {
+                    // Approved - go to dashboard
+                    header('Location: agent-dashboard.php');
+                    exit();
+                } elseif ($row['status'] === 'pending') {
+                    // Pending - go to waiting page
+                    header('Location: agent-pending.php');
+                    exit();
+                } elseif ($row['status'] === 'rejected') {
+                    // Rejected - go to rejected page with reason
+                    $_SESSION['rejection_reason'] = $row['status_reason'];
+                    header('Location: agent-rejected.php');
+                    exit();
+                } else {
+                    // Unknown status
+                    $error = "Your account status is unknown. Please contact support.";
+                }
             } else {
                 $error = "Invalid credentials";
             }

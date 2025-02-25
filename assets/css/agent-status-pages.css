@@ -1,0 +1,87 @@
+/* Common styles for agent status pages */
+.status-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.status-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+}
+
+.status-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+}
+
+.status-message {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.contact-info {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+/* Status-specific colors */
+.status-icon.pending {
+    color: #f59e0b; /* Amber/Yellow */
+}
+
+.status-icon.rejected {
+    color: #ef4444; /* Red */
+}
+
+/* Button styles */
+
+.logout-btn {
+    margin-top: 1rem;
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.logout-btn:hover {
+    background-color: #d1d5db;
+}
+
+.appeal-btn {
+    margin-top: 1rem;
+    background-color: #1a73e8;
+    color: white;
+}
+
+.appeal-btn:hover {
+    background-color: #1557b0;
+}
+
+/* Reason box for rejected status */
+.reason-box {
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.reason-label {
+    font-weight: 600;
+    color: #991b1b;
+    margin-bottom: 0.5rem;
+}
+
+.reason-text {
+    color: #b91c1c;
+    line-height: 1.5;
+}
+
+/* Wider container for status pages */
+.login-box.status-box {
+    max-width: 600px;
+}

@@ -27,13 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Redirect based on staff role
                 switch($row['role']) {
                     case 'io':
-                        header('Location: io/dashboard.php');
+                        header('Location: staff/dashboard.php');
                         break;
                     case 'ao':
-                        header('Location: ao/dashboard.php');
+                        header('Location: staff/dashboard.php');
                         break;
                     case 'it':
-                        header('Location: it/dashboard.php');
+                        header('Location: ../admin/IT-Dashboard.php');
                         break;
                     default:
                         header('Location: dashboard.php');
