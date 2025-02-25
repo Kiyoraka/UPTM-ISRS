@@ -2,7 +2,7 @@
 session_start();
 
 // Check if user is logged in and has IO role
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'io') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ao') {
     header('Location: ../staff/staff-login.php');
     exit();
 }
@@ -30,7 +30,7 @@ $rejected_students = 0;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>International Officer Dashboard - UPTM ISRS</title>
+    <title>Academic Officer Dashboard - UPTM ISRS</title>
     <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-styles.css">
     <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-MainSection.css">
     <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-StudentListSection.css">
@@ -53,7 +53,7 @@ $rejected_students = 0;
                     <div class="user-dropdown">
                         <div class="user-dropdown-header">
                             <div class="user-name"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
-                            <div class="user-role">International Office</div>
+                            <div class="user-role">Academic Officer</div>
                         </div>
                         <a href="staff-logout.php" class="dropdown-item logout">
                             <i class="fas fa-sign-out-alt"></i> Logout
