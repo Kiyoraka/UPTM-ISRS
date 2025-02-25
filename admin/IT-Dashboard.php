@@ -141,55 +141,86 @@ $admin = mysqli_fetch_assoc($result);
                     
                 </div>
 
-                <!-- Staff Management Content -->
-                <div id="staff-content" style="display: none;">
-                    <h1>Staff Management</h1>
-                    
-                    <!-- Search and Filter Section -->
-                    <div class="search-filter-container">
-                        <div class="search-box">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="staffSearchInput" placeholder="Search by name, email, or ID...">
-                        </div>
-                        <div class="filter-box">
-                            <i class="fas fa-filter"></i>
-                            <select id="staffDepartmentFilter">
-                                <option value="">All Departments</option>
-                                <option value="academic">Academic</option>
-                                <option value="admin">Administration</option>
-                                <option value="finance">Finance</option>
-                            </select>
-                        </div>
-                    </div>
+<!-- Staff Management Content -->
+<div id="staff-content" style="display: none;">
+    <h1>Staff Management</h1>
+    
+    <!-- Search and Filter Section -->
+    <div class="search-filter-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="staffSearchInput" placeholder="Search by name or email...">
+        </div>
+        <div class="filter-box">
+            <i class="fas fa-filter"></i>
+            <select id="staffRoleFilter">
+                <option value="">All Roles</option>
+                <option value="io">International Office</option>
+                <option value="ao">Academic Office</option>
+                <option value="it">IT Admin</option>
+            </select>
+        </div>
+    </div>
 
-                    <!-- Table Container -->
-                    <div class="table-container">
-                        <table class="student-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Department</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="staffTableBody">
-                                <!-- Table rows will be dynamically populated -->
-                            </tbody>
-                        </table>
-                    </div>
+    <!-- Table Container -->
+    <div class="table-container">
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="staffTableBody">
+                <!-- Table rows will be dynamically populated -->
+            </tbody>
+        </table>
+    </div>
 
-                    <!-- Pagination -->
-                    <div class="pagination-container">
-                        <button id="staffPrevPage" class="pagination-btn">Previous</button>
-                        <div class="page-numbers" id="staffPageNumbers">
-                            <!-- Page numbers will be dynamically populated -->
-                        </div>
-                        <button id="staffNextPage" class="pagination-btn">Next</button>
-                    </div>
+    <!-- Pagination -->
+    <div class="pagination-container">
+        <button id="staffPrevPage" class="pagination-btn">Previous</button>
+        <div class="page-numbers" id="staffPageNumbers">
+            <!-- Page numbers will be dynamically populated -->
+        </div>
+        <button id="staffNextPage" class="pagination-btn">Next</button>
+    </div>
+</div>
+
+<!-- Staff Password Change Modal -->
+<div id="staffPasswordModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Change Staff Password</h2>
+            <span class="close-modal" id="closeStaffPasswordModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div id="staff-password-message"></div>
+            
+            <form id="changeStaffPasswordForm">
+                <input type="hidden" id="staff_id" name="staff_id">
+                
+                <div class="form-group">
+                    <label for="new_staff_password">New Password</label>
+                    <input type="password" id="new_staff_password" name="new_staff_password" class="form-control" required minlength="8">
                 </div>
+                
+                <div class="form-group">
+                    <label for="confirm_staff_password">Confirm New Password</label>
+                    <input type="password" id="confirm_staff_password" name="confirm_staff_password" class="form-control" required minlength="8">
+                </div>
+                
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" id="cancelStaffPasswordChange">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
                 <!-- Agent Management Content -->
                 <div id="agent-content" style="display: none;">
@@ -526,5 +557,6 @@ $admin = mysqli_fetch_assoc($result);
     <script src="../assets/js/IT_dashboard-AgentManagement.js"></script>
     <script src="../assets/js/IT_dashboard-AgentViewer.js"></script>
     <script src="../assets/js/IT_dashboard-notification.js"></script>
+    <script src="../assets/js/IT_dashboard-StaffManagement.js"></script>
 </body>
 </html>
