@@ -286,6 +286,23 @@
                                 <input type="text" name="year_completed[]">
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="qualification[]">
+                            </td>
+                            <td>
+                                <input type="text" name="institution[]">
+                            </td>
+                            <td>
+                                <input type="text" name="grade[]">
+                            </td>
+                            <td>
+                                <input type="text" name="duration[]">
+                            </td>
+                            <td>
+                                <input type="text" name="year_completed[]">
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
