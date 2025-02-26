@@ -87,8 +87,91 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="nationality">Nationality *</label>
-                    <input type="text" id="nationality" name="nationality" required>
+                        <label for="nationality">Nationality *</label>
+                        <select id="nationality" name="nationality" required>
+                            <option value="">Select Nationality</option>
+        
+                            <!-- Middle East -->
+                            <optgroup label="Middle East">
+                                <option value="SA">Saudi Arabia</option>
+                                <option value="YE">Yemen</option>
+                                <option value="OM">Oman</option>
+                                <option value="AE">United Arab Emirates</option>
+                                <option value="IR">Iran</option>
+                                <option value="IQ">Iraq</option>
+                                <option value="JO">Jordan</option>
+                            </optgroup>
+
+                            <!-- South Asia -->
+                            <optgroup label="South Asia">
+                                <option value="BD">Bangladesh</option>
+                                <option value="PK">Pakistan</option>
+                                <option value="NP">Nepal</option>
+                                <option value="LK">Sri Lanka</option>
+                                <option value="MV">Maldives</option>
+                                <option value="BT">Bhutan</option>
+                            </optgroup>
+
+                            <!-- Southeast Asia -->
+                            <optgroup label="Southeast Asia">
+                                <option value="ID">Indonesia</option>
+                                <option value="TH">Thailand</option>
+                                <option value="VN">Vietnam</option>
+                                <option value="MM">Myanmar</option>
+                                <option value="KH">Cambodia</option>
+                                <option value="LA">Laos</option>
+                                <option value="PH">Philippines</option>
+                                <option value="BN">Brunei</option>
+                                <option value="TL">Timor-Leste</option>
+                            </optgroup>
+
+                            <!-- East Asia -->
+                            <optgroup label="East Asia">
+                                <option value="CN">China</option>
+                                <option value="KR">South Korea</option>
+                                <option value="JP">Japan</option>
+                                <option value="TW">Taiwan</option>
+                                <option value="HK">Hong Kong</option>
+                            </optgroup>
+
+                            <!-- Central Asia -->
+                            <optgroup label="Central Asia">
+                                <option value="KZ">Kazakhstan</option>
+                                <option value="UZ">Uzbekistan</option>
+                                <option value="TM">Turkmenistan</option>
+                                <option value="KG">Kyrgyzstan</option>
+                                <option value="TJ">Tajikistan</option>
+                            </optgroup>
+
+                            <!-- Africa -->
+                            <optgroup label="Africa">
+                                <option value="NG">Nigeria</option>
+                                <option value="SO">Somalia</option>
+                                <option value="SD">Sudan</option>
+                                <option value="LY">Libya</option>
+                                <option value="EG">Egypt</option>
+                                <option value="DZ">Algeria</option>
+                                <option value="MA">Morocco</option>
+                                <option value="TN">Tunisia</option>
+                                <option value="GH">Ghana</option>
+                                <option value="CM">Cameroon</option>
+                                <option value="CI">Côte d'Ivoire</option>
+                                <option value="TZ">Tanzania</option>
+                                <option value="KE">Kenya</option>
+                                <option value="UG">Uganda</option>
+                            </optgroup>
+
+                            <!-- South America -->
+                            <optgroup label="South America">
+                                <option value="BR">Brazil</option>
+                                <option value="CO">Colombia</option>
+                                <option value="AR">Argentina</option>
+                                <option value="PE">Peru</option>
+                                <option value="VE">Venezuela</option>
+                                <option value="CL">Chile</option>
+                            </optgroup>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -133,7 +216,89 @@
 
                     <div class="form-group">
                         <label for="country">Country *</label>
-                        <input type="text" id="country" name="country" required>
+                        <select id="country" name="country" required>
+                            <option value="">Select Country</option>
+        
+                            <!-- Middle East -->
+                            <optgroup label="Middle East">
+                                <option value="SA">Saudi Arabia</option>
+                                <option value="YE">Yemen</option>
+                                <option value="OM">Oman</option>
+                                <option value="AE">United Arab Emirates</option>
+                                <option value="IR">Iran</option>
+                                <option value="IQ">Iraq</option>
+                                <option value="JO">Jordan</option>
+                            </optgroup>
+
+                            <!-- South Asia -->
+                            <optgroup label="South Asia">
+                                <option value="BD">Bangladesh</option>
+                                <option value="PK">Pakistan</option>
+                                <option value="NP">Nepal</option>
+                                <option value="LK">Sri Lanka</option>
+                                <option value="MV">Maldives</option>
+                                <option value="BT">Bhutan</option>
+                            </optgroup>
+
+                            <!-- Southeast Asia -->
+                            <optgroup label="Southeast Asia">
+                                <option value="ID">Indonesia</option>
+                                <option value="TH">Thailand</option>
+                                <option value="VN">Vietnam</option>
+                                <option value="MM">Myanmar</option>
+                                <option value="KH">Cambodia</option>
+                                <option value="LA">Laos</option>
+                                <option value="PH">Philippines</option>
+                                <option value="BN">Brunei</option>
+                                <option value="TL">Timor-Leste</option>
+                            </optgroup>
+
+                            <!-- East Asia -->
+                            <optgroup label="East Asia">
+                                <option value="CN">China</option>
+                                <option value="KR">South Korea</option>
+                                <option value="JP">Japan</option>
+                                <option value="TW">Taiwan</option>
+                                <option value="HK">Hong Kong</option>
+                            </optgroup>
+
+                            <!-- Central Asia -->
+                            <optgroup label="Central Asia">
+                                <option value="KZ">Kazakhstan</option>
+                                <option value="UZ">Uzbekistan</option>
+                                <option value="TM">Turkmenistan</option>
+                                <option value="KG">Kyrgyzstan</option>
+                                <option value="TJ">Tajikistan</option>
+                            </optgroup>
+
+                            <!-- Africa -->
+                            <optgroup label="Africa">
+                                <option value="NG">Nigeria</option>
+                                <option value="SO">Somalia</option>
+                                <option value="SD">Sudan</option>
+                                <option value="LY">Libya</option>
+                                <option value="EG">Egypt</option>
+                                <option value="DZ">Algeria</option>
+                                <option value="MA">Morocco</option>
+                                <option value="TN">Tunisia</option>
+                                <option value="GH">Ghana</option>
+                                <option value="CM">Cameroon</option>
+                                <option value="CI">Côte d'Ivoire</option>
+                                <option value="TZ">Tanzania</option>
+                                <option value="KE">Kenya</option>
+                                <option value="UG">Uganda</option>
+                            </optgroup>
+
+                            <!-- South America -->
+                            <optgroup label="South America">
+                                <option value="BR">Brazil</option>
+                                <option value="CO">Colombia</option>
+                                <option value="AR">Argentina</option>
+                                <option value="PE">Peru</option>
+                                <option value="VE">Venezuela</option>
+                                <option value="CL">Chile</option>
+                            </optgroup>
+                        </select>
                     </div>
                 </div>
 
@@ -185,10 +350,93 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group">
+                <div class="form-group">
                         <label for="guardian_nationality">Nationality *</label>
-                        <input type="text" id="guardian_nationality" name="guardian_nationality" required>
+                        <select id="guardian_nationality" name="guardian_nationality" required>
+                            <option value="">Select Nationality</option>
+        
+                            <!-- Middle East -->
+                            <optgroup label="Middle East">
+                                <option value="SA">Saudi Arabia</option>
+                                <option value="YE">Yemen</option>
+                                <option value="OM">Oman</option>
+                                <option value="AE">United Arab Emirates</option>
+                                <option value="IR">Iran</option>
+                                <option value="IQ">Iraq</option>
+                                <option value="JO">Jordan</option>
+                            </optgroup>
+
+                            <!-- South Asia -->
+                            <optgroup label="South Asia">
+                                <option value="BD">Bangladesh</option>
+                                <option value="PK">Pakistan</option>
+                                <option value="NP">Nepal</option>
+                                <option value="LK">Sri Lanka</option>
+                                <option value="MV">Maldives</option>
+                                <option value="BT">Bhutan</option>
+                            </optgroup>
+
+                            <!-- Southeast Asia -->
+                            <optgroup label="Southeast Asia">
+                                <option value="ID">Indonesia</option>
+                                <option value="TH">Thailand</option>
+                                <option value="VN">Vietnam</option>
+                                <option value="MM">Myanmar</option>
+                                <option value="KH">Cambodia</option>
+                                <option value="LA">Laos</option>
+                                <option value="PH">Philippines</option>
+                                <option value="BN">Brunei</option>
+                                <option value="TL">Timor-Leste</option>
+                            </optgroup>
+
+                            <!-- East Asia -->
+                            <optgroup label="East Asia">
+                                <option value="CN">China</option>
+                                <option value="KR">South Korea</option>
+                                <option value="JP">Japan</option>
+                                <option value="TW">Taiwan</option>
+                                <option value="HK">Hong Kong</option>
+                            </optgroup>
+
+                            <!-- Central Asia -->
+                            <optgroup label="Central Asia">
+                                <option value="KZ">Kazakhstan</option>
+                                <option value="UZ">Uzbekistan</option>
+                                <option value="TM">Turkmenistan</option>
+                                <option value="KG">Kyrgyzstan</option>
+                                <option value="TJ">Tajikistan</option>
+                            </optgroup>
+
+                            <!-- Africa -->
+                            <optgroup label="Africa">
+                                <option value="NG">Nigeria</option>
+                                <option value="SO">Somalia</option>
+                                <option value="SD">Sudan</option>
+                                <option value="LY">Libya</option>
+                                <option value="EG">Egypt</option>
+                                <option value="DZ">Algeria</option>
+                                <option value="MA">Morocco</option>
+                                <option value="TN">Tunisia</option>
+                                <option value="GH">Ghana</option>
+                                <option value="CM">Cameroon</option>
+                                <option value="CI">Côte d'Ivoire</option>
+                                <option value="TZ">Tanzania</option>
+                                <option value="KE">Kenya</option>
+                                <option value="UG">Uganda</option>
+                            </optgroup>
+
+                            <!-- South America -->
+                            <optgroup label="South America">
+                                <option value="BR">Brazil</option>
+                                <option value="CO">Colombia</option>
+                                <option value="AR">Argentina</option>
+                                <option value="PE">Peru</option>
+                                <option value="VE">Venezuela</option>
+                                <option value="CL">Chile</option>
+                            </optgroup>
+                        </select>
                     </div>
+                </div>
 
                     <div class="form-group">
                         <label for="guardian_postcode">Postcode *</label>
@@ -209,8 +457,91 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="guardian_country">Country *</label>
-                    <input type="text" id="guardian_country" name="guardian_country" required>
+                        <label for="country">Country *</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select Country</option>
+        
+                            <!-- Middle East -->
+                            <optgroup label="Middle East">
+                                <option value="SA">Saudi Arabia</option>
+                                <option value="YE">Yemen</option>
+                                <option value="OM">Oman</option>
+                                <option value="AE">United Arab Emirates</option>
+                                <option value="IR">Iran</option>
+                                <option value="IQ">Iraq</option>
+                                <option value="JO">Jordan</option>
+                            </optgroup>
+
+                            <!-- South Asia -->
+                            <optgroup label="South Asia">
+                                <option value="BD">Bangladesh</option>
+                                <option value="PK">Pakistan</option>
+                                <option value="NP">Nepal</option>
+                                <option value="LK">Sri Lanka</option>
+                                <option value="MV">Maldives</option>
+                                <option value="BT">Bhutan</option>
+                            </optgroup>
+
+                            <!-- Southeast Asia -->
+                            <optgroup label="Southeast Asia">
+                                <option value="ID">Indonesia</option>
+                                <option value="TH">Thailand</option>
+                                <option value="VN">Vietnam</option>
+                                <option value="MM">Myanmar</option>
+                                <option value="KH">Cambodia</option>
+                                <option value="LA">Laos</option>
+                                <option value="PH">Philippines</option>
+                                <option value="BN">Brunei</option>
+                                <option value="TL">Timor-Leste</option>
+                            </optgroup>
+
+                            <!-- East Asia -->
+                            <optgroup label="East Asia">
+                                <option value="CN">China</option>
+                                <option value="KR">South Korea</option>
+                                <option value="JP">Japan</option>
+                                <option value="TW">Taiwan</option>
+                                <option value="HK">Hong Kong</option>
+                            </optgroup>
+
+                            <!-- Central Asia -->
+                            <optgroup label="Central Asia">
+                                <option value="KZ">Kazakhstan</option>
+                                <option value="UZ">Uzbekistan</option>
+                                <option value="TM">Turkmenistan</option>
+                                <option value="KG">Kyrgyzstan</option>
+                                <option value="TJ">Tajikistan</option>
+                            </optgroup>
+
+                            <!-- Africa -->
+                            <optgroup label="Africa">
+                                <option value="NG">Nigeria</option>
+                                <option value="SO">Somalia</option>
+                                <option value="SD">Sudan</option>
+                                <option value="LY">Libya</option>
+                                <option value="EG">Egypt</option>
+                                <option value="DZ">Algeria</option>
+                                <option value="MA">Morocco</option>
+                                <option value="TN">Tunisia</option>
+                                <option value="GH">Ghana</option>
+                                <option value="CM">Cameroon</option>
+                                <option value="CI">Côte d'Ivoire</option>
+                                <option value="TZ">Tanzania</option>
+                                <option value="KE">Kenya</option>
+                                <option value="UG">Uganda</option>
+                            </optgroup>
+
+                            <!-- South America -->
+                            <optgroup label="South America">
+                                <option value="BR">Brazil</option>
+                                <option value="CO">Colombia</option>
+                                <option value="AR">Argentina</option>
+                                <option value="PE">Peru</option>
+                                <option value="VE">Venezuela</option>
+                                <option value="CL">Chile</option>
+                            </optgroup>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-navigation">

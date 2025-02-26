@@ -102,24 +102,82 @@ textarea:focus {
     transform: translateY(-2px);
 }
 
-/* Responsive Form Elements */
-@media (max-width: 768px) {
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .radio-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .form-navigation {
-        margin-top: 20px;
-    }
-    
-    .btn-prev, .btn-next, .btn-submit {
-        padding: 8px 15px;
-        font-size: 14px;
-    }
+/* Country Dropdown Styling */
+select[name="country"],
+select[name="guardian_country"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #585858;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+select[name="country"]:focus,
+select[name="guardian_country"]:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+select[name="country"] optgroup,
+select[name="guardian_country"] optgroup {
+    font-weight: bold;
+    color: #1a73e8;
+    background-color: #f5f7fa;
+}
+
+select[name="country"] option,
+select[name="guardian_country"] option {
+    padding: 8px;
+    font-weight: normal;
+    color: #333;
+}
+
+select[name="nationality"],
+select[name="guardian_nationality"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #585858;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+select[name="nationality"]:focus,
+select[name="guardian_nationality"]:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+/* Highlight active optgroup for better visual hierarchy */
+select[name="nationality"] optgroup,
+select[name="guardian_nationality"] optgroup {
+    font-weight: bold;
+    color: #1a73e8;
+    background-color: #f5f7fa;
+}
+
+/* Style individual options */
+select[name="nationality"] option,
+select[name="guardian_nationality"] option {
+    padding: 8px;
+    font-weight: normal;
+    color: #333;
+}
+
+/* Consistent dropdown styling across all selects */
+select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
