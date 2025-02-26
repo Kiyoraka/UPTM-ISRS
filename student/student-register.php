@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="../assets/css/student-register-program-selection.css">
     <link rel="stylesheet" href="../assets/css/student-register-documents.css">
     <link rel="stylesheet" href="../assets/css/student-register-debug.css"> 
+
+    <!-- Load data files first -->
+    <script src="../assets/js/countries-data.js"></script>
+    <script src="../assets/js/programs-data.js"></script>
+    <script src="../assets/js/dropdown-populator.js"></script>
 </head>
 <body>
     <div class="registration-container">
@@ -87,91 +92,11 @@
                 </div>
 
                 <div class="form-group">
-                        <label for="nationality">Nationality *</label>
-                        <select id="nationality" name="nationality" required>
-                            <option value="">Select Nationality</option>
-        
-                            <!-- Middle East -->
-                            <optgroup label="Middle East">
-                                <option value="SA">Saudi Arabia</option>
-                                <option value="YE">Yemen</option>
-                                <option value="OM">Oman</option>
-                                <option value="AE">United Arab Emirates</option>
-                                <option value="IR">Iran</option>
-                                <option value="IQ">Iraq</option>
-                                <option value="JO">Jordan</option>
-                            </optgroup>
-
-                            <!-- South Asia -->
-                            <optgroup label="South Asia">
-                                <option value="BD">Bangladesh</option>
-                                <option value="PK">Pakistan</option>
-                                <option value="NP">Nepal</option>
-                                <option value="LK">Sri Lanka</option>
-                                <option value="MV">Maldives</option>
-                                <option value="BT">Bhutan</option>
-                            </optgroup>
-
-                            <!-- Southeast Asia -->
-                            <optgroup label="Southeast Asia">
-                                <option value="ID">Indonesia</option>
-                                <option value="TH">Thailand</option>
-                                <option value="VN">Vietnam</option>
-                                <option value="MM">Myanmar</option>
-                                <option value="KH">Cambodia</option>
-                                <option value="LA">Laos</option>
-                                <option value="PH">Philippines</option>
-                                <option value="BN">Brunei</option>
-                                <option value="TL">Timor-Leste</option>
-                            </optgroup>
-
-                            <!-- East Asia -->
-                            <optgroup label="East Asia">
-                                <option value="CN">China</option>
-                                <option value="KR">South Korea</option>
-                                <option value="JP">Japan</option>
-                                <option value="TW">Taiwan</option>
-                                <option value="HK">Hong Kong</option>
-                            </optgroup>
-
-                            <!-- Central Asia -->
-                            <optgroup label="Central Asia">
-                                <option value="KZ">Kazakhstan</option>
-                                <option value="UZ">Uzbekistan</option>
-                                <option value="TM">Turkmenistan</option>
-                                <option value="KG">Kyrgyzstan</option>
-                                <option value="TJ">Tajikistan</option>
-                            </optgroup>
-
-                            <!-- Africa -->
-                            <optgroup label="Africa">
-                                <option value="NG">Nigeria</option>
-                                <option value="SO">Somalia</option>
-                                <option value="SD">Sudan</option>
-                                <option value="LY">Libya</option>
-                                <option value="EG">Egypt</option>
-                                <option value="DZ">Algeria</option>
-                                <option value="MA">Morocco</option>
-                                <option value="TN">Tunisia</option>
-                                <option value="GH">Ghana</option>
-                                <option value="CM">Cameroon</option>
-                                <option value="CI">Côte d'Ivoire</option>
-                                <option value="TZ">Tanzania</option>
-                                <option value="KE">Kenya</option>
-                                <option value="UG">Uganda</option>
-                            </optgroup>
-
-                            <!-- South America -->
-                            <optgroup label="South America">
-                                <option value="BR">Brazil</option>
-                                <option value="CO">Colombia</option>
-                                <option value="AR">Argentina</option>
-                                <option value="PE">Peru</option>
-                                <option value="VE">Venezuela</option>
-                                <option value="CL">Chile</option>
-                            </optgroup>
-                        </select>
-                    </div>
+                    <label for="nationality">Nationality *</label>
+                    <select id="nationality" name="nationality" required>
+                        <option value="">Select Nationality</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
                 </div>
 
                 <div class="form-row">
@@ -218,86 +143,7 @@
                         <label for="country">Country *</label>
                         <select id="country" name="country" required>
                             <option value="">Select Country</option>
-        
-                            <!-- Middle East -->
-                            <optgroup label="Middle East">
-                                <option value="SA">Saudi Arabia</option>
-                                <option value="YE">Yemen</option>
-                                <option value="OM">Oman</option>
-                                <option value="AE">United Arab Emirates</option>
-                                <option value="IR">Iran</option>
-                                <option value="IQ">Iraq</option>
-                                <option value="JO">Jordan</option>
-                            </optgroup>
-
-                            <!-- South Asia -->
-                            <optgroup label="South Asia">
-                                <option value="BD">Bangladesh</option>
-                                <option value="PK">Pakistan</option>
-                                <option value="NP">Nepal</option>
-                                <option value="LK">Sri Lanka</option>
-                                <option value="MV">Maldives</option>
-                                <option value="BT">Bhutan</option>
-                            </optgroup>
-
-                            <!-- Southeast Asia -->
-                            <optgroup label="Southeast Asia">
-                                <option value="ID">Indonesia</option>
-                                <option value="TH">Thailand</option>
-                                <option value="VN">Vietnam</option>
-                                <option value="MM">Myanmar</option>
-                                <option value="KH">Cambodia</option>
-                                <option value="LA">Laos</option>
-                                <option value="PH">Philippines</option>
-                                <option value="BN">Brunei</option>
-                                <option value="TL">Timor-Leste</option>
-                            </optgroup>
-
-                            <!-- East Asia -->
-                            <optgroup label="East Asia">
-                                <option value="CN">China</option>
-                                <option value="KR">South Korea</option>
-                                <option value="JP">Japan</option>
-                                <option value="TW">Taiwan</option>
-                                <option value="HK">Hong Kong</option>
-                            </optgroup>
-
-                            <!-- Central Asia -->
-                            <optgroup label="Central Asia">
-                                <option value="KZ">Kazakhstan</option>
-                                <option value="UZ">Uzbekistan</option>
-                                <option value="TM">Turkmenistan</option>
-                                <option value="KG">Kyrgyzstan</option>
-                                <option value="TJ">Tajikistan</option>
-                            </optgroup>
-
-                            <!-- Africa -->
-                            <optgroup label="Africa">
-                                <option value="NG">Nigeria</option>
-                                <option value="SO">Somalia</option>
-                                <option value="SD">Sudan</option>
-                                <option value="LY">Libya</option>
-                                <option value="EG">Egypt</option>
-                                <option value="DZ">Algeria</option>
-                                <option value="MA">Morocco</option>
-                                <option value="TN">Tunisia</option>
-                                <option value="GH">Ghana</option>
-                                <option value="CM">Cameroon</option>
-                                <option value="CI">Côte d'Ivoire</option>
-                                <option value="TZ">Tanzania</option>
-                                <option value="KE">Kenya</option>
-                                <option value="UG">Uganda</option>
-                            </optgroup>
-
-                            <!-- South America -->
-                            <optgroup label="South America">
-                                <option value="BR">Brazil</option>
-                                <option value="CO">Colombia</option>
-                                <option value="AR">Argentina</option>
-                                <option value="PE">Peru</option>
-                                <option value="VE">Venezuela</option>
-                                <option value="CL">Chile</option>
-                            </optgroup>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
                 </div>
@@ -354,89 +200,9 @@
                         <label for="guardian_nationality">Nationality *</label>
                         <select id="guardian_nationality" name="guardian_nationality" required>
                             <option value="">Select Nationality</option>
-        
-                            <!-- Middle East -->
-                            <optgroup label="Middle East">
-                                <option value="SA">Saudi Arabia</option>
-                                <option value="YE">Yemen</option>
-                                <option value="OM">Oman</option>
-                                <option value="AE">United Arab Emirates</option>
-                                <option value="IR">Iran</option>
-                                <option value="IQ">Iraq</option>
-                                <option value="JO">Jordan</option>
-                            </optgroup>
-
-                            <!-- South Asia -->
-                            <optgroup label="South Asia">
-                                <option value="BD">Bangladesh</option>
-                                <option value="PK">Pakistan</option>
-                                <option value="NP">Nepal</option>
-                                <option value="LK">Sri Lanka</option>
-                                <option value="MV">Maldives</option>
-                                <option value="BT">Bhutan</option>
-                            </optgroup>
-
-                            <!-- Southeast Asia -->
-                            <optgroup label="Southeast Asia">
-                                <option value="ID">Indonesia</option>
-                                <option value="TH">Thailand</option>
-                                <option value="VN">Vietnam</option>
-                                <option value="MM">Myanmar</option>
-                                <option value="KH">Cambodia</option>
-                                <option value="LA">Laos</option>
-                                <option value="PH">Philippines</option>
-                                <option value="BN">Brunei</option>
-                                <option value="TL">Timor-Leste</option>
-                            </optgroup>
-
-                            <!-- East Asia -->
-                            <optgroup label="East Asia">
-                                <option value="CN">China</option>
-                                <option value="KR">South Korea</option>
-                                <option value="JP">Japan</option>
-                                <option value="TW">Taiwan</option>
-                                <option value="HK">Hong Kong</option>
-                            </optgroup>
-
-                            <!-- Central Asia -->
-                            <optgroup label="Central Asia">
-                                <option value="KZ">Kazakhstan</option>
-                                <option value="UZ">Uzbekistan</option>
-                                <option value="TM">Turkmenistan</option>
-                                <option value="KG">Kyrgyzstan</option>
-                                <option value="TJ">Tajikistan</option>
-                            </optgroup>
-
-                            <!-- Africa -->
-                            <optgroup label="Africa">
-                                <option value="NG">Nigeria</option>
-                                <option value="SO">Somalia</option>
-                                <option value="SD">Sudan</option>
-                                <option value="LY">Libya</option>
-                                <option value="EG">Egypt</option>
-                                <option value="DZ">Algeria</option>
-                                <option value="MA">Morocco</option>
-                                <option value="TN">Tunisia</option>
-                                <option value="GH">Ghana</option>
-                                <option value="CM">Cameroon</option>
-                                <option value="CI">Côte d'Ivoire</option>
-                                <option value="TZ">Tanzania</option>
-                                <option value="KE">Kenya</option>
-                                <option value="UG">Uganda</option>
-                            </optgroup>
-
-                            <!-- South America -->
-                            <optgroup label="South America">
-                                <option value="BR">Brazil</option>
-                                <option value="CO">Colombia</option>
-                                <option value="AR">Argentina</option>
-                                <option value="PE">Peru</option>
-                                <option value="VE">Venezuela</option>
-                                <option value="CL">Chile</option>
-                            </optgroup>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
-                </div>
 
                     <div class="form-group">
                         <label for="guardian_postcode">Postcode *</label>
@@ -457,91 +223,11 @@
                 </div>
 
                 <div class="form-group">
-                        <label for="country">Country *</label>
-                        <select id="country" name="country" required>
-                            <option value="">Select Country</option>
-        
-                            <!-- Middle East -->
-                            <optgroup label="Middle East">
-                                <option value="SA">Saudi Arabia</option>
-                                <option value="YE">Yemen</option>
-                                <option value="OM">Oman</option>
-                                <option value="AE">United Arab Emirates</option>
-                                <option value="IR">Iran</option>
-                                <option value="IQ">Iraq</option>
-                                <option value="JO">Jordan</option>
-                            </optgroup>
-
-                            <!-- South Asia -->
-                            <optgroup label="South Asia">
-                                <option value="BD">Bangladesh</option>
-                                <option value="PK">Pakistan</option>
-                                <option value="NP">Nepal</option>
-                                <option value="LK">Sri Lanka</option>
-                                <option value="MV">Maldives</option>
-                                <option value="BT">Bhutan</option>
-                            </optgroup>
-
-                            <!-- Southeast Asia -->
-                            <optgroup label="Southeast Asia">
-                                <option value="ID">Indonesia</option>
-                                <option value="TH">Thailand</option>
-                                <option value="VN">Vietnam</option>
-                                <option value="MM">Myanmar</option>
-                                <option value="KH">Cambodia</option>
-                                <option value="LA">Laos</option>
-                                <option value="PH">Philippines</option>
-                                <option value="BN">Brunei</option>
-                                <option value="TL">Timor-Leste</option>
-                            </optgroup>
-
-                            <!-- East Asia -->
-                            <optgroup label="East Asia">
-                                <option value="CN">China</option>
-                                <option value="KR">South Korea</option>
-                                <option value="JP">Japan</option>
-                                <option value="TW">Taiwan</option>
-                                <option value="HK">Hong Kong</option>
-                            </optgroup>
-
-                            <!-- Central Asia -->
-                            <optgroup label="Central Asia">
-                                <option value="KZ">Kazakhstan</option>
-                                <option value="UZ">Uzbekistan</option>
-                                <option value="TM">Turkmenistan</option>
-                                <option value="KG">Kyrgyzstan</option>
-                                <option value="TJ">Tajikistan</option>
-                            </optgroup>
-
-                            <!-- Africa -->
-                            <optgroup label="Africa">
-                                <option value="NG">Nigeria</option>
-                                <option value="SO">Somalia</option>
-                                <option value="SD">Sudan</option>
-                                <option value="LY">Libya</option>
-                                <option value="EG">Egypt</option>
-                                <option value="DZ">Algeria</option>
-                                <option value="MA">Morocco</option>
-                                <option value="TN">Tunisia</option>
-                                <option value="GH">Ghana</option>
-                                <option value="CM">Cameroon</option>
-                                <option value="CI">Côte d'Ivoire</option>
-                                <option value="TZ">Tanzania</option>
-                                <option value="KE">Kenya</option>
-                                <option value="UG">Uganda</option>
-                            </optgroup>
-
-                            <!-- South America -->
-                            <optgroup label="South America">
-                                <option value="BR">Brazil</option>
-                                <option value="CO">Colombia</option>
-                                <option value="AR">Argentina</option>
-                                <option value="PE">Peru</option>
-                                <option value="VE">Venezuela</option>
-                                <option value="CL">Chile</option>
-                            </optgroup>
-                        </select>
-                    </div>
+                    <label for="guardian_country">Country *</label>
+                    <select id="guardian_country" name="guardian_country" required>
+                        <option value="">Select Country</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
                 </div>
 
                 <div class="form-navigation">
@@ -648,35 +334,7 @@
                         <label for="programme_code_1">Programme</label>
                         <select id="programme_code_1" name="programme_code_1" required>
                             <option value="">Select Programme</option>
-                            <!-- Bachelor's Degree -->
-                            <optgroup label="Bachelor's Degree">
-                                <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
-                                <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
-                                <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
-                                <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
-                                <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
-                                <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
-                                <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
-                                <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
-                                <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
-                                <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
-                                <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
-                                <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
-                                <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
-                            </optgroup>
-                            <!-- Master -->
-                            <optgroup label="Master">
-                                <option value="MSIS">MSIS - Master of Science in Information Systems</option>
-                                <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
-                                <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
-                                <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
-                            </optgroup>
-                            <!-- Doctor of Philosophy/PHD -->
-                            <optgroup label="Doctor of Philosophy">
-                                <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
-                                <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
-                                <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
-                            </optgroup>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
                 </div>
@@ -688,35 +346,7 @@
                         <label for="programme_code_2">Programme</label>
                         <select id="programme_code_2" name="programme_code_2">
                             <option value="">Select Programme</option>
-                            <!-- Bachelor's Degree -->
-                            <optgroup label="Bachelor's Degree">
-                                <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
-                                <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
-                                <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
-                                <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
-                                <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
-                                <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
-                                <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
-                                <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
-                                <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
-                                <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
-                                <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
-                                <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
-                                <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
-                            </optgroup>
-                            <!-- Master -->
-                            <optgroup label="Master">
-                                <option value="MSIS">MSIS - Master of Science in Information Systems</option>
-                                <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
-                                <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
-                                <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
-                            </optgroup>
-                            <!-- Doctor of Philosophy/PHD -->
-                            <optgroup label="Doctor of Philosophy">
-                                <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
-                                <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
-                                <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
-                            </optgroup>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
                 </div>
@@ -728,35 +358,7 @@
                         <label for="programme_code_3">Programme</label>
                         <select id="programme_code_3" name="programme_code_3">
                             <option value="">Select Programme</option>
-                            <!-- Bachelor's Degree -->
-                            <optgroup label="Bachelor's Degree">
-                                <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
-                                <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
-                                <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
-                                <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
-                                <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
-                                <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
-                                <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
-                                <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
-                                <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
-                                <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
-                                <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
-                                <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
-                                <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
-                            </optgroup>
-                            <!-- Master -->
-                            <optgroup label="Master">
-                                <option value="MSIS">MSIS - Master of Science in Information Systems</option>
-                                <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
-                                <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
-                                <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
-                            </optgroup>
-                            <!-- Doctor of Philosophy/PHD -->
-                            <optgroup label="Doctor of Philosophy">
-                                <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
-                                <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
-                                <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
-                            </optgroup>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
                 </div>
@@ -768,35 +370,7 @@
                         <label for="programme_code_4">Programme</label>
                         <select id="programme_code_4" name="programme_code_4">
                             <option value="">Select Programme</option>
-                            <!-- Bachelor's Degree -->
-                            <optgroup label="Bachelor's Degree">
-                                <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
-                                <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
-                                <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
-                                <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
-                                <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
-                                <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
-                                <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
-                                <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
-                                <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
-                                <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
-                                <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
-                                <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
-                                <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
-                            </optgroup>
-                            <!-- Master -->
-                            <optgroup label="Master">
-                                <option value="MSIS">MSIS - Master of Science in Information Systems</option>
-                                <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
-                                <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
-                                <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
-                            </optgroup>
-                            <!-- Doctor of Philosophy/PHD -->
-                            <optgroup label="Doctor of Philosophy">
-                                <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
-                                <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
-                                <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
-                            </optgroup>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
                 </div>
@@ -808,35 +382,7 @@
                         <label for="programme_code_5">Programme</label>
                         <select id="programme_code_5" name="programme_code_5">
                             <option value="">Select Programme</option>
-                            <!-- Bachelor's Degree -->
-                            <optgroup label="Bachelor's Degree">
-                                <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
-                                <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
-                                <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
-                                <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
-                                <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
-                                <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
-                                <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
-                                <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
-                                <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
-                                <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
-                                <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
-                                <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
-                                <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
-                            </optgroup>
-                            <!-- Master -->
-                            <optgroup label="Master">
-                                <option value="MSIS">MSIS - Master of Science in Information Systems</option>
-                                <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
-                                <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
-                                <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
-                            </optgroup>
-                            <!-- Doctor of Philosophy/PHD -->
-                            <optgroup label="Doctor of Philosophy">
-                                <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
-                                <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
-                                <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
-                            </optgroup>
+                            <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
                 </div>
