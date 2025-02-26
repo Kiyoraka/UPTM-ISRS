@@ -1,0 +1,78 @@
+/* Program Selection Styles */
+.program-choice {
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.program-choice h3 {
+    font-size: 16px;
+    color: #1a73e8;
+    margin-bottom: 12px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.program-choice select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #585858;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.program-choice select:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+.program-choice select optgroup {
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+.program-choice select option {
+    padding: 8px;
+}
+
+.instructions {
+    margin-bottom: 15px;
+    color: #4b5563;
+    font-style: italic;
+}
+
+/* Highlight required program */
+.program-choice:first-of-type {
+    border-left: 3px solid #1a73e8;
+}
+
+/* Highlight duplicate selections */
+.duplicate-selection {
+    border-color: #e53e3e !important;
+    background-color: rgba(254, 226, 226, 0.5) !important;
+    animation: shake 0.5s linear;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+    100% { transform: translateX(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .program-choice {
+        padding: 12px;
+    }
+    
+    .program-choice h3 {
+        font-size: 15px;
+    }
+}

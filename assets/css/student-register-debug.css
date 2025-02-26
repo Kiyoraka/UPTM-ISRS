@@ -1,0 +1,88 @@
+/* Debug Panel Styles */
+.debug-panel {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 8px;
+    z-index: 1000;
+    font-size: 14px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.debug-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.debug-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.debug-toggle input {
+    margin: 0;
+}
+
+.debug-navigation {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.debug-navigation select {
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #444;
+    color: white;
+    border: 1px solid #555;
+}
+
+/* Debug mode visual indicators */
+body.debug-active {
+    position: relative;
+}
+
+body.debug-active::before {
+    content: "DEBUG MODE";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff5722;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+body.debug-active .form-section {
+    border: 2px dashed #ff5722;
+    background-color: rgba(255, 87, 34, 0.05);
+}
+
+body.debug-active input[data-required="true"],
+body.debug-active select[data-required="true"],
+body.debug-active textarea[data-required="true"] {
+    border-left: 4px solid #ff5722;
+}
+
+/* Make sure the debug panel is more visible on mobile */
+@media (max-width: 768px) {
+    .debug-panel {
+        width: 100%;
+        border-radius: 0;
+    }
+    
+    .debug-controls {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="../assets/css/student-register-form-elements.css">
     <link rel="stylesheet" href="../assets/css/student-register-personal-details.css">
     <link rel="stylesheet" href="../assets/css/student-register-qualifications.css">
+    <link rel="stylesheet" href="../assets/css/student-register-program-selection.css">
     <link rel="stylesheet" href="../assets/css/student-register-documents.css">
+    <link rel="stylesheet" href="../assets/css/student-register-debug.css"> 
 </head>
 <body>
     <div class="registration-container">
@@ -300,72 +302,219 @@
                 </div>
             </div>
 
-            <!-- Section D: Programme Applied For -->
-            <div class="form-section" id="section-d">
-                <h2>SECTION D: PROGRAMME APPLIED FOR (HIGHLY PREFERRED TO LEAST PREFERRED)</h2>
-                
-                <table class="qualification-table">
-                    <thead>
-                        <tr>
-                            <th>Choice</th>
-                            <th>Programme Code</th>
-                            <th>Programme Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <input type="text" name="programme_code_1">
-                            </td>
-                            <td>
-                                <input type="text" name="programme_name_1" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <input type="text" name="programme_code_2">
-                            </td>
-                            <td>
-                                <input type="text" name="programme_name_2">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>
-                                <input type="text" name="programme_code_3">
-                            </td>
-                            <td>
-                                <input type="text" name="programme_name_3">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>
-                                <input type="text" name="programme_code_4">
-                            </td>
-                            <td>
-                                <input type="text" name="programme_name_4">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>
-                                <input type="text" name="programme_code_5">
-                            </td>
-                            <td>
-                                <input type="text" name="programme_name_5">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+<!-- Section D: Programme Applied For -->
+<div class="form-section" id="section-d">
+    <h2>SECTION D: PROGRAMME APPLIED FOR (HIGHLY PREFERRED TO LEAST PREFERRED)</h2>
+    
+    <div class="form-group">
+        <p class="instructions">Please select programs in order of preference (first choice is most preferred).</p>
+    </div>
+    
+    <!-- First Choice -->
+    <div class="program-choice">
+        <h3>First Choice (Most Preferred) *</h3>
+        <div class="form-group">
+            <label for="programme_code_1">Programme</label>
+            <select id="programme_code_1" name="programme_code_1" required>
+                <option value="">Select Programme</option>
+                <!-- Bachelor's Degree -->
+                <optgroup label="Bachelor's Degree">
+                    <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
+                    <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
+                    <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
+                    <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
+                    <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
+                    <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
+                    <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
+                    <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
+                    <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
+                    <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
+                    <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
+                    <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
+                    <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
+                </optgroup>
+                <!-- Master -->
+                <optgroup label="Master">
+                    <option value="MSIS">MSIS - Master of Science in Information Systems</option>
+                    <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
+                    <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
+                    <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
+                </optgroup>
+                <!-- Doctor of Philosophy/PHD -->
+                <optgroup label="Doctor of Philosophy">
+                    <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
+                    <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
+                    <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Second Choice -->
+    <div class="program-choice">
+        <h3>Second Choice</h3>
+        <div class="form-group">
+            <label for="programme_code_2">Programme</label>
+            <select id="programme_code_2" name="programme_code_2">
+                <option value="">Select Programme</option>
+                <!-- Bachelor's Degree -->
+                <optgroup label="Bachelor's Degree">
+                    <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
+                    <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
+                    <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
+                    <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
+                    <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
+                    <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
+                    <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
+                    <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
+                    <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
+                    <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
+                    <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
+                    <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
+                    <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
+                </optgroup>
+                <!-- Master -->
+                <optgroup label="Master">
+                    <option value="MSIS">MSIS - Master of Science in Information Systems</option>
+                    <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
+                    <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
+                    <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
+                </optgroup>
+                <!-- Doctor of Philosophy/PHD -->
+                <optgroup label="Doctor of Philosophy">
+                    <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
+                    <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
+                    <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Third Choice -->
+    <div class="program-choice">
+        <h3>Third Choice</h3>
+        <div class="form-group">
+            <label for="programme_code_3">Programme</label>
+            <select id="programme_code_3" name="programme_code_3">
+                <option value="">Select Programme</option>
+                <!-- Bachelor's Degree -->
+                <optgroup label="Bachelor's Degree">
+                    <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
+                    <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
+                    <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
+                    <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
+                    <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
+                    <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
+                    <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
+                    <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
+                    <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
+                    <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
+                    <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
+                    <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
+                    <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
+                </optgroup>
+                <!-- Master -->
+                <optgroup label="Master">
+                    <option value="MSIS">MSIS - Master of Science in Information Systems</option>
+                    <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
+                    <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
+                    <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
+                </optgroup>
+                <!-- Doctor of Philosophy/PHD -->
+                <optgroup label="Doctor of Philosophy">
+                    <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
+                    <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
+                    <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Fourth Choice -->
+    <div class="program-choice">
+        <h3>Fourth Choice</h3>
+        <div class="form-group">
+            <label for="programme_code_4">Programme</label>
+            <select id="programme_code_4" name="programme_code_4">
+                <option value="">Select Programme</option>
+                <!-- Bachelor's Degree -->
+                <optgroup label="Bachelor's Degree">
+                    <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
+                    <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
+                    <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
+                    <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
+                    <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
+                    <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
+                    <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
+                    <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
+                    <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
+                    <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
+                    <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
+                    <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
+                    <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
+                </optgroup>
+                <!-- Master -->
+                <optgroup label="Master">
+                    <option value="MSIS">MSIS - Master of Science in Information Systems</option>
+                    <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
+                    <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
+                    <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
+                </optgroup>
+                <!-- Doctor of Philosophy/PHD -->
+                <optgroup label="Doctor of Philosophy">
+                    <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
+                    <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
+                    <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Fifth Choice -->
+    <div class="program-choice">
+        <h3>Fifth Choice (Least Preferred)</h3>
+        <div class="form-group">
+            <label for="programme_code_5">Programme</label>
+            <select id="programme_code_5" name="programme_code_5">
+                <option value="">Select Programme</option>
+                <!-- Bachelor's Degree -->
+                <optgroup label="Bachelor's Degree">
+                    <option value="BAC">BAC - Bachelor of Accountancy (Honours)</option>
+                    <option value="BBAHRM">BBAHRM - Bachelor of Business Administration (Honours) in Human Resource Management</option>
+                    <option value="BBA">BBA - Bachelor of Business Administration (Honours)</option>
+                    <option value="BCC">BCC - Bachelor of Communication (Honours) in Corporate Communication</option>
+                    <option value="BBAH">BBAH - Bachelor of Business Administration (Hybrid)</option>
+                    <option value="BAAELS">BAAELS - Bachelor of Arts (Honours) in Applied English Language Studies</option>
+                    <option value="BECE">BECE - Bachelor of Early Childhood Education (Honours)</option>
+                    <option value="BEDTESL">BEDTESL - Bachelor of Education (Honours) in Teaching English as a Second Language (TESL)</option>
+                    <option value="BCA">BCA - Bachelor of Corporate Administration (Honours)</option>
+                    <option value="BA3D">BA3D - Bachelor of Arts in 3D Animation and Digital Media (Honours)</option>
+                    <option value="BITBC">BITBC - Bachelor of Information Technology (Honours) in Business Computing</option>
+                    <option value="BITCAD">BITCAD - Bachelor of Information Technology (Honours) in Computer Application Development</option>
+                    <option value="BITCS">BITCS - Bachelor of Information Technology (Honours) in Cyber Security</option>
+                </optgroup>
+                <!-- Master -->
+                <optgroup label="Master">
+                    <option value="MSIS">MSIS - Master of Science in Information Systems</option>
+                    <option value="MBA">MBA - Master of Business Administration (in collaboration with CMI)</option>
+                    <option value="MBACAG">MBACAG - MBA (Corporate Administration and Governance) (in collaboration with MAICSA)</option>
+                    <option value="MAcc">MAcc - Master of Accountancy (in collaboration with CIMA)</option>
+                </optgroup>
+                <!-- Doctor of Philosophy/PHD -->
+                <optgroup label="Doctor of Philosophy">
+                    <option value="PhDBA">PhDBA - Doctor of Philosophy in Business Administration</option>
+                    <option value="PhDIT">PhDIT - Doctor of Philosophy in Information Technology</option>
+                    <option value="PhDEd">PhDEd - Doctor of Philosophy in Education</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
 
-                <div class="form-navigation">
-                    <button type="button" class="btn-prev">Previous</button>
-                    <button type="button" class="btn-next">Next</button>
-                </div>
-            </div>
+    <div class="form-navigation">
+        <button type="button" class="btn-prev">Previous</button>
+        <button type="button" class="btn-next">Next</button>
+    </div>
+</div>
 
             <!-- Section E: Financial Support -->
             <div class="form-section" id="section-e">
@@ -475,5 +624,6 @@
     </div>
 
     <script src="../assets/js/student-registration.js"></script>
+    <script src="../assets/js/student-register-program-selection.js"></script>
 </body>
 </html>
