@@ -2,14 +2,68 @@
 require_once '../config/db.php';
 require_once '../includes/functions.php';
 
+// Enable error reporting for debugging (remove in production)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Make sure we're running in a session
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// Log file for debugging
+$log_file = '../logs/registration.log';
+if (!file_exists('../logs/')) {
+    mkdir('../logs/', 0777, recursive: true);
+}
+
+function log_debug($message) {
+    global $log_file;
+    file_put_contents($log_file, date('Y-m-d H:i:s') . " - " . $message . PHP_EOL, FILE_APPEND);
+}
+
+// Function to check if the request is an AJAX request
+function isAjaxRequest() {
+    return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') ||
+           (isset($_SERVER['HTTP_ACCEPT']) && 
+            strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
+}
+
+// Function to validate required fields
+function validateRequiredFields($data, $required_fields) {
+    $errors = [];
+    
+    foreach ($required_fields as $field) {
+        if (empty($data[$field])) {
+            $errors[] = "The {$field} field is required.";
+        }
+    }
+    
+    return $errors;
+}
+
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        log_debug("Form submitted, starting processing");
+        
+        // Required fields
+        $required_fields = [
+            'first_name', 'last_name', 'passport_no', 'nationality', 
+            'date_of_birth', 'age', 'place_of_birth', 'home_address', 
+            'city', 'postcode', 'state', 'country', 
+            'contact_no', 'email', 'gender'
+        ];
+        
+        // Validate required fields
+        $validation_errors = validateRequiredFields($_POST, $required_fields);
+        if (!empty($validation_errors)) {
+            throw new Exception("Validation errors: " . implode(", ", $validation_errors));
+        }
+        
+        log_debug("Basic validation passed");
+        
         // Start transaction
         mysqli_begin_transaction($conn);
         
@@ -70,6 +124,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get agent_id if student is registered by an agent
         $agent_id = isset($_SESSION['agent_id']) ? intval($_SESSION['agent_id']) : null;
         
+        // Log data for debugging
+        log_debug("Processing user: $first_name $last_name, Email: $email, DOB: $date_of_birth");
+        
         // Handle file uploads
         $upload_dir = '../uploads/student_documents/';
         if (!file_exists($upload_dir)) {
@@ -82,7 +139,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photo_info = handleUpload($_FILES['passport_photo'], 'student_photos');
             if ($photo_info['success']) {
                 $photo_path = 'uploads/student_photos/' . $photo_info['filename'];
+                log_debug("Photo uploaded: $photo_path");
+            } else {
+                log_debug("Photo upload failed: " . $photo_info['message']);
             }
+        } else {
+            log_debug("No photo uploaded or error: " . ($_FILES['passport_photo']['error'] ?? 'No file'));
         }
         
         // Academic Certificates
@@ -91,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $academic_info = handleUpload($_FILES['academic_certificates'], 'student_documents');
             if ($academic_info['success']) {
                 $academic_certificates_path = 'uploads/student_documents/' . $academic_info['filename'];
+                log_debug("Academic certificates uploaded: $academic_certificates_path");
             }
         }
         
@@ -100,6 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $passport_info = handleUpload($_FILES['passport_copy'], 'student_documents');
             if ($passport_info['success']) {
                 $passport_copy_path = 'uploads/student_documents/' . $passport_info['filename'];
+                log_debug("Passport copy uploaded: $passport_copy_path");
             }
         }
         
@@ -109,7 +173,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $health_info = handleUpload($_FILES['health_declaration'], 'student_documents');
             if ($health_info['success']) {
                 $health_declaration_path = 'uploads/student_documents/' . $health_info['filename'];
+                log_debug("Health declaration uploaded: $health_declaration_path");
             }
+        }
+        
+        // Ensure date is properly formatted
+        if (!empty($date_of_birth)) {
+            // Parse date to ensure it's in YYYY-MM-DD format
+            $parsed_date = date('Y-m-d', strtotime($date_of_birth));
+            if ($parsed_date === '1970-01-01' || $parsed_date === false) {
+                log_debug("Invalid date: $date_of_birth, using current date as fallback");
+                $date_of_birth = date('Y-m-d');
+            } else {
+                $date_of_birth = $parsed_date;
+            }
+            log_debug("Formatted DOB: $date_of_birth");
         }
         
         // Insert into students table
@@ -123,11 +201,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             financial_support, account_no, bank_name, financial_support_others,
             academic_certificates_path, passport_copy_path, health_declaration_path,
             declaration_agreed, signature_date, agent_id, status, created_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         
         $status = 'pending'; // Default status for new applications
         
         $stmt = mysqli_prepare($conn, $sql);
+        if (!$stmt) {
+            throw new Exception("Prepare statement failed: " . mysqli_error($conn));
+        }
+        
         mysqli_stmt_bind_param($stmt, 
             "sssssisssssssssssssssssssssssssssssssssssisiss",
             $first_name, $last_name, $passport_no, $nationality, $date_of_birth, $age, $place_of_birth,
@@ -141,11 +223,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $declaration_agreed, $signature_date, $agent_id, $status
         );
         
+        log_debug("Prepared student insert statement");
+        
         if (!mysqli_stmt_execute($stmt)) {
             throw new Exception("Error inserting student data: " . mysqli_stmt_error($stmt));
         }
         
         $student_id = mysqli_insert_id($conn);
+        log_debug("Inserted student with ID: $student_id");
         
         // Insert qualifications
         if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
@@ -157,7 +242,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $qual_sql = "INSERT INTO student_qualifications (student_id, qualification, institution, grade, duration, year_completed) VALUES (?, ?, ?, ?, ?, ?)";
             $qual_stmt = mysqli_prepare($conn, $qual_sql);
+            if (!$qual_stmt) {
+                throw new Exception("Prepare qualification statement failed: " . mysqli_error($conn));
+            }
             
+            $qualifications_added = 0;
             for ($i = 0; $i < count($qualifications); $i++) {
                 // Only insert if qualification is not empty
                 if (!empty($qualifications[$i])) {
@@ -173,8 +262,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (!mysqli_stmt_execute($qual_stmt)) {
                         throw new Exception("Error inserting qualification data: " . mysqli_stmt_error($qual_stmt));
                     }
+                    
+                    $qualifications_added++;
+                    log_debug("Added qualification: {$qualifications[$i]}");
                 }
             }
+            
+            log_debug("Added $qualifications_added qualifications");
+        } else {
+            log_debug("No qualifications to add");
         }
         
         // Create student login credentials
@@ -183,33 +279,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $login_sql = "INSERT INTO student_login (student_id, email, password, status, created_at) VALUES (?, ?, ?, 'active', NOW())";
         $login_stmt = mysqli_prepare($conn, $login_sql);
+        if (!$login_stmt) {
+            throw new Exception("Prepare login statement failed: " . mysqli_error($conn));
+        }
+        
         mysqli_stmt_bind_param($login_stmt, "iss", $student_id, $email, $hashed_password);
         
         if (!mysqli_stmt_execute($login_stmt)) {
             throw new Exception("Error creating login credentials: " . mysqli_stmt_error($login_stmt));
         }
         
+        log_debug("Created login credentials for student");
+        
         // Commit transaction
         mysqli_commit($conn);
+        log_debug("Transaction committed successfully");
         
-        // Return success response
-        $response = [
-            'success' => true,
-            'message' => 'Student registration submitted successfully',
-            'student_id' => $student_id
-        ];
-        
-        // Redirect based on type of user
-        if (isset($_SESSION['role']) && $_SESSION['role'] === 'agent') {
-            header('Location: agent-dashboard.php?registration=success');
+        // Response based on request type
+        if (isAjaxRequest()) {
+            // Return JSON for AJAX requests
+            $response = [
+                'success' => true,
+                'message' => 'Student registration submitted successfully',
+                'student_id' => $student_id,
+                'redirect_url' => isset($_SESSION['role']) && $_SESSION['role'] === 'agent' 
+                                ? 'agent-dashboard.php?registration=success' 
+                                : 'success-page.php'
+            ];
+            
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
         } else {
-            header('Location: success-page.php');
+            // For regular form submissions, use redirect
+            if (isset($_SESSION['role']) && $_SESSION['role'] === 'agent') {
+                header('Location: agent-dashboard.php?registration=success');
+            } else {
+                header('Location: success-page.php');
+            }
+            exit();
         }
-        exit();
         
     } catch (Exception $e) {
         // Rollback transaction on error
-        mysqli_rollback($conn);
+        if (isset($conn) && $conn->connect_errno === 0) {
+            mysqli_rollback($conn);
+        }
+        
+        log_debug("ERROR: " . $e->getMessage());
         
         $response = [
             'success' => false,
@@ -219,8 +336,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Log the error
         error_log("Student registration error: " . $e->getMessage());
         
-        // Redirect to error page
-        header('Location: error-page.php');
+        // Response based on request type
+        if (isAjaxRequest()) {
+            // Return JSON for AJAX requests
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } else {
+            // For regular form submissions, redirect to error page
+            header('Location: error-page.php');
+        }
         exit();
     }
 } else {

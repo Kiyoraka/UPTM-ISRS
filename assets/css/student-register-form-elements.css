@@ -181,3 +181,85 @@ select[name="guardian_nationality"] option {
 select {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* Form validation styles */
+input.invalid,
+select.invalid,
+textarea.invalid {
+    border-color: #dc2626 !important;
+    background-color: #fef2f2 !important;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    padding-left: 5px;
+}
+
+/* Submit button styles */
+.btn-submit {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.btn-submit.submitting {
+    padding-left: 30px;
+    opacity: 0.7;
+}
+
+.btn-submit.submitting::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Dropdown styling enhancement */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem !important;
+}
+
+/* Ensure select options are properly visible */
+select option {
+    background-color: white;
+    color: #333;
+    padding: 5px;
+}
+
+/* Checkbox and radio button improvements */
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto !important;
+    margin-right: 8px;
+}
+
+.radio-group label,
+.checkbox-group label {
+    display: flex !important;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+/* Date input styling */
+input[type="date"] {
+    min-height: 42px;
+}

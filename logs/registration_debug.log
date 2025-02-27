@@ -1,0 +1,93 @@
+[2025-02-27 18:58:58] Testing database connection
+[2025-02-27 18:58:58] Database connection successful
+[2025-02-27 18:58:58] Table 'students' exists
+[2025-02-27 18:58:58] Table students columns: id, first_name, last_name, passport_no, nationality, date_of_birth, age, place_of_birth, home_address, city, postcode, state, country, contact_no, email, gender, photo_path, guardian_name, guardian_passport, guardian_address, guardian_nationality, guardian_postcode, guardian_state, guardian_city, guardian_country, muet_year, muet_score, ielts_year, ielts_score, toefl_year, toefl_score, toiec_year, toiec_score, programme_code_1, programme_code_2, programme_code_3, programme_code_4, programme_code_5, financial_support, account_no, bank_name, financial_support_others, academic_certificates_path, passport_copy_path, health_declaration_path, declaration_agreed, signature_date, io_status, io_remarks, io_status_date, ao_status, ao_remarks, ao_status_date, agent_id, created_at, updated_at, status
+[2025-02-27 18:58:58] Table 'student_login' exists
+[2025-02-27 18:58:58] Form submitted via POST
+[2025-02-27 18:58:58] Transaction started
+[2025-02-27 18:58:58] POST data: Array
+(
+    [first_name] => Afif Maahi
+    [last_name] => Abu Bakar
+    [passport_no] => Dark920725
+    [nationality] => ID
+    [date_of_birth] => 2005-07-25
+    [age] => 19
+    [place_of_birth] => Bandung
+    [home_address] => Lot 1757 Kampung Kemasin Perupok
+    [city] => Bachok
+    [postcode] => 16300
+    [state] => Kelantan
+    [country] => ID
+    [contact_no] => +620145106293
+    [email] => Wings.dark7@gmail.com
+    [gender] => male
+    [guardian_name] => test Subject B
+    [guardian_passport] => Dark250785
+    [guardian_address] => Bilik 1, Masjid Sultan Yussuf, Jalan Raja Musa Mahadi
+    [guardian_nationality] => ID
+    [guardian_postcode] => 31350
+    [guardian_state] => Perak
+    [guardian_city] => Ipoh
+    [guardian_country] => ID
+    [qualification] => Array
+        (
+            [0] => Foundation of System
+            [1] => 
+            [2] => 
+        )
+
+    [institution] => Array
+        (
+            [0] => Universiti Of Bandung
+            [1] => 
+            [2] => 
+        )
+
+    [grade] => Array
+        (
+            [0] => 3.75
+            [1] => 
+            [2] => 
+        )
+
+    [duration] => Array
+        (
+            [0] => 1 years
+            [1] => 
+            [2] => 
+        )
+
+    [year_completed] => Array
+        (
+            [0] => 2020
+            [1] => 
+            [2] => 
+        )
+
+    [muet_year] => 2020
+    [ielts_year] => 
+    [toefl_year] => 
+    [toiec_year] => 
+    [muet_score] => 4
+    [ielts_score] => 
+    [toefl_score] => 
+    [toiec_score] => 
+    [programme_code_1] => BITCS
+    [programme_code_2] => BITCAD
+    [programme_code_3] => BITBC
+    [programme_code_4] => 
+    [programme_code_5] => 
+    [financial_support] => self
+    [account_no] => 1234567
+    [bank_name] => BCA
+    [financial_support_others] => 
+    [declaration_agree] => on
+    [signature_date] => 2025-02-28
+)
+
+[2025-02-27 18:58:58] Basic data: Name: Afif Maahi Abu Bakar, Passport: Dark920725, Email: Wings.dark7@gmail.com
+[2025-02-27 18:58:58] Basic student data inserted successfully, ID: 1
+[2025-02-27 18:58:58] Student login created successfully
+[2025-02-27 18:58:58] Transaction committed successfully
+[2025-02-27 18:58:58] Registration successful

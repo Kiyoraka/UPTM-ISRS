@@ -4,6 +4,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressSteps = document.querySelectorAll('.step');
     let currentSection = 0;
 
+    // Calculate age from date of birth
+    function calculateAge(birthDate) {
+        const today = new Date();
+        const birth = new Date(birthDate);
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        
+        return age;
+    }
+
+    // Auto-fill age when date of birth changes
+    const dobInput = document.getElementById('date_of_birth');
+    const ageInput = document.getElementById('age');
+    
+    if (dobInput && ageInput) {
+        dobInput.addEventListener('change', function() {
+            if (this.value) {
+                ageInput.value = calculateAge(this.value);
+            }
+        });
+    }
+
+    // Show/hide section
     function showSection(index) {
         sections.forEach(section => section.style.display = 'none');
         sections[index].style.display = 'block';
@@ -15,6 +42,83 @@ document.addEventListener('DOMContentLoaded', function() {
                 step.classList.remove('active');
             }
         });
+    }
+
+    // Validate section
+    function validateSection(sectionIndex) {
+        const currentSection = sections[sectionIndex];
+        const requiredInputs = currentSection.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
+        
+        requiredInputs.forEach(input => {
+            if (!input.value.trim()) {
+                isValid = false;
+                input.classList.add('invalid');
+                
+                // Create error message if it doesn't exist
+                let errorMsg = input.nextElementSibling;
+                if (!errorMsg || !errorMsg.classList.contains('error-message')) {
+                    errorMsg = document.createElement('div');
+                    errorMsg.className = 'error-message';
+                    errorMsg.textContent = 'This field is required';
+                    input.parentNode.insertBefore(errorMsg, input.nextSibling);
+                }
+            } else {
+                input.classList.remove('invalid');
+                
+                // Remove error message if it exists
+                const errorMsg = input.nextElementSibling;
+                if (errorMsg && errorMsg.classList.contains('error-message')) {
+                    errorMsg.remove();
+                }
+            }
+        });
+        
+        // Special validations for specific sections
+        if (sectionIndex === 0) { // Personal details
+            // Validate email format
+            const emailInput = document.getElementById('email');
+            if (emailInput && emailInput.value && !isValidEmail(emailInput.value)) {
+                isValid = false;
+                emailInput.classList.add('invalid');
+                
+                let errorMsg = emailInput.nextElementSibling;
+                if (!errorMsg || !errorMsg.classList.contains('error-message')) {
+                    errorMsg = document.createElement('div');
+                    errorMsg.className = 'error-message';
+                    errorMsg.textContent = 'Please enter a valid email address';
+                    emailInput.parentNode.insertBefore(errorMsg, emailInput.nextSibling);
+                }
+            }
+            
+            // Validate date of birth (must be in the past)
+            const dobInput = document.getElementById('date_of_birth');
+            if (dobInput && dobInput.value) {
+                const dob = new Date(dobInput.value);
+                const now = new Date();
+                
+                if (dob > now) {
+                    isValid = false;
+                    dobInput.classList.add('invalid');
+                    
+                    let errorMsg = dobInput.nextElementSibling;
+                    if (!errorMsg || !errorMsg.classList.contains('error-message')) {
+                        errorMsg = document.createElement('div');
+                        errorMsg.className = 'error-message';
+                        errorMsg.textContent = 'Date of birth must be in the past';
+                        dobInput.parentNode.insertBefore(errorMsg, dobInput.nextSibling);
+                    }
+                }
+            }
+        }
+        
+        return isValid;
+    }
+
+    // Email validation
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
     // Previous button click handlers
@@ -32,21 +136,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.btn-next').forEach(button => {
         button.addEventListener('click', () => {
             if (currentSection < sections.length - 1) {
-                // Validate current section before moving to next
-                const currentInputs = sections[currentSection].querySelectorAll('input[required], select[required], textarea[required]');
-                let isValid = true;
-
-                currentInputs.forEach(input => {
-                    if (!input.checkValidity()) {
-                        isValid = false;
-                        input.reportValidity();
-                    }
-                });
-
-                if (isValid) {
+                if (validateSection(currentSection)) {
                     currentSection++;
                     showSection(currentSection);
                     window.scrollTo(0, 0);
+                } else {
+                    // Show general error message
+                    alert('Please fill in all required fields correctly before proceeding.');
                 }
             }
         });
@@ -56,33 +152,86 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Validate the entire form
-        if (!form.checkValidity()) {
-            form.reportValidity();
+        // Validate final section
+        if (!validateSection(currentSection)) {
+            alert('Please fill in all required fields correctly before submitting.');
             return;
+        }
+
+        // Show loading indicator
+        const submitBtn = form.querySelector('.btn-submit');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.classList.add('submitting');
         }
 
         // Create FormData object
         const formData = new FormData(form);
 
+        // Add X-Requested-With header to identify as AJAX request
+        const headers = new Headers({
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+        });
+
         // Submit form using fetch
         fetch(form.action, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers
         })
-        .then(response => response.json())
+        .then(response => {
+            // Check if the response is JSON
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json();
+            } else {
+                // Handle non-JSON responses (like HTML redirects)
+                if (response.ok) {
+                    window.location.href = 'success-page.php';
+                    return { success: true };
+                } else {
+                    throw new Error('Received non-JSON response');
+                }
+            }
+        })
         .then(data => {
             if (data.success) {
-                alert(data.message);
-                // Redirect to success page
-                window.location.href = 'success-page.html';
+                // Save student ID in local storage (might be useful later)
+                if (data.student_id) {
+                    localStorage.setItem('lastStudentId', data.student_id);
+                }
+                
+                // Handle redirect
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                } else {
+                    window.location.href = 'success-page.php';
+                }
             } else {
-                alert(data.message || 'An error occurred during submission');
+                // Re-enable submit button on error
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Application';
+                    submitBtn.classList.remove('submitting');
+                }
+                
+                // Display error message
+                alert(data.message || 'An error occurred during submission. Please try again.');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred during submission. Please try again later.');
+            
+            // Re-enable submit button on error
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Application';
+                submitBtn.classList.remove('submitting');
+            }
+            
+            alert('An error occurred during submission. Please check your internet connection and try again.');
         });
     });
 
