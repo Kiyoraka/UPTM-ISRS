@@ -1,62 +1,73 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Notification toggle functionality
-    const notificationIcon = document.querySelector('.notifications');
-    const notificationDropdown = document.querySelector('.notification-dropdown');
 
-    if (notificationIcon && notificationDropdown) {
-        // Toggle notification dropdown
-        notificationIcon.addEventListener('click', function(e) {
-            e.stopPropagation();
-            
-            // Close user dropdown if open
-            const userDropdown = document.querySelector('.user-dropdown');
-            if (userDropdown) {
-                userDropdown.style.display = 'none';
-            }
-            
-            // Toggle notification dropdown
-            if (notificationDropdown.style.display === 'block') {
-                notificationDropdown.style.display = 'none';
-            } else {
-                notificationDropdown.style.display = 'block';
-            }
-        });
+    // Content switching functionality
+    const mainContent = document.getElementById('main-content');
+    const profileContent = document.getElementById('profile-content');
+    const documentContent = document.getElementById('document-content');
+    const paymentContent = document.getElementById('payment-content');
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!notificationIcon.contains(e.target)) {
-                notificationDropdown.style.display = 'none';
-            }
+    // Get navigation links
+    const mainLink = document.querySelector('.nav-link[data-section="main"]');
+    const profileLink = document.querySelector('.nav-link[data-section="profile"]');
+    const documentLink = document.querySelector('.nav-link[data-section="document"]');
+    const paymentLink = document.querySelector('.nav-link[data-section="payment"]');
+
+    // Function to show selected content and hide others
+    function showContent(contentId) {
+        // Hide all content sections
+        mainContent.style.display = 'none';
+        profileContent.style.display = 'none';
+        documentContent.style.display = 'none';
+        paymentContent.style.display = 'none';
+
+        // Show selected content
+        switch(contentId) {
+            case 'main':
+                mainContent.style.display = 'block';
+                break;
+            case 'profile':
+                profileContent.style.display = 'block';
+                break;
+            case 'document':
+                documentContent.style.display = 'block';
+                break;
+            case 'payment':
+                paymentContent.style.display = 'block';
+                break;
+        }
+
+        // Update active state in navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
         });
+        document.querySelector(`.nav-link[data-section="${contentId}"]`).classList.add('active');
     }
 
-    // User dropdown toggle functionality
-    const userProfile = document.querySelector('.user-profile');
-    const userDropdown = document.querySelector('.user-dropdown');
+    // Add click event listeners to navigation links
+    mainLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showContent('main');
+    });
 
-    if (userProfile && userDropdown) {
-        // Toggle user dropdown
-        userProfile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            
-            // Close notification dropdown if open
-            if (notificationDropdown) {
-                notificationDropdown.style.display = 'none';
-            }
-            
-            // Toggle user dropdown
-            if (userDropdown.style.display === 'block') {
-                userDropdown.style.display = 'none';
-            } else {
-                userDropdown.style.display = 'block';
-            }
-        });
+    profileLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showContent('profile');
+    });
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!userProfile.contains(e.target)) {
-                userDropdown.style.display = 'none';
-            }
-        });
-    }
+    documentLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showContent('document');
+    });
+
+    paymentLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showContent('payment');
+    });
+
+    // Connect change password link to modal
+    document.getElementById('change-password-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('passwordModal').style.display = 'block';
+    });
+
 });
