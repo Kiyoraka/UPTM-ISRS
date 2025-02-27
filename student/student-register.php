@@ -518,6 +518,7 @@
     </div>
 
     <script src="../assets/js/student-registration.js"></script>
+    <!-- <script src="../assets/js/student-regitsration-debugmode.js"></script> -->
     <script src="../assets/js/student-register-program-selection.js"></script>
 </body>
 </html>

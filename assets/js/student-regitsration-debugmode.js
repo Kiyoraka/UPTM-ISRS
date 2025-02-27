@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.form-section');
     const progressSteps = document.querySelectorAll('.step');
     let currentSection = 0;
+    
+    // Debug mode flag - set to true to bypass validation
+    let debugMode = false;
+    
+    // Add debug control panel
+    createDebugPanel();
 
     function showSection(index) {
         sections.forEach(section => section.style.display = 'none');
@@ -32,6 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.btn-next').forEach(button => {
         button.addEventListener('click', () => {
             if (currentSection < sections.length - 1) {
+                // If debug mode is on, skip validation
+                if (debugMode) {
+                    currentSection++;
+                    showSection(currentSection);
+                    window.scrollTo(0, 0);
+                    return;
+                }
+                
                 // Validate current section before moving to next
                 const currentInputs = sections[currentSection].querySelectorAll('input[required], select[required], textarea[required]');
                 let isValid = true;
@@ -55,6 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form submission handler
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // If debug mode is on, skip validation
+        if (debugMode) {
+            alert("Form would be submitted now (Debug mode is ON)");
+            return;
+        }
 
         // Validate the entire form
         if (!form.checkValidity()) {
@@ -85,6 +105,63 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('An error occurred during submission. Please try again later.');
         });
     });
+    
+    // Create debug panel function
+    function createDebugPanel() {
+        const debugPanel = document.createElement('div');
+        debugPanel.className = 'debug-panel';
+        debugPanel.innerHTML = `
+            <div class="debug-controls">
+                <label class="debug-toggle">
+                    <input type="checkbox" id="debug-mode-toggle">
+                    <span>Debug Mode</span>
+                </label>
+                <div class="debug-navigation">
+                    <span>Jump to section:</span>
+                    <select id="debug-section-jump">
+                        <option value="0">1. Personal Details</option>
+                        <option value="1">2. Guardian Information</option>
+                        <option value="2">3. Qualifications</option>
+                        <option value="3">4. Program Selection</option>
+                        <option value="4">5. Financial Support</option>
+                        <option value="5">6. Documents & Declaration</option>
+                    </select>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(debugPanel);
+        
+        // Add debug mode toggle event listener
+        const debugToggle = document.getElementById('debug-mode-toggle');
+        debugToggle.addEventListener('change', function() {
+            debugMode = this.checked;
+            document.body.classList.toggle('debug-active', debugMode);
+            
+            // Update form visuals when debug mode changes
+            const requiredInputs = document.querySelectorAll('[required]');
+            requiredInputs.forEach(input => {
+                if (debugMode) {
+                    input.dataset.required = "true";
+                    input.removeAttribute('required');
+                } else {
+                    if (input.dataset.required === "true") {
+                        input.setAttribute('required', 'required');
+                    }
+                }
+            });
+            
+            console.log('Debug mode ' + (debugMode ? 'enabled' : 'disabled'));
+        });
+        
+        // Add section jump functionality
+        const sectionJump = document.getElementById('debug-section-jump');
+        sectionJump.addEventListener('change', function() {
+            currentSection = parseInt(this.value);
+            showSection(currentSection);
+            window.scrollTo(0, 0);
+        });
+    }
 
     // Initialize the first section
     showSection(0);
