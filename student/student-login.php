@@ -2,6 +2,11 @@
 require_once '../config/db.php';
 require_once '../includes/functions.php';
 
+// Start session if not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -12,20 +17,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($email) || empty($password)) {
         $error = "All fields are required";
     } else {
-        $sql = "SELECT * FROM students WHERE email = ?";
+        // Join student_login with students table to get student information
+        $sql = "SELECT sl.*, s.first_name, s.last_name, s.status
+                FROM student_login sl 
+                JOIN students s ON sl.student_id = s.id 
+                WHERE sl.email = ?";
+        
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         
         if ($row = mysqli_fetch_assoc($result)) {
+            // Verify password
             if (password_verify($password, $row['password'])) {
-                $_SESSION['user_id'] = $row['id'];
-                $_SESSION['role'] = 'student';
-                $_SESSION['username'] = $row['name'];
-                
-                header('Location: dashboard.php');
-                exit();
+                // Check if account is active
+                if ($row['status'] === 'active') {
+                    // Store basic login information
+                    $_SESSION['user_id'] = $row['student_id'];
+                    $_SESSION['login_id'] = $row['id'];
+                    $_SESSION['role'] = 'student';
+                    $_SESSION['username'] = $row['first_name'] . ' ' . $row['last_name'];
+                    
+                    // Redirect to dashboard
+                    header('Location: student-dashboard.php');
+                    exit();
+                } else {
+                    $error = "Your account is not active. Please contact support.";
+                }
             } else {
                 $error = "Invalid credentials";
             }
@@ -40,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Login - UPTM ISRS</title>
+    <title>Student Login - UPTM ISRS</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/login-style.css">
 </head>
