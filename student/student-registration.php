@@ -122,12 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             programme_code_1, programme_code_2, programme_code_3, programme_code_4, programme_code_5,
             financial_support, account_no, bank_name, financial_support_others,
             academic_certificates_path, passport_copy_path, health_declaration_path,
-            declaration_agreed, signature_date, agent_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            declaration_agreed, signature_date, agent_id, status, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        
+        $status = 'pending'; // Default status for new applications
         
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 
-            "sssssissssssssssssssssssssssssssssssssssssi",
+            "sssssisssssssssssssssssssssssssssssssssssisiss",
             $first_name, $last_name, $passport_no, $nationality, $date_of_birth, $age, $place_of_birth,
             $home_address, $city, $postcode, $state, $country, $contact_no, $email, $gender, $photo_path,
             $guardian_name, $guardian_passport, $guardian_address, $guardian_nationality, 
@@ -136,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $programme_code_1, $programme_code_2, $programme_code_3, $programme_code_4, $programme_code_5,
             $financial_support, $account_no, $bank_name, $financial_support_others,
             $academic_certificates_path, $passport_copy_path, $health_declaration_path,
-            $declaration_agreed, $signature_date, $agent_id
+            $declaration_agreed, $signature_date, $agent_id, $status
         );
         
         if (!mysqli_stmt_execute($stmt)) {
@@ -173,6 +175,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
             }
+        }
+        
+        // Create student login credentials
+        // By default, use passport number as the initial password
+        $hashed_password = password_hash($passport_no, PASSWORD_DEFAULT);
+        
+        $login_sql = "INSERT INTO student_login (student_id, email, password, status, created_at) VALUES (?, ?, ?, 'active', NOW())";
+        $login_stmt = mysqli_prepare($conn, $login_sql);
+        mysqli_stmt_bind_param($login_stmt, "iss", $student_id, $email, $hashed_password);
+        
+        if (!mysqli_stmt_execute($login_stmt)) {
+            throw new Exception("Error creating login credentials: " . mysqli_stmt_error($login_stmt));
         }
         
         // Commit transaction
