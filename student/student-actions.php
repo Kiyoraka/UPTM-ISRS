@@ -76,7 +76,7 @@ function changePassword() {
             'message' => 'New password must be at least 8 characters long'
         ];
     } else {
-        // Verify current password
+        // Verify current password - now checking in student_login table
         $sql = "SELECT password FROM student_login WHERE student_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "i", $student_id);
@@ -88,7 +88,7 @@ function changePassword() {
                 // Hash new password
                 $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
                 
-                // Update password
+                // Update password in student_login table
                 $update_sql = "UPDATE student_login SET password = ? WHERE student_id = ?";
                 $update_stmt = mysqli_prepare($conn, $update_sql);
                 mysqli_stmt_bind_param($update_stmt, "si", $hashed_password, $student_id);
