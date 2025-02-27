@@ -1,0 +1,77 @@
+/* agent-MainSection.css */
+/* Dashboard Header and Stats */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.current-month {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.stat-card {
+    flex: 1;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-top: 5rem;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.stat-icon.registered {
+    color: #1a73e8;
+}
+
+.stat-icon.approved {
+    color: #34D399;
+}
+
+.stat-icon.rejected {
+    color: #EF4444;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.stat-number.registered {
+    color: #1a73e8;
+}
+
+.stat-number.approved {
+    color: #34D399;
+}
+
+.stat-number.rejected {
+    color: #EF4444;
+}
+
+.stat-label {
+    color: #6B7280;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
