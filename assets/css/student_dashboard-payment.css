@@ -1,0 +1,107 @@
+/* Payment Container Styling */
+.payment-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.payment-info-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 25px;
+}
+
+.payment-header {
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.payment-header h2 {
+    color: #1a73e8;
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.payment-details {
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-row.total {
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+.bank-details {
+    background-color: #f0f9ff;
+    border-left: 4px solid #1a73e8;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.btn-stripe-payment {
+    width: 100%;
+    padding: 12px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-stripe-payment:hover {
+    background-color: #1557b0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.payment-status-badge {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+.payment-status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.payment-status-badge.paid {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.important-note {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+}

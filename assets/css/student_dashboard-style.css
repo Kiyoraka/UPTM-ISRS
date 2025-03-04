@@ -216,28 +216,3 @@ body {
     color: white;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .dashboard-container {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "nav"
-            "main";
-    }
-
-    .sidebar {
-        display: none;
-    }
-
-    .nav-text {
-        display: none;
-    }
-
-    .dashboard-footer {
-        margin-top: auto;
-    }
-
-    .footer-content {
-        text-align: center;
-    }
-}

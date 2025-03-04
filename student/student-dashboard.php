@@ -44,6 +44,8 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
     <link rel="stylesheet" href="../assets/css/student_dashboard-UserDropDownMenu.css">
     <link rel="stylesheet" href="../assets/css/student_dashboard-changepassword.css">
     <link rel="stylesheet" href="../assets/css/student_dashboard-QualificationSection.css">
+    <link rel="stylesheet" href="../assets/css/student_dashboard-payment.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Load Program Data -->
@@ -598,89 +600,54 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                             <div class="payment-header">
                                 <h2>Payment Information</h2>
                             </div>
-                            <div class="payment-body">
-                                <div class="payment-status">
-                                    <h3>Current Status</h3>
-                                    <div class="status-badge <?php echo (isset($student['payment_status']) && $student['payment_status'] == 'paid') ? 'paid' : 'pending'; ?>">
-                                        <?php echo isset($student['payment_status']) ? ucfirst($student['payment_status']) : 'Pending'; ?>
-                                    </div>
+        
+                            <div class="payment-status-badge pending">
+                                Pending Payment
+                            </div>
+        
+                            <div class="payment-details">
+                                <div class="detail-row">
+                                    <span>Application Fee</span>
+                                    <span>RM 300.00</span>
                                 </div>
-                                
-                                <div class="payment-details">
-                                    <div class="detail-row">
-                                        <div class="detail-label">Application Fee:</div>
-                                        <div class="detail-value">RM 300.00</div>
-                                    </div>
-                                    <div class="detail-row">
-                                        <div class="detail-label">Processing Fee:</div>
-                                        <div class="detail-value">RM 100.00</div>
-                                    </div>
-                                    <div class="detail-row total">
-                                        <div class="detail-label">Total Amount:</div>
-                                        <div class="detail-value">RM 400.00</div>
-                                    </div>
+                                <div class="detail-row">
+                                    <span>Processing Fee</span>
+                                    <span>RM 100.00</span>
                                 </div>
-                                
-                                <div class="payment-instructions">
-                                    <h3>Bank Details</h3>
-                                    <p>Please make your payment to the following bank account:</p>
-                                    <div class="bank-details">
-                                        <div class="detail-row">
-                                            <div class="detail-label">Account Name:</div>
-                                            <div class="detail-value">Universiti Poly-Tech Malaysia</div>
-                                        </div>
-                                        <div class="detail-row">
-                                            <div class="detail-label">Account Number:</div>
-                                            <div class="detail-value">1234-5678-9012</div>
-                                        </div>
-                                        <div class="detail-row">
-                                            <div class="detail-label">Bank Name:</div>
-                                            <div class="detail-value">Malaysia Bank Berhad</div>
-                                        </div>
-                                        <div class="detail-row">
-                                            <div class="detail-label">Swift Code:</div>
-                                            <div class="detail-value">MBBEMYKL</div>
-                                        </div>
-                                    </div>
-                                    <p class="important-note">Important: Please include your name and passport number as reference when making payment.</p>
-                                </div>
-                                
-                                <div class="payment-action">
-                                    <button id="upload-receipt-btn" class="btn-upload-receipt">Upload Payment Receipt</button>
+                                <div class="detail-row total">
+                                    <span>Total Amount</span>
+                                    <span>RM 400.00</span>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="payment-history-card">
-                            <div class="payment-header">
-                                <h2>Payment History</h2>
+        
+                            <div class="bank-details">
+                                <div class="detail-row">
+                                    <span>Bank</span>
+                                    <span>Malaysia Bank Berhad</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Account Name</span>
+                                    <span>Universiti Poly-Tech Malaysia</span>
+                                </div>
                             </div>
-                            <div class="payment-body">
-                                <?php if(isset($student['payment_receipt_path'])): ?>
-                                <div class="payment-item">
-                                    <div class="payment-date"><?php echo date("d M Y", strtotime($student['payment_date'])); ?></div>
-                                    <div class="payment-detail">
-                                        <div class="payment-type">Application & Processing Fee</div>
-                                        <div class="payment-amount">RM 400.00</div>
-                                    </div>
-                                    <div class="payment-status-badge <?php echo $student['payment_status']; ?>">
-                                        <?php echo ucfirst($student['payment_status']); ?>
-                                    </div>
-                                    <div class="payment-actions">
-                                        <a href="../<?php echo $student['payment_receipt_path']; ?>" class="view-receipt-btn" target="_blank">
-                                            <i class="fas fa-eye"></i> View Receipt
-                                        </a>
-                                    </div>
-                                </div>
-                                <?php else: ?>
-                                <div class="no-payment-history">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <p>No payment records found.</p>
-                                </div>
-                                <?php endif; ?>
+        
+                            <button class="btn-stripe-payment" id="stripe-payment-btn">
+                                Proceed to Payment
+                            </button>
+        
+                            <div class="important-note">
+                                Please verify all details before making payment
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                    document.getElementById('stripe-payment-btn').addEventListener('click', function() {
+                        // Future Stripe payment integration
+                        alert('Stripe payment integration coming soon!');
+                    });
+                    </script>
+
                 </div>
             </div>
 
