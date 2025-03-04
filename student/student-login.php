@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($email) || empty($password)) {
         $error = "All fields are required";
     } else {
+        // Enhanced logging
+        error_log("Login attempt for email: $email");
+
         // Join student_login with students table to get student information
         $sql = "SELECT sl.*, s.first_name, s.last_name, s.status
                 FROM student_login sl 
@@ -29,10 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = mysqli_stmt_get_result($stmt);
         
         if ($row = mysqli_fetch_assoc($result)) {
+            // Log full user details for debugging
+            error_log("User found - Status: " . $row['status'] . ", Login Status: " . $row['status']);
+
             // Verify password
             if (password_verify($password, $row['password'])) {
-                // Check if account is active
-                if ($row['status'] === 'active') {
+                // More flexible status check
+                if (in_array($row['status'], ['active', 'pending','approved'])) {
                     // Store basic login information
                     $_SESSION['user_id'] = $row['student_id'];
                     $_SESSION['login_id'] = $row['id'];
@@ -43,16 +49,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     header('Location: student-dashboard.php');
                     exit();
                 } else {
-                    $error = "Your account is not active. Please contact support.";
+                    $error = "Your account status is: " . $row['status'] . ". Please contact support.";
+                    error_log("Login failed - Unexpected account status: " . $row['status']);
                 }
             } else {
                 $error = "Invalid credentials";
             }
         } else {
             $error = "Invalid credentials";
+            error_log("No user found with email: $email");
         }
     }
 }
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">

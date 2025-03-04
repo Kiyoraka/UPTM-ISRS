@@ -200,10 +200,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             programme_code_1, programme_code_2, programme_code_3, programme_code_4, programme_code_5,
             financial_support, account_no, bank_name, financial_support_others,
             academic_certificates_path, passport_copy_path, health_declaration_path,
-            declaration_agreed, signature_date, agent_id, status, created_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-        
-        $status = 'pending'; // Default status for new applications
+            declaration_agreed, signature_date, agent_id, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         
         $stmt = mysqli_prepare($conn, $sql);
         if (!$stmt) {
@@ -211,17 +209,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         mysqli_stmt_bind_param($stmt, 
-            "sssssisssssssssssssssssssssssssssssssssssisiss",
-            $first_name, $last_name, $passport_no, $nationality, $date_of_birth, $age, $place_of_birth,
-            $home_address, $city, $postcode, $state, $country, $contact_no, $email, $gender, $photo_path,
-            $guardian_name, $guardian_passport, $guardian_address, $guardian_nationality, 
-            $guardian_postcode, $guardian_state, $guardian_city, $guardian_country,
-            $muet_year, $muet_score, $ielts_year, $ielts_score, $toefl_year, $toefl_score, $toiec_year, $toiec_score,
-            $programme_code_1, $programme_code_2, $programme_code_3, $programme_code_4, $programme_code_5,
-            $financial_support, $account_no, $bank_name, $financial_support_others,
-            $academic_certificates_path, $passport_copy_path, $health_declaration_path,
-            $declaration_agreed, $signature_date, $agent_id, $status
-        );
+        "sssssisssssssssssssssssssssssssssssssssssisis",
+        $first_name, $last_name, $passport_no, $nationality, $date_of_birth, $age, $place_of_birth,
+        $home_address, $city, $postcode, $state, $country, $contact_no, $email, $gender, $photo_path,
+        $guardian_name, $guardian_passport, $guardian_address, $guardian_nationality, 
+        $guardian_postcode, $guardian_state, $guardian_city, $guardian_country,
+        $muet_year, $muet_score, $ielts_year, $ielts_score, $toefl_year, $toefl_score, $toiec_year, $toiec_score,
+        $programme_code_1, $programme_code_2, $programme_code_3, $programme_code_4, $programme_code_5,
+        $financial_support, $account_no, $bank_name, $financial_support_others,
+        $academic_certificates_path, $passport_copy_path, $health_declaration_path,
+        $declaration_agreed, $signature_date, $agent_id
+    );
         
         log_debug("Prepared student insert statement");
         
@@ -232,46 +230,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $student_id = mysqli_insert_id($conn);
         log_debug("Inserted student with ID: $student_id");
         
-        // Insert qualifications
-        if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
-            $qualifications = $_POST['qualification'];
-            $institutions = $_POST['institution'];
-            $grades = $_POST['grade'];
-            $durations = $_POST['duration'];
-            $year_completed = $_POST['year_completed'];
+// Insert qualifications
+if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
+    $qualifications = $_POST['qualification'];
+    $institutions = $_POST['institution'];
+    $grades = $_POST['grade'];
+    $durations = $_POST['duration'];
+    $year_completed = $_POST['year_completed'];
+    
+    $qual_sql = "INSERT INTO student_qualifications (student_id, qualification, institution, grade, duration, year_completed) VALUES (?, ?, ?, ?, ?, ?)";
+    $qual_stmt = mysqli_prepare($conn, $qual_sql);
+    if (!$qual_stmt) {
+        throw new Exception("Prepare qualification statement failed: " . mysqli_error($conn));
+    }
+    
+    $qualifications_added = 0;
+    for ($i = 0; $i < count($qualifications); $i++) {
+        // Only insert if ALL required fields for this qualification are provided
+        if (!empty($qualifications[$i]) && !empty($institutions[$i]) && 
+            !empty($grades[$i]) && !empty($durations[$i]) && !empty($year_completed[$i])) {
             
-            $qual_sql = "INSERT INTO student_qualifications (student_id, qualification, institution, grade, duration, year_completed) VALUES (?, ?, ?, ?, ?, ?)";
-            $qual_stmt = mysqli_prepare($conn, $qual_sql);
-            if (!$qual_stmt) {
-                throw new Exception("Prepare qualification statement failed: " . mysqli_error($conn));
+            mysqli_stmt_bind_param($qual_stmt, "isssss", 
+                $student_id,
+                $qualifications[$i],
+                $institutions[$i],
+                $grades[$i],
+                $durations[$i],
+                $year_completed[$i]
+            );
+            
+            if (!mysqli_stmt_execute($qual_stmt)) {
+                throw new Exception("Error inserting qualification data: " . mysqli_stmt_error($qual_stmt));
             }
             
-            $qualifications_added = 0;
-            for ($i = 0; $i < count($qualifications); $i++) {
-                // Only insert if qualification is not empty
-                if (!empty($qualifications[$i])) {
-                    mysqli_stmt_bind_param($qual_stmt, "isssss", 
-                        $student_id,
-                        $qualifications[$i],
-                        $institutions[$i],
-                        $grades[$i],
-                        $durations[$i],
-                        $year_completed[$i]
-                    );
-                    
-                    if (!mysqli_stmt_execute($qual_stmt)) {
-                        throw new Exception("Error inserting qualification data: " . mysqli_stmt_error($qual_stmt));
-                    }
-                    
-                    $qualifications_added++;
-                    log_debug("Added qualification: {$qualifications[$i]}");
-                }
-            }
-            
-            log_debug("Added $qualifications_added qualifications");
-        } else {
-            log_debug("No qualifications to add");
+            $qualifications_added++;
+            log_debug("Added qualification: {$qualifications[$i]}");
+        } else if (!empty($qualifications[$i]) || !empty($institutions[$i]) || 
+                  !empty($grades[$i]) || !empty($durations[$i]) || !empty($year_completed[$i])) {
+            // If some fields in this row are filled but not all, log a warning
+            log_debug("Warning: Incomplete qualification data in row " . ($i+1) . " - not inserted");
         }
+    }
+    
+    log_debug("Added $qualifications_added qualifications");
+}
         
         // Create student login credentials
         // By default, use passport number as the initial password

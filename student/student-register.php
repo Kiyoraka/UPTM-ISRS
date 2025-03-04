@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../assets/css/student-register-qualifications.css">
     <link rel="stylesheet" href="../assets/css/student-register-program-selection.css">
     <link rel="stylesheet" href="../assets/css/student-register-documents.css">
-    <!-- <link rel="stylesheet" href="../assets/css/student-register-debug.css"> -->
+    <link rel="stylesheet" href="../assets/css/student-register-debug.css"> 
 
     <!-- Load data files first -->
     <script src="../assets/js/countries-data.js"></script>
@@ -19,6 +19,9 @@
     <script src="../assets/js/dropdown-populator.js"></script>
 </head>
 <body>
+<div id="auto-populate-section" style="display: none;">
+    <button type="button" id="auto-populate-btn">Auto Populate Test Data</button>
+</div>
     <div class="registration-container">
         <!-- Progress Bar -->
         <div class="progress-bar">
@@ -241,70 +244,43 @@
                 <h2>SECTION C: QUALIFICATION</h2>
                 
                 <h3>1. ACADEMIC QUALIFICATIONS (HIGHEST LEVEL)</h3>
-                <table class="qualification-table">
-                    <thead>
-                        <tr>
-                            <th>Qualification / Award</th>
-                            <th>School / Institution Name</th>
-                            <th>Grade / CGPA</th>
-                            <th>Duration</th>
-                            <th>Year Completed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="text" name="qualification[]" required>
-                            </td>
-                            <td>
-                                <input type="text" name="institution[]" required>
-                            </td>
-                            <td>
-                                <input type="text" name="grade[]" required>
-                            </td>
-                            <td>
-                                <input type="text" name="duration[]" required>
-                            </td>
-                            <td>
-                                <input type="text" name="year_completed[]" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="qualification[]">
-                            </td>
-                            <td>
-                                <input type="text" name="institution[]">
-                            </td>
-                            <td>
-                                <input type="text" name="grade[]">
-                            </td>
-                            <td>
-                                <input type="text" name="duration[]">
-                            </td>
-                            <td>
-                                <input type="text" name="year_completed[]">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="qualification[]">
-                            </td>
-                            <td>
-                                <input type="text" name="institution[]">
-                            </td>
-                            <td>
-                                <input type="text" name="grade[]">
-                            </td>
-                            <td>
-                                <input type="text" name="duration[]">
-                            </td>
-                            <td>
-                                <input type="text" name="year_completed[]">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <p class="form-instruction">Please enter at least one qualification. Click "Add Qualification" to add more.</p>
+                        <table class="qualification-table">
+                            <thead>
+                                <tr>
+                                    <th>Qualification / Award</th>
+                                    <th>School / Institution Name</th>
+                                    <th>Grade / CGPA</th>
+                                    <th>Duration</th>
+                                    <th>Year Completed</th>
+                                    <th></th>
+                                </tr>
+    </thead>
+    <tbody id="qualifications-container">
+        <tr class="primary-qualification">
+            <td>
+                <input type="text" name="qualification[]" required>
+            </td>
+            <td>
+                <input type="text" name="institution[]" required>
+            </td>
+            <td>
+                <input type="text" name="grade[]" required>
+            </td>
+            <td>
+                <input type="text" name="duration[]" required>
+            </td>
+            <td>
+                <input type="text" name="year_completed[]" required>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="add-qualification-btn-container">
+    <button type="button" id="add-qualification-btn">+ Add Qualification</button>
+</div>
 
                 <h3>2. OTHER QUALIFICATION - ENGLISH PROFICIENCY</h3>
                 <table class="proficiency-table">
@@ -517,8 +493,10 @@
         </form>
     </div>
 
-    <script src="../assets/js/student-registration.js"></script>
-    <!-- <script src="../assets/js/student-regitsration-debugmode.js"></script> -->
+        <!-- <script src="../assets/js/student-registration.js"></script>-->
+   <script src="../assets/js/student-regitsration-debugmode.js"></script> 
+   <script src="../assets/js/student-register-QualificationButton.js"></script>
     <script src="../assets/js/student-register-program-selection.js"></script>
+
 </body>
 </html>
