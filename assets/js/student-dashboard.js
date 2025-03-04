@@ -95,3 +95,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the dashboard with main content
     showContent('main');
 });
+

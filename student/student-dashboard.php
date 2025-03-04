@@ -20,6 +20,9 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $student = mysqli_fetch_assoc($result);
 
+// filter based on IO and AO status
+$disableDocumentSection = ($student['io_status'] !== 'approved' && $student['ao_status'] !== 'approved');
+
 // Fetch student qualifications
 $qual_query = "SELECT * FROM student_qualifications WHERE student_id = ? ORDER BY id ASC";
 $qual_stmt = mysqli_prepare($conn, $qual_query);
@@ -81,7 +84,7 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="#" class="nav-link active" data-section="main">
-                        <span class="nav-icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="nav-icon"><i class="fa fa-home"></i></span>
                         <span class="nav-text">Main</span>
                     </a>
                 </li>
@@ -92,17 +95,17 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-section="document">
-                        <span class="nav-icon"><i class="fas fa-file-alt"></i></span>
-                        <span class="nav-text">Documents</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-section="payment">
-                        <span class="nav-icon"><i class="fas fa-credit-card"></i></span>
-                        <span class="nav-text">Payments</span>
-                    </a>
-                </li>
+    <a href="#" class="nav-link <?php echo $disableDocumentSection ? 'disabled' : ''; ?>" data-section="document">
+        <span class="nav-icon"><i class="fas fa-file-alt"></i></span>
+        <span class="nav-text">Documents</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link <?php echo $disableDocumentSection ? 'disabled' : ''; ?>" data-section="payment">
+        <span class="nav-icon"><i class="fas fa-credit-card"></i></span>
+        <span class="nav-text">Payments</span>
+    </a>
+</li>
             </ul>
         </div>
 
@@ -440,6 +443,18 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                 </div>
 
                 <!-- Document Content -->
+                <div id="document-content" style="display: none; <?php echo $disableDocumentSection ? 'pointer-events: none; opacity: 0.5;' : ''; ?>">
+                    <h1>My Documents</h1>
+    
+                    <?php if ($disableDocumentSection): ?>
+                    <div class="section-blocked-overlay">
+                        <p>
+                            <i class="fas fa-lock"></i> 
+                            Documents section is currently unavailable. 
+                            Please wait for approval from International and Academic Offices.
+                        </p>
+                    </div>
+                    <?php endif; ?>
                 <div id="document-content" style="display: none;">
                     <h1>My Documents</h1>
                     
@@ -590,8 +605,22 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                         </div>
                     </div>
                 </div>
+                </div>
 
                 <!-- Payment Content -->
+                <div id="payment-content" style="display: none; <?php echo $disableDocumentSection ? 'pointer-events: none; opacity: 0.5;' : ''; ?>">
+    <h1>Payments</h1>
+    
+    <?php if ($disableDocumentSection): ?>
+    <div class="section-blocked-overlay">
+        <p>
+            <i class="fas fa-lock"></i> 
+            Payment section is currently unavailable. 
+            Please wait for approval from International and Academic Offices.
+        </p>
+    </div>
+    <?php endif; ?>
+
                 <div id="payment-content" style="display: none;">
                     <h1>Payments</h1>
                     
@@ -649,6 +678,7 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                     </script>
 
                 </div>
+            </div>
             </div>
 
             <!-- Change Password Modal -->
