@@ -20,10 +20,18 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $staff = mysqli_fetch_assoc($result);
 
-// Placeholder stats (to be replaced later with actual data)
-$total_students = 0;
-$approved_students = 0;
-$rejected_students = 0;
+// Fetch student statistics
+$total_students_query = "SELECT COUNT(*) as total FROM students";
+$total_result = mysqli_query($conn, $total_students_query);
+$total_students = mysqli_fetch_assoc($total_result)['total'] ?? 0;
+
+$approved_students_query = "SELECT COUNT(*) as approved FROM students WHERE io_status = 'approved'";
+$approved_result = mysqli_query($conn, $approved_students_query);
+$approved_students = mysqli_fetch_assoc($approved_result)['approved'] ?? 0;
+
+$rejected_students_query = "SELECT COUNT(*) as rejected FROM students WHERE io_status = 'rejected'";
+$rejected_result = mysqli_query($conn, $rejected_students_query);
+$rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -161,7 +169,7 @@ $rejected_students = 0;
                             <tbody id="studentTableBody">
                                 <!-- Table rows will be dynamically populated -->
                                 <tr>
-                                    <td colspan="6" class="text-center">No students found</td>
+                                    <td colspan="6" class="text-center">Loading students...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -189,8 +197,13 @@ $rejected_students = 0;
         </main>
     </div>
 
+    <!-- Load the base dashboard JS -->
     <script src="../assets/js/IO-AO_dashboard.js"></script>
     <script src="../assets/js/IO-AO_dashboard-UserDropDownMenu.js"></script>
     <script src="../assets/js/IO-AO_dashboard-notification.js"></script>
+    
+    <!-- Load the student management JS -->
+    <script src="../assets/js/IO_dashboard-StudentManagement.js"></script>
+    <script src="../assets/js/IO_dashboard-StudentViewer.js"></script>
 </body>
 </html>
