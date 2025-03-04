@@ -266,55 +266,180 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             log_debug("Formatted DOB: $date_of_birth");
         }
         
-        // Insert into students table
-        $sql = "INSERT INTO students (
-            first_name, last_name, passport_no, nationality, date_of_birth, age, place_of_birth,
-            home_address, city, postcode, state, country, contact_no, email, gender, photo_path,
-            guardian_name, guardian_passport, guardian_address, guardian_nationality, 
-            guardian_postcode, guardian_state, guardian_city, guardian_country,
-            muet_year, muet_score, ielts_year, ielts_score, toefl_year, toefl_score, toiec_year, toiec_score,
-            programme_code_1, programme_code_2, programme_code_3, programme_code_4, programme_code_5,
-            financial_support, account_no, bank_name, financial_support_others,
-            academic_certificates_path, passport_copy_path, health_declaration_path,
-            declaration_agreed, signature_date, agent_id, created_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-        
-        log_debug("SQL query prepared: " . substr($sql, 0, 100) . "...");
-        
-        $stmt = mysqli_prepare($conn, $sql);
-        if (!$stmt) {
-            log_debug("Prepare statement failed: " . mysqli_error($conn));
-            throw new Exception("Database error while preparing statement: " . mysqli_error($conn));
-        }
-        
-        log_debug("SQL statement prepared successfully");
-        
-        mysqli_stmt_bind_param($stmt, 
-        "sssssisssssssssssssssssssssssssssssssssssisis", 
-        $first_name, $last_name, $passport_no, $nationality, $date_of_birth, $age, $place_of_birth,
-        $home_address, $city, $postcode, $state, $country, $contact_no, $email, $gender, $photo_path,
-        $guardian_name, $guardian_passport, $guardian_address, $guardian_nationality, 
-        $guardian_postcode, $guardian_state, $guardian_city, $guardian_country,
-        $muet_year, $muet_score, $ielts_year, $ielts_score, $toefl_year, $toefl_score, $toiec_year, $toiec_score,
-        $programme_code_1, $programme_code_2, $programme_code_3, $programme_code_4, $programme_code_5,
-        $financial_support, $account_no, $bank_name, $financial_support_others,
-        $academic_certificates_path, $passport_copy_path, $health_declaration_path,
-        $declaration_agreed, $signature_date, $agent_id
-    );
-        
-        log_debug("Parameters bound to statement");
-        
-        $result = mysqli_stmt_execute($stmt);
-        log_debug("SQL execution result: " . ($result ? "Success" : "Failed"));
-        
-        if (!$result) {
-            $error = mysqli_stmt_error($stmt);
-            log_debug("SQL error: " . $error);
-            throw new Exception("Error inserting student data: " . $error);
-        }
-        
-        $student_id = mysqli_insert_id($conn);
-        log_debug("Inserted student ID: " . ($student_id ? $student_id : "None"));
+        // Prepare the SQL query with clear sections and proper formatting
+$sql = "INSERT INTO students (
+    -- Personal Details
+    first_name, last_name, passport_no, nationality, date_of_birth, 
+    age, place_of_birth, home_address, city, postcode, 
+    state, country, contact_no, email, gender, photo_path,
+    
+    -- Guardian Information
+    guardian_name, guardian_passport, guardian_address, guardian_nationality,
+    guardian_postcode, guardian_state, guardian_city, guardian_country,
+    
+    -- English Proficiency
+    muet_year, muet_score, ielts_year, ielts_score, 
+    toefl_year, toefl_score, toiec_year, toiec_score,
+    
+    -- Program Selection
+    programme_code_1, programme_code_2, programme_code_3, programme_code_4, programme_code_5,
+    
+    -- Financial Support
+    financial_support, account_no, bank_name, financial_support_others,
+    
+    -- Documents
+    academic_certificates_path, passport_copy_path, health_declaration_path,
+    
+    -- Declaration & Metadata
+    declaration_agreed, signature_date, agent_id, created_at
+) VALUES (
+    -- Personal Details (16 params: 15s, 1i)
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+    
+    -- Guardian Information (8 params: 8s)
+    ?, ?, ?, ?, ?, ?, ?, ?,
+    
+    -- English Proficiency (8 params: 8s)
+    ?, ?, ?, ?, ?, ?, ?, ?,
+    
+    -- Program Selection (5 params: 5s)
+    ?, ?, ?, ?, ?,
+    
+    -- Financial Support (4 params: 4s)
+    ?, ?, ?, ?,
+    
+    -- Documents (3 params: 3s)
+    ?, ?, ?,
+    
+    -- Declaration & Metadata (3 params: 1i, 1s, 1i)
+    ?, ?, ?, NOW()
+)";
+
+$stmt = mysqli_prepare($conn, $sql);
+if (!$stmt) {
+    log_debug("Prepare statement failed: " . mysqli_error($conn));
+    throw new Exception("Database error while preparing statement: " . mysqli_error($conn));
+}
+
+// Define section parameters and their types
+$sections = [
+    'Personal Details' => [
+        'count' => 16,
+        'types' => "sssssissssssssss",  // 15 strings, 1 integer (age)
+        'params' => [
+            $first_name, $last_name, $passport_no, $nationality, $date_of_birth, 
+            $age, $place_of_birth, $home_address, $city, $postcode, 
+            $state, $country, $contact_no, $email, $gender, $photo_path
+        ]
+    ],
+    'Guardian Information' => [
+        'count' => 8,
+        'types' => "ssssssss",         // 8 strings
+        'params' => [
+            $guardian_name, $guardian_passport, $guardian_address, $guardian_nationality,
+            $guardian_postcode, $guardian_state, $guardian_city, $guardian_country
+        ]
+    ],
+    'English Proficiency' => [
+        'count' => 8,
+        'types' => "ssssssss",         // 8 strings
+        'params' => [
+            $muet_year, $muet_score, $ielts_year, $ielts_score, 
+            $toefl_year, $toefl_score, $toiec_year, $toiec_score
+        ]
+    ],
+    'Program Selection' => [
+        'count' => 5,
+        'types' => "sssss",            // 5 strings
+        'params' => [
+            $programme_code_1, $programme_code_2, $programme_code_3, $programme_code_4, $programme_code_5
+        ]
+    ],
+    'Financial Support' => [
+        'count' => 4,
+        'types' => "ssss",             // 4 strings
+        'params' => [
+            $financial_support, $account_no, $bank_name, $financial_support_others
+        ]
+    ],
+    'Documents' => [
+        'count' => 3,
+        'types' => "sss",              // 3 strings
+        'params' => [
+            $academic_certificates_path, $passport_copy_path, $health_declaration_path
+        ]
+    ],
+    'Declaration & Metadata' => [
+        'count' => 3,
+        'types' => "isi",              // integer, string, integer
+        'params' => [
+            $declaration_agreed, $signature_date, $agent_id
+        ]
+    ]
+];
+
+// Validate each section and build combined types string
+$all_types = "";
+$all_params = [];
+$total_params = 0;
+$total_types = 0;
+
+foreach ($sections as $section_name => $section) {
+    $param_count = count($section['params']);
+    $type_count = strlen($section['types']);
+    $expected_count = $section['count'];
+    
+    log_debug("Section '$section_name': Expected $expected_count params, Got $param_count params, Types: $type_count");
+    
+    // Verify the section's parameters match expected count
+    if ($param_count != $expected_count) {
+        log_debug("ERROR in section '$section_name': Expected $expected_count parameters but got $param_count");
+        throw new Exception("Parameter count mismatch in section '$section_name'");
+    }
+    
+    // Verify the section's type string matches the parameter count
+    if ($type_count != $param_count) {
+        log_debug("ERROR in section '$section_name': Parameter count ($param_count) doesn't match type count ($type_count)");
+        throw new Exception("Type string mismatch in section '$section_name'");
+    }
+    
+    // Add to combined types and parameters
+    $all_types .= $section['types'];
+    $all_params = array_merge($all_params, $section['params']);
+    $total_params += $param_count;
+    $total_types += $type_count;
+}
+
+// Final verification
+$placeholders_count = 47; // Total placeholders in the SQL query
+log_debug("Final check: Expected $placeholders_count placeholders, Have $total_params parameters, Types string length: $total_types");
+
+if ($placeholders_count != $total_params || $placeholders_count != $total_types) {
+    log_debug("ERROR: Total placeholders ($placeholders_count) doesn't match parameters ($total_params) or types ($total_types)");
+    throw new Exception("Parameter binding error: Total counts do not match");
+}
+
+// Build the bind_param arguments dynamically
+$bind_args = [$stmt, $all_types];
+foreach ($all_params as $param) {
+    $bind_args[] = $param;
+}
+
+// Call bind_param with the spread operator to unpack the arguments
+call_user_func_array('mysqli_stmt_bind_param', $bind_args);
+
+// Execute the statement with better error handling
+$result = mysqli_stmt_execute($stmt);
+log_debug("SQL execution result: " . ($result ? "Success" : "Failed"));
+
+if (!$result) {
+    $error = mysqli_stmt_error($stmt);
+    log_debug("SQL error: " . $error);
+    throw new Exception("Error inserting student data: " . $error);
+}
+
+$student_id = mysqli_insert_id($conn);
+log_debug("Inserted student ID: " . ($student_id ? $student_id : "None"));
         
         if (!$student_id) {
             log_debug("No student ID returned after INSERT");

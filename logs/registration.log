@@ -1,24 +1,90 @@
-2025-02-27 19:32:06 - Form submitted, starting processing
-2025-02-27 19:32:06 - Basic validation passed
-2025-02-27 19:32:06 - Processing user: Afif Maahi Abu Bakar, Email: afifmaahi92@gmail.com, DOB: 2005-07-25
-2025-02-27 19:32:06 - Photo uploaded: uploads/student_photos/67c0afa6738ca.png
-2025-02-27 19:32:06 - Academic certificates uploaded: uploads/student_documents/67c0afa673c90.png
-2025-02-27 19:32:06 - Passport copy uploaded: uploads/student_documents/67c0afa6740ce.png
-2025-02-27 19:32:06 - Health declaration uploaded: uploads/student_documents/67c0afa6744fa.png
-2025-02-27 19:32:06 - Formatted DOB: 2005-07-25
-2025-03-04 06:18:28 - Form submitted, starting processing
-2025-03-04 06:18:28 - Testing simple database insertion
-2025-03-04 06:18:28 - Test insertion result: Success
-2025-03-04 06:18:28 - Test insertion ID: 4
-2025-03-04 06:18:28 - Test data cleanup completed
-2025-03-04 06:18:28 - Basic validation passed
-2025-03-04 06:18:28 - Transaction started
-2025-03-04 06:18:28 - Processing user: Novi Sari Wahyudi, Email: NoviBand@gmail.com, DOB: 2005-07-01
-2025-03-04 06:18:28 - Photo uploaded: uploads/student_photos/67c68d24258d0.png
-2025-03-04 06:18:28 - Academic certificates uploaded: uploads/student_documents/67c68d2425a02.pdf
-2025-03-04 06:18:28 - Passport copy uploaded: uploads/student_documents/67c68d2425aef.pdf
-2025-03-04 06:18:28 - Health declaration uploaded: uploads/student_documents/67c68d2425bd2.pdf
-2025-03-04 06:18:28 - Formatted DOB: 2005-07-01
-2025-03-04 06:18:28 - SQL query prepared: INSERT INTO students (
-            first_name, last_name, passport_no, nationality, date_of_birth, ...
-2025-03-04 06:18:28 - SQL statement prepared successfully
+2025-03-04 07:45:31 - Form submitted, starting processing
+2025-03-04 07:45:31 - Testing simple database insertion
+2025-03-04 07:45:31 - Test insertion result: Success
+2025-03-04 07:45:31 - Test insertion ID: 5
+2025-03-04 07:45:31 - Test data cleanup completed
+2025-03-04 07:45:31 - Basic validation passed
+2025-03-04 07:45:31 - Transaction started
+2025-03-04 07:45:31 - Processing user: Novi Sari Wahyudi, Email: NoviBand@gmail.com, DOB: 2005-07-01
+2025-03-04 07:45:31 - Photo uploaded: uploads/student_photos/67c6a18bd7a86.png
+2025-03-04 07:45:31 - Academic certificates uploaded: uploads/student_documents/67c6a18bd801f.pdf
+2025-03-04 07:45:31 - Passport copy uploaded: uploads/student_documents/67c6a18bd8a9f.pdf
+2025-03-04 07:45:31 - Health declaration uploaded: uploads/student_documents/67c6a18bd94e7.pdf
+2025-03-04 07:45:31 - Formatted DOB: 2005-07-01
+2025-03-04 07:45:31 - Section 'Personal Details': Expected 16 params, Got 16 params, Types: 15
+2025-03-04 07:45:31 - ERROR in section 'Personal Details': Parameter count (16) doesn't match type count (15)
+2025-03-04 07:45:31 - Transaction rolled back due to error
+2025-03-04 07:45:31 - ERROR: Type string mismatch in section 'Personal Details'
+2025-03-04 07:45:31 - TRACE: #0 {main}
+2025-03-04 07:46:23 - Form submitted, starting processing
+2025-03-04 07:46:23 - Testing simple database insertion
+2025-03-04 07:46:23 - Test insertion result: Success
+2025-03-04 07:46:23 - Test insertion ID: 6
+2025-03-04 07:46:23 - Test data cleanup completed
+2025-03-04 07:46:23 - Basic validation passed
+2025-03-04 07:46:23 - Transaction started
+2025-03-04 07:46:23 - Processing user: Novi Sari Wahyudi, Email: NoviBand@gmail.com, DOB: 2005-07-01
+2025-03-04 07:46:23 - Photo uploaded: uploads/student_photos/67c6a1bf1e614.png
+2025-03-04 07:46:23 - Academic certificates uploaded: uploads/student_documents/67c6a1bf1ec42.pdf
+2025-03-04 07:46:23 - Passport copy uploaded: uploads/student_documents/67c6a1bf1f507.pdf
+2025-03-04 07:46:23 - Health declaration uploaded: uploads/student_documents/67c6a1bf20026.pdf
+2025-03-04 07:46:23 - Formatted DOB: 2005-07-01
+2025-03-04 07:46:23 - Section 'Personal Details': Expected 16 params, Got 16 params, Types: 15
+2025-03-04 07:46:23 - ERROR in section 'Personal Details': Parameter count (16) doesn't match type count (15)
+2025-03-04 07:46:23 - Transaction rolled back due to error
+2025-03-04 07:46:23 - ERROR: Type string mismatch in section 'Personal Details'
+2025-03-04 07:46:23 - TRACE: #0 {main}
+2025-03-04 07:48:27 - Form submitted, starting processing
+2025-03-04 07:48:27 - Testing simple database insertion
+2025-03-04 07:48:27 - Test insertion result: Success
+2025-03-04 07:48:27 - Test insertion ID: 7
+2025-03-04 07:48:27 - Test data cleanup completed
+2025-03-04 07:48:27 - Basic validation passed
+2025-03-04 07:48:27 - Transaction started
+2025-03-04 07:48:27 - Processing user: Novi Sari Wahyudi, Email: NoviBand@gmail.com, DOB: 2005-07-01
+2025-03-04 07:48:27 - Photo uploaded: uploads/student_photos/67c6a23bc63bd.png
+2025-03-04 07:48:27 - Academic certificates uploaded: uploads/student_documents/67c6a23bc7171.pdf
+2025-03-04 07:48:27 - Passport copy uploaded: uploads/student_documents/67c6a23bc7eba.pdf
+2025-03-04 07:48:27 - Health declaration uploaded: uploads/student_documents/67c6a23bc8fb6.pdf
+2025-03-04 07:48:27 - Formatted DOB: 2005-07-01
+2025-03-04 07:48:27 - Section 'Personal Details': Expected 16 params, Got 16 params, Types: 15
+2025-03-04 07:48:27 - ERROR in section 'Personal Details': Parameter count (16) doesn't match type count (15)
+2025-03-04 07:48:27 - Transaction rolled back due to error
+2025-03-04 07:48:27 - ERROR: Type string mismatch in section 'Personal Details'
+2025-03-04 07:48:27 - TRACE: #0 {main}
+2025-03-04 07:51:18 - Form submitted, starting processing
+2025-03-04 07:51:18 - Testing simple database insertion
+2025-03-04 07:51:18 - Test insertion result: Success
+2025-03-04 07:51:18 - Test insertion ID: 8
+2025-03-04 07:51:18 - Test data cleanup completed
+2025-03-04 07:51:18 - Basic validation passed
+2025-03-04 07:51:18 - Transaction started
+2025-03-04 07:51:18 - Processing user: Novi Sari Wahyudi, Email: NoviBand@gmail.com, DOB: 2005-07-01
+2025-03-04 07:51:18 - Photo uploaded: uploads/student_photos/67c6a2e662bf5.png
+2025-03-04 07:51:18 - Academic certificates uploaded: uploads/student_documents/67c6a2e662e2a.pdf
+2025-03-04 07:51:18 - Passport copy uploaded: uploads/student_documents/67c6a2e663563.pdf
+2025-03-04 07:51:18 - Health declaration uploaded: uploads/student_documents/67c6a2e663c13.pdf
+2025-03-04 07:51:18 - Formatted DOB: 2005-07-01
+2025-03-04 07:51:18 - Section 'Personal Details': Expected 16 params, Got 16 params, Types: 15
+2025-03-04 07:51:18 - ERROR in section 'Personal Details': Parameter count (16) doesn't match type count (15)
+2025-03-04 07:51:18 - Transaction rolled back due to error
+2025-03-04 07:51:18 - ERROR: Type string mismatch in section 'Personal Details'
+2025-03-04 07:51:18 - TRACE: #0 {main}
+2025-03-04 07:51:58 - Form submitted, starting processing
+2025-03-04 07:51:58 - Testing simple database insertion
+2025-03-04 07:51:58 - Test insertion result: Success
+2025-03-04 07:51:58 - Test insertion ID: 9
+2025-03-04 07:51:58 - Test data cleanup completed
+2025-03-04 07:51:58 - Basic validation passed
+2025-03-04 07:51:58 - Transaction started
+2025-03-04 07:51:58 - Processing user: Novi Sari Wahyudi, Email: NoviBand@gmail.com, DOB: 2005-07-01
+2025-03-04 07:51:58 - Photo uploaded: uploads/student_photos/67c6a30edae1b.png
+2025-03-04 07:51:58 - Academic certificates uploaded: uploads/student_documents/67c6a30edb19e.pdf
+2025-03-04 07:51:58 - Passport copy uploaded: uploads/student_documents/67c6a30edb7d2.pdf
+2025-03-04 07:51:58 - Health declaration uploaded: uploads/student_documents/67c6a30edbf81.pdf
+2025-03-04 07:51:58 - Formatted DOB: 2005-07-01
+2025-03-04 07:51:58 - Section 'Personal Details': Expected 16 params, Got 16 params, Types: 15
+2025-03-04 07:51:58 - ERROR in section 'Personal Details': Parameter count (16) doesn't match type count (15)
+2025-03-04 07:51:58 - Transaction rolled back due to error
+2025-03-04 07:51:58 - ERROR: Type string mismatch in section 'Personal Details'
+2025-03-04 07:51:58 - TRACE: #0 {main}
