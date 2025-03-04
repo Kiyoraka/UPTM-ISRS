@@ -88,3 +88,32 @@
 2025-03-04 07:51:58 - Transaction rolled back due to error
 2025-03-04 07:51:58 - ERROR: Type string mismatch in section 'Personal Details'
 2025-03-04 07:51:58 - TRACE: #0 {main}
+2025-03-04 07:56:13 - Form submitted, starting processing
+2025-03-04 07:56:13 - Testing simple database insertion
+2025-03-04 07:56:13 - Test insertion result: Success
+2025-03-04 07:56:13 - Test insertion ID: 10
+2025-03-04 07:56:13 - Test data cleanup completed
+2025-03-04 07:56:13 - Basic validation passed
+2025-03-04 07:56:13 - Transaction started
+2025-03-04 07:56:13 - Processing user: Novi Sari Wa, Email: NoviBand@gmail.com, DOB: 2005-05-01
+2025-03-04 07:56:13 - Photo uploaded: uploads/student_photos/67c6a40d53169.png
+2025-03-04 07:56:13 - Academic certificates uploaded: uploads/student_documents/67c6a40d532a1.pdf
+2025-03-04 07:56:13 - Passport copy uploaded: uploads/student_documents/67c6a40d53393.pdf
+2025-03-04 07:56:13 - Health declaration uploaded: uploads/student_documents/67c6a40d534c4.pdf
+2025-03-04 07:56:13 - Formatted DOB: 2005-05-01
+2025-03-04 07:56:13 - Section 'Personal Details': Expected 16 params, Got 16 params, Types: 16
+2025-03-04 07:56:13 - Section 'Guardian Information': Expected 8 params, Got 8 params, Types: 8
+2025-03-04 07:56:13 - Section 'English Proficiency': Expected 8 params, Got 8 params, Types: 8
+2025-03-04 07:56:13 - Section 'Program Selection': Expected 5 params, Got 5 params, Types: 5
+2025-03-04 07:56:13 - Section 'Financial Support': Expected 4 params, Got 4 params, Types: 4
+2025-03-04 07:56:13 - Section 'Documents': Expected 3 params, Got 3 params, Types: 3
+2025-03-04 07:56:13 - Section 'Declaration & Metadata': Expected 3 params, Got 3 params, Types: 3
+2025-03-04 07:56:13 - Final check: Expected 47 placeholders, Have 47 parameters, Types string length: 47
+2025-03-04 07:56:13 - SQL execution result: Success
+2025-03-04 07:56:13 - Inserted student ID: 11
+2025-03-04 07:56:13 - Added qualification: Foundation of System
+2025-03-04 07:56:13 - Added 1 qualifications
+2025-03-04 07:56:13 - Login creation result: Success
+2025-03-04 07:56:13 - About to commit transaction
+2025-03-04 07:56:13 - Transaction committed successfully
+2025-03-04 07:56:13 - Registration completed successfully for student ID: 11

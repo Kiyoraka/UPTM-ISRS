@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         error_log("Login attempt for email: $email");
 
         // Join student_login with students table to get student information
-        $sql = "SELECT sl.*, s.first_name, s.last_name, s.status
+        // Removed s.status since that column doesn't exist
+        $sql = "SELECT sl.*, s.first_name, s.last_name
                 FROM student_login sl 
                 JOIN students s ON sl.student_id = s.id 
                 WHERE sl.email = ?";
@@ -32,13 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = mysqli_stmt_get_result($stmt);
         
         if ($row = mysqli_fetch_assoc($result)) {
-            // Log full user details for debugging
-            error_log("User found - Status: " . $row['status'] . ", Login Status: " . $row['status']);
+            // Log full user details for debugging (using sl.status instead of s.status)
+            error_log("User found - Status: " . $row['status']);
 
             // Verify password
             if (password_verify($password, $row['password'])) {
                 // More flexible status check
-                if (in_array($row['status'], ['active', 'pending','approved'])) {
+                if (in_array($row['status'], ['active', 'pending', 'approved'])) {
                     // Store basic login information
                     $_SESSION['user_id'] = $row['student_id'];
                     $_SESSION['login_id'] = $row['id'];
@@ -61,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-?>
 ?>
 <!DOCTYPE html>
 <html lang="en">
