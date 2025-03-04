@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Check if user is logged in and has ao role
+// Check if user is logged in and has AO role
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ao') {
     header('Location: ../staff/staff-login.php');
     exit();
@@ -25,11 +25,11 @@ $total_students_query = "SELECT COUNT(*) as total FROM students WHERE io_status 
 $total_result = mysqli_query($conn, $total_students_query);
 $total_students = mysqli_fetch_assoc($total_result)['total'] ?? 0;
 
-$approved_students_query = "SELECT COUNT(*) as approved FROM students WHERE io_status && ao_status = 'approved'";
+$approved_students_query = "SELECT COUNT(*) as approved FROM students WHERE io_status = 'approved' AND ao_status = 'approved'";
 $approved_result = mysqli_query($conn, $approved_students_query);
 $approved_students = mysqli_fetch_assoc($approved_result)['approved'] ?? 0;
 
-$rejected_students_query = "SELECT COUNT(*) as rejected FROM students WHERE io_status && ao_status = 'rejected'";
+$rejected_students_query = "SELECT COUNT(*) as rejected FROM students WHERE io_status = 'approved' AND ao_status = 'rejected'";
 $rejected_result = mysqli_query($conn, $rejected_students_query);
 $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
 ?>
@@ -47,7 +47,6 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
     <link rel="stylesheet" href="../assets/css/IT_dashboard-notification.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 </head>
 <body>
     <div class="dashboard-container">
@@ -104,31 +103,31 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
                     </div>
 
                     <div class="stats-container">
-                        <!-- Total Students Registered -->
+                        <!-- Total Students Registered (Already IO Approved) -->
                         <div class="stat-card">
                             <div class="stat-icon registered">
                                 <i class="fas fa-user-graduate"></i>
                             </div>
                             <div class="stat-number registered"><?php echo $total_students; ?></div>
-                            <div class="stat-label">Total Student Registered</div>
+                            <div class="stat-label">Total IO Approved</div>
                         </div>
 
-                        <!-- Total Students Approved -->
+                        <!-- Total Students AO Approved -->
                         <div class="stat-card">
                             <div class="stat-icon approved">
                                 <i class="fas fa-user-graduate"></i>
                             </div>
                             <div class="stat-number approved"><?php echo $approved_students; ?></div>
-                            <div class="stat-label">Total Student Approved</div>
+                            <div class="stat-label">Total AO Approved</div>
                         </div>
 
-                        <!-- Total Students Rejected -->
+                        <!-- Total Students Rejected by AO -->
                         <div class="stat-card">
                             <div class="stat-icon rejected">
                                 <i class="fas fa-user-graduate"></i>
                             </div>
                             <div class="stat-number rejected"><?php echo $rejected_students; ?></div>
-                            <div class="stat-label">Total Student Rejected</div>
+                            <div class="stat-label">Total AO Rejected</div>
                         </div>
                     </div>
                 </div>
@@ -147,9 +146,9 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
                             <i class="fas fa-filter"></i>
                             <select id="studentStatusFilter">
                                 <option value="">All Status</option>
-                                <option value="pending">Pending</option>
-                                <option value="approved">Approved</option>
-                                <option value="rejected">Rejected</option>
+                                <option value="pending">Pending AO Approval</option>
+                                <option value="approved">AO Approved</option>
+                                <option value="rejected">AO Rejected</option>
                             </select>
                         </div>
                     </div>
@@ -198,7 +197,7 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
         </main>
     </div>
 
-    <!-- Student Details Modal -->
+        <!-- Student Details Modal -->
 <div id="studentDetailsModal" class="modal">
     <div class="modal-content" style="width: 80%; max-width: 900px;">
         <div class="modal-header">
@@ -489,12 +488,7 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
     <script src="../assets/js/IO-AO_dashboard-notification.js"></script>
     
     <!-- Load the student management JS -->
-    <script src="../assets/js/IO_dashboard-StudentManagement.js"></script>
-    <script src="../assets/js/IO_dashboard-StudentViewer.js"></script>
-
-    <!-- Debug and testing script -->
-    <!--<script src="../assets/js/IO-AO_dashboard-studentmodaldebug.js"></script> -->
-
-    
+    <script src="../assets/js/AO_dashboard-StudentManagement.js"></script>
+    <script src="../assets/js/AO_dashboard-StudentViewer.js"></script>
 </body>
 </html>
