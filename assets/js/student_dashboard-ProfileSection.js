@@ -87,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 inputs.forEach(input => input.disabled = true);
                 this.textContent = 'Edit';
                 if (saveBtn) {
-                    if (section.id === 'section-guardian') {
+                    if (section.id === 'section-guardian' || section.id === 'section-qualifications') {
                         saveBtn.textContent = 'Save Changes';
-                        saveBtn.classList.remove('btn-save');
+                        saveBtn.classList.remove('btn-next');
                         saveBtn.classList.add('btn-save');
                     } else {
                         saveBtn.textContent = 'Next';
@@ -101,7 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Restore original form field values
                 const originalValues = JSON.parse(this.dataset.originalValues);
                 inputs.forEach(input => {
-                    input.value = originalValues[input.id];
+                    if (originalValues[input.id] !== undefined) {
+                        input.value = originalValues[input.id];
+                    }
                 });
             }
         });
@@ -122,12 +124,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentSectionElement = sections[currentSection];
             
             if (button.classList.contains('btn-save') || button.textContent === 'Save Changes') {
-                // Save changes
-                updateSection(currentSectionElement.id);
-                // Reset button and inputs
-                const editButton = currentSectionElement.querySelector('.btn-edit');
-                if (editButton) {
-                    editButton.click(); // Reset to view mode
+                // If not the qualifications section (which has its own save handler)
+                if (currentSectionElement.id !== 'section-qualifications') {
+                    // Save changes
+                    updateSection(currentSectionElement.id);
+                    // Reset button and inputs
+                    const editButton = currentSectionElement.querySelector('.btn-edit');
+                    if (editButton) {
+                        editButton.click(); // Reset to view mode
+                    }
                 }
             } else if (currentSection < sections.length - 1) {
                 // Normal navigation

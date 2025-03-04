@@ -55,29 +55,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const documentTypeInput = document.getElementById('document_type');
 
     // Show upload form when clicking on upload button
-    uploadButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Get document type from parent element
-            const documentCard = this.closest('.document-card');
-            const documentTitle = documentCard.querySelector('.document-title').textContent.toLowerCase();
-            
-            // Set document type in the hidden input
-            documentTypeInput.value = documentTitle;
-            
-            // Show upload form
-            uploadForm.style.display = 'block';
-            
-            // Scroll to upload form
-            uploadForm.scrollIntoView({ behavior: 'smooth' });
+    if (uploadButtons && uploadButtons.length > 0) {
+        uploadButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get document type from parent element
+                const documentCard = this.closest('.document-card');
+                const documentTitle = documentCard.querySelector('.document-title').textContent.toLowerCase();
+                
+                // Set document type in the hidden input
+                documentTypeInput.value = documentTitle;
+                
+                // Show upload form
+                uploadForm.style.display = 'block';
+                
+                // Scroll to upload form
+                uploadForm.scrollIntoView({ behavior: 'smooth' });
+            });
         });
-    });
+    }
 
     // Hide upload form when clicking cancel
     if (cancelUploadBtn) {
         cancelUploadBtn.addEventListener('click', function() {
             uploadForm.style.display = 'none';
+        });
+    }
+
+    // Connect change password link to modal
+    const changePasswordLink = document.getElementById('change-password-link');
+    if (changePasswordLink) {
+        changePasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('passwordModal').style.display = 'block';
         });
     }
 

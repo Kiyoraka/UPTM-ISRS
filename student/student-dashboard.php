@@ -19,6 +19,17 @@ mysqli_stmt_bind_param($stmt, "i", $student_id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $student = mysqli_fetch_assoc($result);
+
+// Fetch student qualifications
+$qual_query = "SELECT * FROM student_qualifications WHERE student_id = ? ORDER BY id ASC";
+$qual_stmt = mysqli_prepare($conn, $qual_query);
+mysqli_stmt_bind_param($qual_stmt, "i", $student_id);
+mysqli_stmt_execute($qual_stmt);
+$qual_result = mysqli_stmt_get_result($qual_stmt);
+$qualifications = [];
+while ($row = mysqli_fetch_assoc($qual_result)) {
+    $qualifications[] = $row;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +43,11 @@ $student = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="../assets/css/student_dashboard-DocumentSection.css">
     <link rel="stylesheet" href="../assets/css/student_dashboard-UserDropDownMenu.css">
     <link rel="stylesheet" href="../assets/css/student_dashboard-changepassword.css">
+    <link rel="stylesheet" href="../assets/css/student_dashboard-QualificationSection.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Load Program Data -->
+    <script src="../assets/js/programs-data.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -164,6 +179,14 @@ $student = mysqli_fetch_assoc($result);
                             <div class="step">
                                 <span class="step-number">3</span>
                                 <span class="step-text">Guardian Information</span>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">4</span>
+                                <span class="step-text">Qualifications</span>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">5</span>
+                                <span class="step-text">Program</span>
                             </div>
                         </div>
 
@@ -313,7 +336,101 @@ $student = mysqli_fetch_assoc($result);
                                 <div class="form-navigation">
                                     <button type="button" class="btn-prev">Previous</button>
                                     <button type="button" class="btn-edit">Edit</button>
-                                    <button type="button" class="btn-save">Save Changes</button>
+                                    <button type="button" class="btn-next">Next</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Qualifications Section -->
+                            <div class="profile-section" id="section-qualifications">
+                                <div class="section-header">
+                                    <h2>Qualifications</h2>
+                                </div>
+    
+                                <table class="qualification-table" id="qualifications-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Qualification / Award</th>
+                                            <th>School / Institution</th>
+                                            <th>Grade / CGPA</th>
+                                            <th>Duration</th>
+                                            <th>Year Completed</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (empty($qualifications)): ?>
+                                        <tr id="no-qualifications-row">
+                                            <td colspan="5" class="text-center">No qualifications have been added yet.</td>
+                                        </tr>
+                                        <?php else: ?>
+                                            <?php foreach($qualifications as $index => $qual): ?>
+                                            <tr class="qualification-row" data-qual-id="<?php echo $qual['id']; ?>">
+                                                <td>
+                                                    <input type="text" name="qualification[]" class="form-control" value="<?php echo htmlspecialchars($qual['qualification']); ?>" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="institution[]" class="form-control" value="<?php echo htmlspecialchars($qual['institution']); ?>" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="grade[]" class="form-control" value="<?php echo htmlspecialchars($qual['grade']); ?>" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="duration[]" class="form-control" value="<?php echo htmlspecialchars($qual['duration']); ?>" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="year_completed[]" class="form-control" value="<?php echo htmlspecialchars($qual['year_completed']); ?>" disabled>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+    
+                                <div class="form-navigation">
+                                    <button type="button" class="btn-prev">Previous</button>
+
+                                    <button type="button" class="btn-next">Next</button>
+                                </div>
+                            </div>
+
+                            <!-- Programme Section -->
+                            <div class="profile-section" id="section-programme">
+                                <div class="section-header">
+                                    <h2>Programme Selection</h2>
+                                </div>
+    
+                                <div class="programme-details">
+                                    <div class="programme-list">
+                                        <p><strong>First Choice (Primary)</strong><br>
+                                        <span id="program1"><?php echo htmlspecialchars($student['programme_code_1']); ?></span></p>
+            
+                                        <?php if (!empty($student['programme_code_2'])): ?>
+                                        <p><strong>Second Choice</strong><br>
+                                        <span id="program2"><?php echo htmlspecialchars($student['programme_code_2']); ?></span></p>
+                                        <?php endif; ?>
+            
+                                        <?php if (!empty($student['programme_code_3'])): ?>
+                                        <p><strong>Third Choice</strong><br>
+                                        <span id="program3"><?php echo htmlspecialchars($student['programme_code_3']); ?></span></p>
+                                        <?php endif; ?>
+            
+                                        <?php if (!empty($student['programme_code_4'])): ?>
+                                        <p><strong>Fourth Choice</strong><br>
+                                        <span id="program4"><?php echo htmlspecialchars($student['programme_code_4']); ?></span></p>
+                                        <?php endif; ?>
+            
+                                        <?php if (!empty($student['programme_code_5'])): ?>
+                                        <p><strong>Fifth Choice</strong><br>
+                                        <span id="program5"><?php echo htmlspecialchars($student['programme_code_5']); ?></span></p>
+                                        <?php endif; ?>
+                                    </div>
+        
+                                    <p class="note">
+                                        <em>Note: Programme selections cannot be changed after submission. Please contact the International Office if you need to make changes.</em>
+                                    </p>
+                                </div>
+    
+                                <div class="form-navigation">
+                                    <button type="button" class="btn-prev">Previous</button>
                                 </div>
                             </div>
                         </form>
@@ -450,7 +567,7 @@ $student = mysqli_fetch_assoc($result);
                                         <p>Available for all students</p>
                                     </div>
                                     <div class="document-actions">
-                                        <a href="../uploads/guides/visa_guide.pdf" class="document-btn download" download>Download</a>
+                                    <a href="../uploads/guides/visa_guide.pdf" class="document-btn download" download>Download</a>
                                     </div>
                                 </div>
                                 
@@ -697,5 +814,7 @@ $student = mysqli_fetch_assoc($result);
     <script src="../assets/js/student_dashboard-PaymentSection.js"></script>
     <script src="../assets/js/student_dashboard-UserDropDownMenu.js"></script>
     <script src="../assets/js/student_dashboard-ChangePassword.js"></script>
+    <script src="../assets/js/student_dashboard-QualificationSection.js"></script>
+    <script src="../assets/js/student_dashboard-ProgrammeCode.js"></script>
 </body>
 </html>
