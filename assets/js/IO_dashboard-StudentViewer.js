@@ -162,17 +162,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // Add student modal to the DOM
 function addStudentModalToDOM() {
     const modalHTML = `
-    <div id="studentDetailsModal" class="modal">
+    <div id="studentDetailsModal" class="modal" style="display: none;">
         <div class="modal-content" style="width: 80%; max-width: 900px;">
-            <div class="modal-header">
-                <h2>Student Details</h2>
-                <span class="close-modal" id="closeStudentModal">&times;</span>
-            </div>
             <div class="modal-body">
-                <div id="student-modal-loading" style="text-align: center; padding: 20px;">
-                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
-                    <p>Loading student details...</p>
-                </div>
+                <div id="student-modal-loading" style="text-align: center; padding: 20px; display: block;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+            <p>Loading student details...</p>
+            </div>
                 
                 <div id="student-details-content" style="display: none;">
                     <!-- Tabs Navigation -->

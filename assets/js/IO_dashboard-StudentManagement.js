@@ -179,14 +179,66 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 });
 
-// Student action functions
+// Override the viewStudent function
 function viewStudent(studentId) {
-    // This function will be defined in IO_dashboard-StudentViewer.js
-    // and will show the student details modal
-    if (typeof showStudentModal === 'function') {
-        showStudentModal(studentId);
+    console.log("viewStudent called with ID:", studentId);
+    
+    // Get the modal and its content elements
+    const modal = document.getElementById('studentDetailsModal');
+    const modalLoading = document.getElementById('student-modal-loading');
+    const modalContent = document.getElementById('student-details-content');
+    
+    if (modal) {
+        // Ensure modal is visible and content is reset
+        modal.style.display = 'block';
+        modal.style.opacity = '1';
+        modal.style.visibility = 'visible';
+        
+        // Reset modal content
+        modalLoading.style.display = 'block';
+        modalContent.style.display = 'none';
+        
+        // Reset tabs to first tab
+        const tabButtons = modal.querySelectorAll('.student-tab-btn');
+        const tabPanes = modal.querySelectorAll('.student-tab-pane');
+        
+        tabButtons.forEach((btn, index) => {
+            btn.classList.toggle('active', index === 0);
+        });
+        
+        tabPanes.forEach((pane, index) => {
+            pane.classList.toggle('active', index === 0);
+        });
+        
+        // Fetch student details
+        fetch(`IO-fetch-student-details.php?id=${studentId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Populate modal with student details
+                    populateStudentDetails(data);
+                    
+                    // Hide loading, show content
+                    modalLoading.style.display = 'none';
+                    modalContent.style.display = 'block';
+                } else {
+                    console.error('Error in response:', data.message);
+                    alert(data.message || 'Failed to load student details');
+                    modal.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                alert('An error occurred while fetching student details');
+                modal.style.display = 'none';
+            });
     } else {
-        console.error('Student viewer not loaded');
-        alert('Unable to view student details. Please try refreshing the page.');
+        console.error("Modal element not found!");
+        alert("Could not display student details. Please try again.");
     }
 }
