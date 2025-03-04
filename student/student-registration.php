@@ -22,6 +22,12 @@ function log_debug($message) {
     file_put_contents($log_file, date('Y-m-d H:i:s') . " - " . $message . PHP_EOL, FILE_APPEND);
 }
 
+function log_var($name, $var) {
+    global $log_file;
+    $value = is_array($var) ? 'Array: ' . print_r($var, true) : $var;
+    file_put_contents($log_file, date('Y-m-d H:i:s') . " - {$name}: {$value}" . PHP_EOL, FILE_APPEND);
+}
+
 // Function to check if the request is an AJAX request
 function isAjaxRequest() {
     return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -43,10 +49,66 @@ function validateRequiredFields($data, $required_fields) {
     return $errors;
 }
 
+// Function to test basic database insertion
+function testDatabaseInsertion($conn) {
+    log_debug("Testing simple database insertion");
+    
+    try {
+        $test_sql = "INSERT INTO students (first_name, last_name, email, passport_no, nationality, date_of_birth, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+        $test_stmt = mysqli_prepare($conn, $test_sql);
+        
+        if (!$test_stmt) {
+            log_debug("Test preparation error: " . mysqli_error($conn));
+            return false;
+        }
+        
+        $test_first = "Test";
+        $test_last = "User";
+        $test_email = "test" . time() . "@example.com";
+        $test_passport = "TEST" . time();
+        $test_nationality = "Test";
+        $test_dob = date('Y-m-d');
+        
+        mysqli_stmt_bind_param($test_stmt, "ssssss", $test_first, $test_last, $test_email, $test_passport, $test_nationality, $test_dob);
+        
+        $result = mysqli_stmt_execute($test_stmt);
+        log_debug("Test insertion result: " . ($result ? "Success" : "Failed"));
+        
+        if (!$result) {
+            log_debug("Test insertion error: " . mysqli_stmt_error($test_stmt));
+            return false;
+        } else {
+            $test_id = mysqli_insert_id($conn);
+            log_debug("Test insertion ID: " . $test_id);
+            
+            // Clean up test data
+            mysqli_query($conn, "DELETE FROM students WHERE id = $test_id");
+            log_debug("Test data cleanup completed");
+            return true;
+        }
+    } catch (Exception $e) {
+        log_debug("Test insertion exception: " . $e->getMessage());
+        return false;
+    }
+}
+
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         log_debug("Form submitted, starting processing");
+        
+        // Check database connection
+        if (!$conn || mysqli_connect_errno()) {
+            log_debug("Database connection error: " . mysqli_connect_error());
+            throw new Exception("Database connection failed");
+        }
+        
+        // Test database insertion capability
+        $test_result = testDatabaseInsertion($conn);
+        if (!$test_result) {
+            log_debug("Database test insertion failed");
+            throw new Exception("Unable to insert data into the database. Please contact the administrator.");
+        }
         
         // Required fields
         $required_fields = [
@@ -66,6 +128,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Start transaction
         mysqli_begin_transaction($conn);
+        log_debug("Transaction started");
+        
+        // Check for duplicate email or passport
+        $check_sql = "SELECT id FROM students WHERE passport_no = ? OR email = ?";
+        $check_stmt = mysqli_prepare($conn, $check_sql);
+        mysqli_stmt_bind_param($check_stmt, "ss", $_POST['passport_no'], $_POST['email']);
+        mysqli_stmt_execute($check_stmt);
+        mysqli_stmt_store_result($check_stmt);
+        $exists = mysqli_stmt_num_rows($check_stmt) > 0;
+
+        if ($exists) {
+            log_debug("ERROR: Student with this passport number or email already exists");
+            throw new Exception("A student with this passport number or email already exists");
+        }
         
         // Sanitize input data from Section A: Personal Details
         $first_name = sanitize($_POST['first_name']);
@@ -203,13 +279,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             declaration_agreed, signature_date, agent_id, created_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         
+        log_debug("SQL query prepared: " . substr($sql, 0, 100) . "...");
+        
         $stmt = mysqli_prepare($conn, $sql);
         if (!$stmt) {
-            throw new Exception("Prepare statement failed: " . mysqli_error($conn));
+            log_debug("Prepare statement failed: " . mysqli_error($conn));
+            throw new Exception("Database error while preparing statement: " . mysqli_error($conn));
         }
         
+        log_debug("SQL statement prepared successfully");
+        
         mysqli_stmt_bind_param($stmt, 
-        "sssssisssssssssssssssssssssssssssssssssssisis",
+        "sssssisssssssssssssssssssssssssssssssssssisis", 
         $first_name, $last_name, $passport_no, $nationality, $date_of_birth, $age, $place_of_birth,
         $home_address, $city, $postcode, $state, $country, $contact_no, $email, $gender, $photo_path,
         $guardian_name, $guardian_passport, $guardian_address, $guardian_nationality, 
@@ -221,59 +302,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $declaration_agreed, $signature_date, $agent_id
     );
         
-        log_debug("Prepared student insert statement");
+        log_debug("Parameters bound to statement");
         
-        if (!mysqli_stmt_execute($stmt)) {
-            throw new Exception("Error inserting student data: " . mysqli_stmt_error($stmt));
+        $result = mysqli_stmt_execute($stmt);
+        log_debug("SQL execution result: " . ($result ? "Success" : "Failed"));
+        
+        if (!$result) {
+            $error = mysqli_stmt_error($stmt);
+            log_debug("SQL error: " . $error);
+            throw new Exception("Error inserting student data: " . $error);
         }
         
         $student_id = mysqli_insert_id($conn);
-        log_debug("Inserted student with ID: $student_id");
+        log_debug("Inserted student ID: " . ($student_id ? $student_id : "None"));
         
-// Insert qualifications
-if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
-    $qualifications = $_POST['qualification'];
-    $institutions = $_POST['institution'];
-    $grades = $_POST['grade'];
-    $durations = $_POST['duration'];
-    $year_completed = $_POST['year_completed'];
-    
-    $qual_sql = "INSERT INTO student_qualifications (student_id, qualification, institution, grade, duration, year_completed) VALUES (?, ?, ?, ?, ?, ?)";
-    $qual_stmt = mysqli_prepare($conn, $qual_sql);
-    if (!$qual_stmt) {
-        throw new Exception("Prepare qualification statement failed: " . mysqli_error($conn));
-    }
-    
-    $qualifications_added = 0;
-    for ($i = 0; $i < count($qualifications); $i++) {
-        // Only insert if ALL required fields for this qualification are provided
-        if (!empty($qualifications[$i]) && !empty($institutions[$i]) && 
-            !empty($grades[$i]) && !empty($durations[$i]) && !empty($year_completed[$i])) {
+        if (!$student_id) {
+            log_debug("No student ID returned after INSERT");
+            throw new Exception("Failed to insert student - no ID returned");
+        }
+        
+        // Insert qualifications
+        if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
+            $qualifications = $_POST['qualification'];
+            $institutions = $_POST['institution'];
+            $grades = $_POST['grade'];
+            $durations = $_POST['duration'];
+            $year_completed = $_POST['year_completed'];
             
-            mysqli_stmt_bind_param($qual_stmt, "isssss", 
-                $student_id,
-                $qualifications[$i],
-                $institutions[$i],
-                $grades[$i],
-                $durations[$i],
-                $year_completed[$i]
-            );
-            
-            if (!mysqli_stmt_execute($qual_stmt)) {
-                throw new Exception("Error inserting qualification data: " . mysqli_stmt_error($qual_stmt));
+            $qual_sql = "INSERT INTO student_qualifications (student_id, qualification, institution, grade, duration, year_completed) VALUES (?, ?, ?, ?, ?, ?)";
+            $qual_stmt = mysqli_prepare($conn, $qual_sql);
+            if (!$qual_stmt) {
+                log_debug("Prepare qualification statement failed: " . mysqli_error($conn));
+                throw new Exception("Database error while preparing qualification statement: " . mysqli_error($conn));
             }
             
-            $qualifications_added++;
-            log_debug("Added qualification: {$qualifications[$i]}");
-        } else if (!empty($qualifications[$i]) || !empty($institutions[$i]) || 
-                  !empty($grades[$i]) || !empty($durations[$i]) || !empty($year_completed[$i])) {
-            // If some fields in this row are filled but not all, log a warning
-            log_debug("Warning: Incomplete qualification data in row " . ($i+1) . " - not inserted");
+            $qualifications_added = 0;
+            for ($i = 0; $i < count($qualifications); $i++) {
+                // Only insert if ALL required fields for this qualification are provided
+                if (!empty($qualifications[$i]) && !empty($institutions[$i]) && 
+                    !empty($grades[$i]) && !empty($durations[$i]) && !empty($year_completed[$i])) {
+                    
+                    mysqli_stmt_bind_param($qual_stmt, "isssss", 
+                        $student_id,
+                        $qualifications[$i],
+                        $institutions[$i],
+                        $grades[$i],
+                        $durations[$i],
+                        $year_completed[$i]
+                    );
+                    
+                    $qual_result = mysqli_stmt_execute($qual_stmt);
+                    
+                    if (!$qual_result) {
+                        log_debug("Error inserting qualification data: " . mysqli_stmt_error($qual_stmt));
+                    } else {
+                        $qualifications_added++;
+                        log_debug("Added qualification: {$qualifications[$i]}");
+                    }
+                } else if (!empty($qualifications[$i]) || !empty($institutions[$i]) || 
+                          !empty($grades[$i]) || !empty($durations[$i]) || !empty($year_completed[$i])) {
+                    // If some fields in this row are filled but not all, log a warning
+                    log_debug("Warning: Incomplete qualification data in row " . ($i+1) . " - not inserted");
+                }
+            }
+            
+            log_debug("Added $qualifications_added qualifications");
         }
-    }
-    
-    log_debug("Added $qualifications_added qualifications");
-}
         
         // Create student login credentials
         // By default, use passport number as the initial password
@@ -282,20 +376,31 @@ if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
         $login_sql = "INSERT INTO student_login (student_id, email, password, status, created_at) VALUES (?, ?, ?, 'active', NOW())";
         $login_stmt = mysqli_prepare($conn, $login_sql);
         if (!$login_stmt) {
-            throw new Exception("Prepare login statement failed: " . mysqli_error($conn));
+            log_debug("Prepare login statement failed: " . mysqli_error($conn));
+            throw new Exception("Database error while preparing login statement: " . mysqli_error($conn));
         }
         
         mysqli_stmt_bind_param($login_stmt, "iss", $student_id, $email, $hashed_password);
         
-        if (!mysqli_stmt_execute($login_stmt)) {
+        $login_result = mysqli_stmt_execute($login_stmt);
+        log_debug("Login creation result: " . ($login_result ? "Success" : "Failed"));
+        
+        if (!$login_result) {
+            log_debug("Error creating login credentials: " . mysqli_stmt_error($login_stmt));
             throw new Exception("Error creating login credentials: " . mysqli_stmt_error($login_stmt));
         }
         
-        log_debug("Created login credentials for student");
-        
         // Commit transaction
-        mysqli_commit($conn);
+        log_debug("About to commit transaction");
+        $commit_result = mysqli_commit($conn);
+        
+        if (!$commit_result) {
+            log_debug("Transaction commit failed: " . mysqli_error($conn));
+            throw new Exception("Failed to commit database transaction: " . mysqli_error($conn));
+        }
+        
         log_debug("Transaction committed successfully");
+        log_debug("Registration completed successfully for student ID: $student_id");
         
         // Response based on request type
         if (isAjaxRequest()) {
@@ -326,17 +431,22 @@ if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
         // Rollback transaction on error
         if (isset($conn) && $conn->connect_errno === 0) {
             mysqli_rollback($conn);
+            log_debug("Transaction rolled back due to error");
         }
         
-        log_debug("ERROR: " . $e->getMessage());
+        $error_message = $e->getMessage();
+        $error_trace = $e->getTraceAsString();
+        
+        log_debug("ERROR: " . $error_message);
+        log_debug("TRACE: " . $error_trace);
         
         $response = [
             'success' => false,
-            'message' => 'Registration failed: ' . $e->getMessage()
+            'message' => 'Registration failed: ' . $error_message
         ];
         
         // Log the error
-        error_log("Student registration error: " . $e->getMessage());
+        error_log("Student registration error: " . $error_message);
         
         // Response based on request type
         if (isAjaxRequest()) {
@@ -344,7 +454,8 @@ if (isset($_POST['qualification']) && is_array($_POST['qualification'])) {
             header('Content-Type: application/json');
             echo json_encode($response);
         } else {
-            // For regular form submissions, redirect to error page
+            // For regular form submissions, redirect to error page with message
+            $_SESSION['error_message'] = $error_message;
             header('Location: error-page.php');
         }
         exit();

@@ -6,3 +6,19 @@
 2025-02-27 19:32:06 - Passport copy uploaded: uploads/student_documents/67c0afa6740ce.png
 2025-02-27 19:32:06 - Health declaration uploaded: uploads/student_documents/67c0afa6744fa.png
 2025-02-27 19:32:06 - Formatted DOB: 2005-07-25
+2025-03-04 06:18:28 - Form submitted, starting processing
+2025-03-04 06:18:28 - Testing simple database insertion
+2025-03-04 06:18:28 - Test insertion result: Success
+2025-03-04 06:18:28 - Test insertion ID: 4
+2025-03-04 06:18:28 - Test data cleanup completed
+2025-03-04 06:18:28 - Basic validation passed
+2025-03-04 06:18:28 - Transaction started
+2025-03-04 06:18:28 - Processing user: Novi Sari Wahyudi, Email: NoviBand@gmail.com, DOB: 2005-07-01
+2025-03-04 06:18:28 - Photo uploaded: uploads/student_photos/67c68d24258d0.png
+2025-03-04 06:18:28 - Academic certificates uploaded: uploads/student_documents/67c68d2425a02.pdf
+2025-03-04 06:18:28 - Passport copy uploaded: uploads/student_documents/67c68d2425aef.pdf
+2025-03-04 06:18:28 - Health declaration uploaded: uploads/student_documents/67c68d2425bd2.pdf
+2025-03-04 06:18:28 - Formatted DOB: 2005-07-01
+2025-03-04 06:18:28 - SQL query prepared: INSERT INTO students (
+            first_name, last_name, passport_no, nationality, date_of_birth, ...
+2025-03-04 06:18:28 - SQL statement prepared successfully

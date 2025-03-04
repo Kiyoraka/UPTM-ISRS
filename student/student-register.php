@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../assets/css/student-register-qualifications.css">
     <link rel="stylesheet" href="../assets/css/student-register-program-selection.css">
     <link rel="stylesheet" href="../assets/css/student-register-documents.css">
-    <link rel="stylesheet" href="../assets/css/student-register-debug.css"> 
+    <!-- <link rel="stylesheet" href="../assets/css/student-register-debug.css"> -->
 
     <!-- Load data files first -->
     <script src="../assets/js/countries-data.js"></script>
@@ -493,8 +493,8 @@
         </form>
     </div>
 
-        <!-- <script src="../assets/js/student-registration.js"></script>-->
-   <script src="../assets/js/student-regitsration-debugmode.js"></script> 
+         <script src="../assets/js/student-registration.js"></script>
+   <!-- <script src="../assets/js/student-regitsration-debugmode.js"></script> -->
    <script src="../assets/js/student-register-QualificationButton.js"></script>
     <script src="../assets/js/student-register-program-selection.js"></script>
 
