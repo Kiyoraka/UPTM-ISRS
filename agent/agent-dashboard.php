@@ -28,14 +28,14 @@ mysqli_stmt_execute($stmt);
 $total_result = mysqli_stmt_get_result($stmt);
 $total_students = mysqli_fetch_assoc($total_result)['total'];
 
-$approved_students_query = "SELECT COUNT(*) as approved FROM students WHERE agent_id = ? AND io_status && ao_status  = 'approved'";
+$approved_students_query = "SELECT COUNT(*) as approved FROM students WHERE agent_id = ? AND io_status = 'approved'";
 $stmt = mysqli_prepare($conn, $approved_students_query);
 mysqli_stmt_bind_param($stmt, "i", $agent_id);
 mysqli_stmt_execute($stmt);
 $approved_result = mysqli_stmt_get_result($stmt);
 $approved_students = mysqli_fetch_assoc($approved_result)['approved'];
 
-$rejected_students_query = "SELECT COUNT(*) as rejected FROM students WHERE agent_id = ? AND io_status && ao_status = 'rejected'";
+$rejected_students_query = "SELECT COUNT(*) as rejected FROM students WHERE agent_id = ? AND io_status = 'rejected'";
 $stmt = mysqli_prepare($conn, $rejected_students_query);
 mysqli_stmt_bind_param($stmt, "i", $agent_id);
 mysqli_stmt_execute($stmt);

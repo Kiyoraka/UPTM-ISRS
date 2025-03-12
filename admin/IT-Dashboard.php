@@ -156,7 +156,6 @@ $admin = mysqli_fetch_assoc($result);
             <select id="staffRoleFilter">
                 <option value="">All Roles</option>
                 <option value="io">International Office</option>
-                <option value="ao">Academic Office</option>
                 <option value="it">IT Admin</option>
             </select>
         </div>

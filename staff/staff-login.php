@@ -29,9 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     case 'io':
                         header('Location: IO_dashboard.php');
                         break;
-                    case 'ao':
-                        header('Location: AO_dashboard.php');
-                        break;
                     case 'it':
                         header('Location: ../admin/IT-Dashboard.php');
                         break;

@@ -167,9 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'io':
                     roleDisplay = 'International Office';
                     break;
-                case 'ao':
-                    roleDisplay = 'Academic Office';
-                    break;
                 case 'it':
                     roleDisplay = 'IT Admin';
                     break;

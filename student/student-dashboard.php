@@ -20,8 +20,8 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $student = mysqli_fetch_assoc($result);
 
-// filter based on IO and AO status
-$disableDocumentSection = ($student['io_status'] !== 'approved' && $student['ao_status'] !== 'approved');
+// filter based on IO status
+$disableDocumentSection = ($student['io_status'] !== 'approved');
 
 // Fetch student qualifications
 $qual_query = "SELECT * FROM student_qualifications WHERE student_id = ? ORDER BY id ASC";
@@ -128,11 +128,10 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                             <div class="stat-number registered">
                                 <?php 
                                     $io_status = isset($student['io_status']) ? $student['io_status'] : 'pending';
-                                    $ao_status = isset($student['ao_status']) ? $student['ao_status'] : 'pending';
             
-                                    if ($io_status === 'approved' && $ao_status === 'approved') {
+                                    if ($io_status === 'approved') {
                                         echo 'Approved';
-                                    } elseif ($io_status === 'rejected' || $ao_status === 'rejected') {
+                                    } elseif ($io_status === 'rejected') {
                                         echo 'Rejected';
                                     } else {
                                         echo 'Pending';
