@@ -39,11 +39,11 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Officer Dashboard - UPTM ISRS</title>
-    <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-styles.css">
-    <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-MainSection.css">
-    <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-StudentListSection.css">
-    <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-UserDropDownMenu.css">
-    <link rel="stylesheet" href="../assets/css/IO-AO_dashboard-StudentViewer.css">
+    <link rel="stylesheet" href="../assets/css/IO_dashboard-styles.css">
+    <link rel="stylesheet" href="../assets/css/IO_dashboard-MainSection.css">
+    <link rel="stylesheet" href="../assets/css/IO_dashboard-StudentListSection.css">
+    <link rel="stylesheet" href="../assets/css/IO_dashboard-UserDropDownMenu.css">
+    <link rel="stylesheet" href="../assets/css/IO_dashboard-StudentViewer.css">
     <link rel="stylesheet" href="../assets/css/IT_dashboard-notification.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -484,16 +484,16 @@ $rejected_students = mysqli_fetch_assoc($rejected_result)['rejected'] ?? 0;
 </div>
 
     <!-- Load the base dashboard JS -->
-    <script src="../assets/js/IO-AO_dashboard.js"></script>
-    <script src="../assets/js/IO-AO_dashboard-UserDropDownMenu.js"></script>
-    <script src="../assets/js/IO-AO_dashboard-notification.js"></script>
+    <script src="../assets/js/IO_dashboard.js"></script>
+    <script src="../assets/js/IO_dashboard-UserDropDownMenu.js"></script>
+    <script src="../assets/js/IO_dashboard-notification.js"></script>
     
     <!-- Load the student management JS -->
     <script src="../assets/js/IO_dashboard-StudentManagement.js"></script>
     <script src="../assets/js/IO_dashboard-StudentViewer.js"></script>
 
     <!-- Debug and testing script -->
-    <!--<script src="../assets/js/IO-AO_dashboard-studentmodaldebug.js"></script> -->
+    <!--<script src="../assets/js/IO_dashboard-studentmodaldebug.js"></script> -->
 
     
 </body>
