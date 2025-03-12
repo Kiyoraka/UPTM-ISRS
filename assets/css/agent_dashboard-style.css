@@ -28,7 +28,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1a73e8;
+    background-color: #000000;
     color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -89,7 +89,7 @@ body {
 /* Sidebar */
 .sidebar {
     grid-area: sidebar;
-    background-color: #1a73e8;
+    background-color: #000000;
     box-shadow: 2px 0 4px rgba(0,0,0,0.1);
     padding: 20px 0;
 }
@@ -162,7 +162,7 @@ body {
 /* Footer Styles */
 .dashboard-footer {
     width: 98%;
-    background-color: #1a73e8;
+    background-color: #000000;
     padding: 15px 0;
     margin: auto auto 20px auto;
 }
@@ -178,31 +178,6 @@ body {
     font-size: 0.875rem;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .dashboard-container {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "nav"
-            "main";
-    }
-
-    .sidebar {
-        display: none;
-    }
-
-    .nav-text {
-        display: none;
-    }
-
-    .dashboard-footer {
-        margin-top: auto;
-    }
-
-    .footer-content {
-        text-align: center;
-    }
-}
 
 
 
