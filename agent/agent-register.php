@@ -378,8 +378,8 @@
                         <tbody>
                             <tr>
                                 <td class="declaration-text">
-                                    <p>I hereby declare that the information given in this application form is true and complete.</p>
-                                    <p>I understand that any false or incomplete information submitted may result my application being rejected.</p>
+                                    <p>I hereby declare that the information provided is true and valid, with the understanding that UPTM reserves the right to withdraw the offer if the information is untrue and invalid. </p>
+                                    <p>UPTM complies with the Personal Data Protection Act (PDPA) in handling and safeguarding your personal information.</p>
                                 </td>
                             </tr>
                             <tr>
