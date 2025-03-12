@@ -117,3 +117,32 @@
 2025-03-04 07:56:13 - About to commit transaction
 2025-03-04 07:56:13 - Transaction committed successfully
 2025-03-04 07:56:13 - Registration completed successfully for student ID: 11
+2025-03-04 19:06:27 - Form submitted, starting processing
+2025-03-04 19:06:27 - Testing simple database insertion
+2025-03-04 19:06:27 - Test insertion result: Success
+2025-03-04 19:06:27 - Test insertion ID: 12
+2025-03-04 19:06:27 - Test data cleanup completed
+2025-03-04 19:06:27 - Basic validation passed
+2025-03-04 19:06:27 - Transaction started
+2025-03-04 19:06:27 - Processing user: Alisa Wahyudi, Email: Alisa@gmail.com, DOB: 2005-05-01
+2025-03-04 19:06:27 - Photo uploaded: uploads/student_photos/67c74123d705f.png
+2025-03-04 19:06:27 - Academic certificates uploaded: uploads/student_documents/67c74123d75d4.pdf
+2025-03-04 19:06:27 - Passport copy uploaded: uploads/student_documents/67c74123d7f00.pdf
+2025-03-04 19:06:27 - Health declaration uploaded: uploads/student_documents/67c74123d87d4.pdf
+2025-03-04 19:06:27 - Formatted DOB: 2005-05-01
+2025-03-04 19:06:27 - Section 'Personal Details': Expected 16 params, Got 16 params, Types: 16
+2025-03-04 19:06:27 - Section 'Guardian Information': Expected 8 params, Got 8 params, Types: 8
+2025-03-04 19:06:27 - Section 'English Proficiency': Expected 8 params, Got 8 params, Types: 8
+2025-03-04 19:06:27 - Section 'Program Selection': Expected 5 params, Got 5 params, Types: 5
+2025-03-04 19:06:27 - Section 'Financial Support': Expected 4 params, Got 4 params, Types: 4
+2025-03-04 19:06:27 - Section 'Documents': Expected 3 params, Got 3 params, Types: 3
+2025-03-04 19:06:27 - Section 'Declaration & Metadata': Expected 3 params, Got 3 params, Types: 3
+2025-03-04 19:06:27 - Final check: Expected 47 placeholders, Have 47 parameters, Types string length: 47
+2025-03-04 19:06:27 - SQL execution result: Success
+2025-03-04 19:06:27 - Inserted student ID: 13
+2025-03-04 19:06:27 - Added qualification: Foundation of System
+2025-03-04 19:06:27 - Added 1 qualifications
+2025-03-04 19:06:28 - Login creation result: Success
+2025-03-04 19:06:28 - About to commit transaction
+2025-03-04 19:06:28 - Transaction committed successfully
+2025-03-04 19:06:28 - Registration completed successfully for student ID: 13

@@ -127,8 +127,16 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                             </div>
                             <div class="stat-number registered">
                                 <?php 
-                                    $status = isset($student['status']) ? $student['status'] : 'Pending';
-                                    echo ucfirst($status);
+                                    $io_status = isset($student['io_status']) ? $student['io_status'] : 'pending';
+                                    $ao_status = isset($student['ao_status']) ? $student['ao_status'] : 'pending';
+            
+                                    if ($io_status === 'approved' && $ao_status === 'approved') {
+                                        echo 'Approved';
+                                    } elseif ($io_status === 'rejected' || $ao_status === 'rejected') {
+                                        echo 'Rejected';
+                                    } else {
+                                        echo 'Pending';
+                                    }
                                 ?>
                             </div>
                             <div class="stat-label">Application Status</div>
@@ -455,8 +463,7 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                         </p>
                     </div>
                     <?php endif; ?>
-                <div id="document-content" style="display: none;">
-                    <h1>My Documents</h1>
+
                     
                     <div class="documents-container">
                         <div class="document-list">
@@ -605,24 +612,21 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                         </div>
                     </div>
                 </div>
-                </div>
 
                 <!-- Payment Content -->
                 <div id="payment-content" style="display: none; <?php echo $disableDocumentSection ? 'pointer-events: none; opacity: 0.5;' : ''; ?>">
-    <h1>Payments</h1>
+                <h1>Payments</h1>
     
-    <?php if ($disableDocumentSection): ?>
-    <div class="section-blocked-overlay">
-        <p>
-            <i class="fas fa-lock"></i> 
-            Payment section is currently unavailable. 
-            Please wait for approval from International and Academic Offices.
-        </p>
-    </div>
-    <?php endif; ?>
+                    <?php if ($disableDocumentSection): ?>
+                    <div class="section-blocked-overlay">
+                        <p>
+                        <i class="fas fa-lock"></i> 
+                            Payment section is currently unavailable. 
+                            Please wait for approval from International and Academic Offices.
+                    </p>
+                </div>
+                <?php endif; ?>
 
-                <div id="payment-content" style="display: none;">
-                    <h1>Payments</h1>
                     
                     <div class="payment-container">
                         <div class="payment-info-card">
@@ -678,7 +682,6 @@ while ($row = mysqli_fetch_assoc($qual_result)) {
                     </script>
 
                 </div>
-            </div>
             </div>
 
             <!-- Change Password Modal -->
